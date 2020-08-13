@@ -174,14 +174,15 @@ public void OnClientPutInServer(int client)
 	g_sUserID[client][0] = '\0';
 }
 
-public void OnClientAuthorized(int client, const char[] szSteamId)
+public Action OnClientPreAdminCheck(int client)
 {
 	if(IsFakeClient(client))
 	{
 		return;
 	}
 	
-	char szQuery[512];
+	char szQuery[512], szSteamId[32];
+	GetClientAuthId(client, AuthId_Steam2, szSteamId, sizeof(szSteamId));
 	if(g_bIsMySQl)
 	{
 		g_hDB.Format(szQuery, sizeof(szQuery), "SELECT userid, member FROM %s WHERE steamid = '%s';", g_sTableName, szSteamId);
