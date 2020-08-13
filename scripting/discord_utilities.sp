@@ -77,6 +77,6 @@ public void OnPluginStart()
 		OnAllPluginsLoaded();
 		OnPluginEnd();
 		OnConfigsExecuted();
-		RefreshClients();
+		CreateTimer(3.0, Timer_RefreshClients, _, TIMER_FLAG_NO_MAPCHANGE);
 	}
 }
