@@ -1,6 +1,8 @@
 # Discord Utilities
 Utilities that can be used to integrate gameserver to discord server.
 
+Confused how this plugin will look? Join my discord ([CruzeCoding](https://discord.gg/XfYf62a)) to have a look on how each feature look!
+
 ## Credits
 * .#Zipcore (CallAdmin Discord's code)
 * Impact(CallAdmin Main plugin's code)
