@@ -715,11 +715,9 @@ void LoadCommands()
 
 stock void RefreshClients()
 {
-	char steamid[32];
 	for(int i = 1; i <= MaxClients; i++) if(IsClientInGame(i))
 	{
-		GetClientAuthId(i, AuthId_Steam2, steamid, sizeof(steamid));
-		OnClientAuthorized(i, steamid);
+		OnClientPreAdminCheck(i);
 	}
 }
 
@@ -834,4 +832,9 @@ public Action SendRequestAgain(Handle timer, DataPack dp)
 	ReadPackString(dp, route, sizeof(route));
 	delete dp;
 	DiscordSendRequest(request, route);
+}
+
+public Action Timer_RefreshClients(Handle timer)
+{
+	RefreshClients();
 }
