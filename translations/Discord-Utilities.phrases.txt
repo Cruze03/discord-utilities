@@ -1,0 +1,391 @@
+﻿"Phrases"
+{
+	"CurrentMapField"
+	{
+		"en"		"Current Map:"
+		"hu"		"Jelenlegi pálya:"
+		"fr"		"Carte actuelle:"
+		"nl"		"Huidige Map:"
+		"lv"		"Šobrīd Mape:"
+		"ru"		"Текущая карта:"
+	}
+
+	"PlayersOnlineField"
+	{
+		"en"		"Players Online:"
+		"hu"		"Elérhető Játékosok:"
+		"fr"		"Joueurs en ligne:"
+		"nl"		"Spelers Online:"
+		"lv"		"Spēlētāji Online:"
+		"ru"		"Игроки онлайн:"
+	}
+
+	"DirectConnectField"
+	{
+		"en"		"Direct Connect:"
+		"hu"		"Csatlakozás:"
+		"fr"		"Connexion directe:"
+		"nl"		"Direct Verbinden:"
+		"lv"		"Tiešā savienošana:"
+		"ru"		"Прямое соединение:"
+	}
+	
+	"ChatRelayFormat"
+	{
+		"#format"	"{1:s},{2:s},{3:s}"		//1 = Username | 2 = Discriminator | 3 = Message
+		"en"		"{purple}{1}#{2}{default}: {3}"
+	}
+	
+	"DiscordInvalid"
+	{
+		"#format"	"{1:s}"
+		"en"		"<@{1}> This code is invalid!"
+		"hu"		"<@{1}> Ez a megerősítő kód nem érvényes!"
+		"fr"		"<@{1}> Ce code n'est pas valable!"
+		"nl"		"<@{1}> Deze code is ongeldig!"
+		"lv"		"<@{1}> Kods ir nederīgs!"
+		"ru"		"<@{1}> Этот код недействителен!"
+	}
+	
+	"DiscordInfo"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"		"<@{1}> This channel is being used for account linking!\nUsage: {2} <verification code>"
+		"hu"		"<@{1}> Ezt a szobát a fiókok megerősítésére használjuk!\nHasználat: {2} <azonosító>"
+		"fr"		"<@{1}> Ce canal est utilisé pour la liason de compte!\nUtilisation: {2} <code de vérification>"
+		"nl"		"<@{1}> Dit kanaal wordt gebruikt om je account te koppelen!\nGebruik: {2} <verificatie code>"
+		"lv"		"<@{1}> Šis kanāls tiek lietots profilu savienošanas!\nPielietojums: {2} <verifikācijas kods>"
+		"ru"		"<@{1}> Этот канал используется для привязки аккаунта!\nИспользование: {2} <код подтверждения>"
+	}
+	
+	"DiscordVerified"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"		"You have verified your account. ({green}{1}#{2}{default})"
+		"hu"		"Megerősítetted a fiókodat! ({green}{1}#{2}{default})"
+		"fr"		"Vous avez validé votre compte. ({green}{1}#{2}{default})"
+		"nl"		"Je hebt je account geverifieerd. ({green}{1}#{2}{default})"
+		"lv"		"Jūs verificējāt savu profilu. ({green}{1}#{2}{default})"
+		"ru"		"Вы подтвердили свой аккаунт. ({green}{1}#{2}{default})"
+	}
+	
+	"DiscordLinked"
+	{
+		"#format"	"{1:s}"
+		"en"		"<@{1}> You've linked your account! ✅"
+		"hu"		"<@{1}> Sikeresen megerősítetted a fiókodat! ✅ \nmostmár visszamehetsz a szerverre^-^"
+		"fr"		"<@{1}> Vous avez lié votre compte! ✅"
+		"nl"		"<@{1}> Je hebt je account gekoppeld! ✅"
+		"lv"		"<@{1}> Tu savienoji savu profilu! ✅"
+		"ru"		"<@{1}> Вы связали свой аккаунт! ✅"
+	}
+	
+	"DiscordAlreadyLinked"
+	{
+		"#format"	"{1:s}"
+		"en"		"<@{1}> This discord account is already linked! ❌"
+		"hu"		"<@{1}> Ez a discord fiók már társítva van! ❌"
+		"fr"		"<@{1}> Ce compte Discord est déjà lié! ❌"
+		"nl"		"<@{1}> Dit Discord account is al gekoppeld! ❌"
+		"lv"		"<@{1}> Jūsu discord profils jau ir savienots! ❌"
+		"ru"		"<@{1}> Эта учетная запись уже связана! ❌"
+	}
+	
+	"ChatRelayPrivateToAdmins"
+	{
+		"en"		"Private To Admins: "
+		"nl"		"Prive naar Admins: "
+		"lv"		"Privāti adminiem: "
+		"ru"		"Приват для администраторов: "
+	}
+	
+	"ChatRelayAllChat"
+	{
+		"en"		"All Chat: "
+		"nl"		"Openbare Chat: "
+		"lv"		"Visu Čats: "
+		"ru"		"весь чат: "
+	}
+	
+	"AdminLogFormat"
+	{
+		"#format"	"{1:s},{2:s},{3:s},{4:s}"		//1 = TimeStamp | 2 = ServerName | 3 = MapName | 4 = Message
+		"en"		"{1}`{2}|{3}` => {4}"
+	}
+	
+	"LinkYourID"
+	{
+		"#format"	"{1:s}"
+		"en" 		"Your ID: {grey}{1}"
+		"hu" 		"Azonosítód: {grey}{1}"
+		"fr"		"Identifiant: {grey}{1}"
+		"nl" 		"Jouw ID: {grey}{1}"
+		"lv"		"Tavs ID: {grey}{1}"
+		"ru"		"Ваш ID: {grey}{1}"
+	}
+	
+	"LinkConnect"
+	{
+		"#format"	"{1:s}"
+		"en"		"Connect to our discord server at: {blue}{1}"
+		"hu"		"Csatlakozz discord szerverünkre: {blue}{1}"
+		"fr"		"Connectez-vous à notre serveur de discord avec: {blue}{1}"
+		"nl"		"Join onze Discord server via: {blue}{1}"
+		"lv"		"Pievienojies mūsu discord serverim šeit: {blue}{1}"
+		"ru"		"Подключитесь к нашему серверу раздоров на: {blue}{1}"
+	}
+
+	"LinkUsage"
+	{
+		"#format"	"{1:s},{2:s},{3:s}"
+		"en"		"Use {yellow}{1} {2}{default} in channel {purple}#{3} {default}to get verified!"
+		"hu"		"Használd a {yellow}{1} {2}{default} parancsot a {purple}#{3} {default}szobában a megerősítéshez!"
+		"fr"		"Utiliser {yellow}{1} {2}{default} dans le canal {purple}#{3} {default}pour se faire vérifier!"
+		"nl"		"Gebruik {yellow}{1} {2}{default} in kanaal {purple}#{3} {default}om geverifieerd te worden!"
+		"lv"		"Izmanto {yellow}{1} {2}{default} verifikācijas kodu kanālā {purple}#{3} {default}lai verificētu profilu!"
+		"ru"		"использование {yellow}{1} {2}{default} в канале {purple}#{3} {default}пройти проверку!"
+	}
+	
+	"CallAdminReportHandledTitle"
+	{
+		"en"		"CallAdmin Report is being handled!"
+		"nl"		"De CallAdmin Report wordt behandelt!"
+		"lv"		"CallAdmin Ziņojums tiek izskatīts!"
+		"ru"		"CallAdmin Репорт обрабатывается!"
+	}
+	
+	"CallAdminReportHandlerName"
+	{
+		"en"		"Handler Name:"
+		"nl"		"Naam van de Handelaar:"
+		"lv"		"Ziņu izskatījā:"
+		"ru"		"Имя обработчика:"
+	}
+	
+	"CallAdminReportIDField"
+	{
+		"en"		"Report ID:"
+		"nl"		"Report ID:"
+		"lv"		"Ziņojuma ID:"
+		"ru"		"Репорт ID:"
+	}
+	
+	"ServerField"
+	{
+		"#format"	"{1:s}"
+		"en"		"Server: {1}"
+		"nl"		"Server: {1}"
+		"lv"		"Server: {1}"
+		"ru"		"Сервер: {1}"
+	}
+	
+	"CallAdminReportTitle"
+	{
+		"en"		"New CallAdmin Report!"
+		"lv"		"Jauns CallAdmin Ziņojums!"
+		"nl"		"Nieuwe CallAdmin Report!"
+		"ru"		"Новый CallAdmin Репорт!"
+	}
+	
+	"CONSOLE"
+	{
+		"en"		"CONSOLE"
+		"nl"		"CONSOLE"
+		"lv"		"CONSOLE"
+		"ru"		"CONSOLE"
+	}
+	
+	"SERVER"
+	{
+		"en"		"SERVER"
+		"nl"		"SERVER"
+		"lv"		"SERVER"
+		"ru"		"SERVER"
+	}
+	
+	"ReporterField"
+	{
+		"en"		"Reporter:"
+		"nl"		"Raporteerder:"
+		"lv"		"Ziņotājs:"
+		"ru"		"Репортер:"
+	}
+	
+	"TargetField"
+	{
+		"en"		"Target:"
+		"lv"		"Ziņo par:"
+		"nl"		"Doel:"
+		"ru"		"Цель:"
+	}
+	
+	"ReasonField"
+	{
+		"en"		"Reason:"
+		"nl"		"Reden:"
+		"lv"		"Iemesls:"
+		"ru"		"Причина:" 
+	}
+	
+	"BugReportTitle"
+	{
+		"en"		"New Bug Report!"
+		"nl"		"Nieuwe Fout Gerapporteerd!"
+		"lv"		"Jauns kļūdas ziņojums!"
+		"ru"		"Новая  Буг Репорт!"
+	}
+	
+	"MapField"
+	{
+		"en"		"Map:"
+		"nl"		"Map:"
+		"lv"		"Mape:"
+		"ru"		"Карта:"
+	}
+	
+	"NoReasonSpecified"
+	{
+		"en"		"No reason specified."
+		"hu"		"Nincs indok megadva"
+		"nl"		"Geen reden gespecificeerd."
+		"lv"		"iemesls nav norādīts"
+		"ru"		"Причина не указана."
+	}
+	
+	"SourceBansTitle"
+	{
+		"en"		"New Player Server Banned!"
+		"lv"		"Jauns spēlētājs ir saņēmis banu!"
+		"nl"		"Nieuwe Speler Server Geband!"
+		"ru"		"Новый игрок Сервер Banned!"
+	}
+	"AdminField"
+	{
+		"en"		"ADMIN:"
+		"hu"		"ADMIN:"
+		"fr"		"ADMIN:"
+		"nl"		"ADMIN:"
+		"lv"		"ADMIN:"
+		"ru"		"ADMIN:"
+	}
+
+	"PlayerField"
+	{
+		"en"		"PLAYER:"
+		"hu"		"PLAYER:"
+		"fr"		"PLAYER:"
+		"nl"		"SPELER:"
+		"lv"		"PLAYER:"
+		"ru"		"ИГРОК:"
+	}
+	
+	"TEMPORARY"
+	{
+		"en"		"TEMPORARY"
+		"hu"		"IDEIGLENES"
+		"fr"		"TEMPORAIRE"
+		"nl"		"TIJDELIJK"
+		"lv"		"PAGAIDU"
+		"ru"		"ВРЕМЕННОЕ"
+	}
+	
+	"MINUTE"
+	{
+		"en"		"minute"
+		"hu"		"perc"
+		"fr"		"minute"
+		"nl"		"minuut"
+		"lv"		"minūte"
+		"ru"		"минут"
+	}
+	
+	"MINUTES"
+	{
+		"en"		"minutes"
+		"fr"		"minutes"
+		"nl"		"minuten"
+		"lv"		"minūtes"
+		"ru"		"минут"
+	}
+	
+	"PERMANENT"
+	{
+		"en"		"PERMANENT"
+		"hu"		"VÉGLEGES"
+		"fr"		"PERMANENT"
+		"nl"		"PERMANENT"
+		"lv"		"MŪŽĪGS"
+		"ru"		"ПОСТОЯННАЯ"
+	}
+
+	"LengthField"
+	{
+		"en"		"LENGTH"
+		"hu"		"IDŐTARTAM"
+		"fr"		"DURÉE"
+		"nl"		"LENGTE"
+		"lv"		"ILGUMS"
+		"ru"		"ДЛИНА"
+	}
+	
+	"SourceBansReportTitle"
+	{
+		"en"		"New Report!"
+		"nl"		"Nieuwe Report!"
+		"lv"		"Jauns Ziņojums!"
+		"ru"		"Новый Репорт!"
+	}
+	
+	"SourceCommsTitle"
+	{
+		"en"		"New Player Comm-Banned!"
+		"nl"		"Nieuwe Speler Comm-Banned!"
+		"lv"		"New Player Comm-Banned!"
+		"ru"		"Новый игрок Comm-Banned!"
+	}
+	
+	"MUTE"
+	{
+		"en"		"MUTE"
+		"nl"		"MUTE"
+		"lv"		"MUTE"
+		"ru"		"МУТЕ"
+	}
+	
+	"GAG"
+	{
+		"en"		"GAG"
+		"nl"		"GAG"
+		"lv"		"GAG"
+		"ru"		"ГАГ"
+	}
+	
+	"SILENCE"
+	{
+		"en"		"SILENCE"
+		"nl"		"SILENCE"
+		"lv"		"SILENCE"
+		"ru"		"МОЛЧАНИЕ"
+	}
+	
+	"TypeField"
+	{
+		"en"		"TYPE"
+		"hu"		"TIPUS"
+		"fr"		"TYPE"
+		"nl"		"TYPE"
+		"lv"		"VEIDS"
+		"ru"		"ТИП"
+	}
+	
+	"MustVerify"
+	{
+		"#format"	"{1:s}"
+		"en"		"You have to verify your {blue}Discord {default}account! Type {orange}{1}"
+		"hu"		"Meg kell erősítened a {blue}Discord {default}fiókodat! Írd be, hogy {orange}{1}"
+		"fr"		"Vous devez vérifier votre {blue}Discord {default}account! Ecrit {orange}{1}"
+		"nl"		"Je moet je {blue}Discord {default}account verifieren! Type {orange}{1}"
+		"lv"		"Verificē savu {blue}Discord {default}profilu! Raksti {orange}{1}"
+		"ru"		"Вы должны подтвердить свой {blue}Discord {default}учетная запись! Тип {orange}{1}"
+	}
+}
