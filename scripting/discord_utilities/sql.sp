@@ -97,7 +97,7 @@ public int SQLQuery_GetUserData(Handle owner, Handle hndl, char [] error, any da
 			g_hDB.Format(Query, sizeof(Query), "INSERT INTO %s(userid, steamid, member, last_accountuse) VALUES('%s', '%s', '0', '0');", g_sTableName, NULL_STRING, szSteamId);
 		}
 		SQL_TQuery(g_hDB, SQLQuery_InsertNewPlayer, Query);
-		OnClientAuthorized(client, szSteamId);
+		OnClientPreAdminCheck(client);
 		return;
 	}
 	while(SQL_FetchRow(hndl))
