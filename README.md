@@ -1,4 +1,4 @@
-# discord-utilities
+# Discord Utilities
 Utilities that can be used to integrate gameserver to discord server.
 
 ## Credits
