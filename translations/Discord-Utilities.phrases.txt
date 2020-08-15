@@ -39,12 +39,12 @@
 	"DiscordInvalid"
 	{
 		"#format"	"{1:s}"
-		"en"		"<@{1}> This code is invalid!"
-		"hu"		"<@{1}> Ez a megerősítő kód nem érvényes!"
-		"fr"		"<@{1}> Ce code n'est pas valable!"
-		"nl"		"<@{1}> Deze code is ongeldig!"
-		"lv"		"<@{1}> Kods ir nederīgs!"
-		"ru"		"<@{1}> Этот код недействителен!"
+		"en"		"<@{1}> There is no client with this ID, ensure you are connected to the game server and check your ID again!"
+		"hu"		"<@{1}> Nincs kliens ezzel az azonosítóval, ellenőrizze, hogy csatlakozik-e a játék szerveréhez, és ellenőrizze újra az azonosítóját!"
+		"fr"		"<@{1}> Il n'y a pas de client avec cet identifiant, assurez-vous d'être connecté au serveur de jeu et vérifiez à nouveau votre identifiant!"
+		"nl"		"<@{1}> Er is geen client met deze ID, zorg ervoor dat je verbonden bent met de spelserver en controleer je ID opnieuw!"
+		"lv"		"<@{1}> Nav neviena klienta ar šo ID, pārliecinieties, vai esat izveidojis savienojumu ar spēles serveri, un pārbaudiet savu ID vēlreiz!"
+		"ru"		"<@{1}> Нет клиента с таким идентификатором, убедитесь, что вы подключены к игровому серверу, и еще раз проверьте свой идентификатор!"
 	}
 	
 	"DiscordInfo"
@@ -126,24 +126,34 @@
 	
 	"LinkConnect"
 	{
-		"#format"	"{1:s}"
-		"en"		"Connect to our discord server at: {blue}{1}"
-		"hu"		"Csatlakozz discord szerverünkre: {blue}{1}"
-		"fr"		"Connectez-vous à notre serveur de discord avec: {blue}{1}"
-		"nl"		"Join onze Discord server via: {blue}{1}"
-		"lv"		"Pievienojies mūsu discord serverim šeit: {blue}{1}"
-		"ru"		"Подключитесь к нашему серверу раздоров на: {blue}{1}"
+		"en"		"Connect to our discord server at:"
+		"hu"		"Csatlakozz discord szerverünkre:"
+		"fr"		"Connectez-vous à notre serveur de discord avec:"
+		"nl"		"Join onze Discord server via:"
+		"lv"		"Pievienojies mūsu discord serverim šeit:"
+		"ru"		"Подключитесь к нашему серверу раздоров на:"
 	}
 
 	"LinkUsage"
 	{
-		"#format"	"{1:s},{2:s},{3:s}"
-		"en"		"Use {yellow}{1} {2}{default} in channel {purple}#{3} {default}to get verified!"
-		"hu"		"Használd a {yellow}{1} {2}{default} parancsot a {purple}#{3} {default}szobában a megerősítéshez!"
-		"fr"		"Utiliser {yellow}{1} {2}{default} dans le canal {purple}#{3} {default}pour se faire vérifier!"
-		"nl"		"Gebruik {yellow}{1} {2}{default} in kanaal {purple}#{3} {default}om geverifieerd te worden!"
-		"lv"		"Izmanto {yellow}{1} {2}{default} verifikācijas kodu kanālā {purple}#{3} {default}lai verificētu profilu!"
-		"ru"		"использование {yellow}{1} {2}{default} в канале {purple}#{3} {default}пройти проверку!"
+		"#format"	"{1:s},{2:s}"
+		"en"		"Use {yellow}{1} {2}"
+		"hu"		"Használd a {yellow}{1} {2}"
+		"fr"		"Utiliser {yellow}{1} {2}"
+		"nl"		"Gebruik {yellow}{1} {2}"
+		"lv"		"Izmanto {yellow}{1} {2}"
+		"ru"		"использование {yellow}{1} {2}"
+	}
+
+	"LinkUsage2"
+	{
+		"#format"	"{1:s}"
+		"en"		"in channel {purple}#{1} {default}to get verified!"
+		"hu"		"parancsot a {purple}#{1} {default}szobában a megerősítéshez!"
+		"fr"		"dans le canal {purple}#{1} {default}pour se faire vérifier!"
+		"nl"		"in kanaal {purple}#{1} {default}om geverifieerd te worden!"
+		"lv"		"verifikācijas kodu kanālā {purple}#{1} {default}lai verificētu profilu!"
+		"ru"		"в канале {purple}#{1} {default}пройти проверку!"
 	}
 	
 	"CallAdminReportHandledTitle"

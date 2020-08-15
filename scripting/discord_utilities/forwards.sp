@@ -176,7 +176,7 @@ public void OnClientPutInServer(int client)
 
 public Action OnClientPreAdminCheck(int client)
 {
-	if(IsFakeClient(client))
+	if(IsFakeClient(client) || g_hDB == null)
 	{
 		return;
 	}
@@ -478,9 +478,15 @@ public Action Command_ViewId(int client, int args)
 	{
 		return Plugin_Handled;
 	}
+	
 	CPrintToChat(client, "%s %T", g_sServerPrefix, "LinkYourID", client, g_sUniqueCode[client]);
-	CPrintToChat(client, "%s %T", g_sServerPrefix, "LinkConnect", client, g_sInviteLink);
-	CPrintToChat(client, "%s %T", g_sServerPrefix, "LinkUsage", client, g_sLinkCommand, g_sUniqueCode[client], g_sVerificationChannelName);
+	
+	CPrintToChat(client, "%s %T", g_sServerPrefix, "LinkConnect", client);
+	CPrintToChat(client, "%s {blue}%s", g_sServerPrefix, g_sInviteLink);
+	
+	CPrintToChat(client, "%s %T", g_sServerPrefix, "LinkUsage", client, g_sLinkCommand, g_sUniqueCode[client]);
+	CPrintToChat(client, "%s %T", g_sServerPrefix, "LinkUsage2", client, g_sVerificationChannelName);
+	
 	return Plugin_Handled;
 }
 
