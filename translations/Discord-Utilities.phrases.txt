@@ -155,7 +155,7 @@
 		"nl"		"Join onze Discord server via:"
 		"lv"		"Pievienojies mūsu discord serverim šeit:"
 		"ru"		"Подключитесь к нашему серверу раздоров на:"
-		"ro"		"Conecteazăte la server-ul nostru de discord (link):"
+		"ro"		"Conectează-te la server-ul nostru de discord (link):"
 	}
 
 	"LinkUsage"
@@ -179,7 +179,7 @@
 		"nl"		"in kanaal {purple}#{1} {default}om geverifieerd te worden!"
 		"lv"		"verifikācijas kodu kanālā {purple}#{1} {default}lai verificētu profilu!"
 		"ru"		"в канале {purple}#{1} {default}пройти проверку!"
-		"ro"		"in chanalul {purple}#{1} {default}pentru a te verifica!"
+		"ro"		"Îcn chanalul {purple}#{1} {default}pentru a te verifica!"
 	}
 	
 	"CallAdminReportHandledTitle"
