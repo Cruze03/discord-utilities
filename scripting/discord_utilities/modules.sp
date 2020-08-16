@@ -816,11 +816,20 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 
 	ExplodeString(message, " ", szValues, sizeof(szValues), sizeof(szValues[]));
 	
-	char _szValues[2][50];
-	ExplodeString(szValues[1], "-", _szValues, sizeof(_szValues), sizeof(_szValues[]));
+	TrimString(szValues[1]);
+	
+	char _szValues[3][75];
+	int retrieved = ExplodeString(szValues[1], "-", _szValues, sizeof(_szValues), sizeof(_szValues[]));
 
 	if(StrEqual(szValues[0], g_sLinkCommand))
 	{
+		if (retrieved != 3)
+		{
+			Format(szReply, sizeof(szReply), "%T", "DiscordInvalidID", LANG_SERVER, userID, g_sViewIDCommand);
+			Bot.SendMessage(channel, szReply);
+			return;
+		}
+		
 		if(StringToInt(_szValues[0]) != g_cServerID.IntValue)
 		{
 			return; //Prevent multiple replies from the bot (for e.g. the plugin is installed on more than 1 server and they're using the same bot & channel)
