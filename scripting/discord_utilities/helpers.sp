@@ -748,8 +748,8 @@ stock int GetClientFromUniqueCode(const char[] unique)
 {
 	for(int i = 1; i <= MaxClients; i++)
 	{
-		if(!IsClientInGame(i)) continue;
-		if(StrEqual(g_sUniqueCode[i], unique)) return i;
+		if (!IsClientInGame(i)) continue;
+		if (StrEqual(g_sUniqueCode[i], unique)) return i;
 	}
 	return -1;
 }

@@ -36,6 +36,17 @@
 		"en"		"{purple}{1}#{2}{default}: {3}"
 	}
 	
+	"DiscordInvalidID"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"		"<@{1}> This ID is not valid, please type {2} in-game and try again!"
+		"hu"		"<@{1}> Ez az azonosító nem érvényes, kérjük, írja be a {2} játékon belüli játékot, és próbálja újra!"
+		"fr"		"<@{1}> Cet identifiant n'est pas valide, veuillez saisir {2} dans le jeu et réessayer!"
+		"nl"		"<@{1}> Deze ID is niet geldig. Typ {2} in de game en probeer het opnieuw!"
+		"lv"		"<@{1}> Šis ID nav derīgs. Lūdzu, ierakstiet {2} spēlē un mēģiniet vēlreiz!"
+		"ru"		"<@{1}> Этот идентификатор недействителен, введите в игре {2} и повторите попытку!"
+	}
+
 	"DiscordInvalid"
 	{
 		"#format"	"{1:s}"
