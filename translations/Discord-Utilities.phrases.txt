@@ -179,7 +179,7 @@
 		"nl"		"in kanaal {purple}#{1} {default}om geverifieerd te worden!"
 		"lv"		"verifikācijas kodu kanālā {purple}#{1} {default}lai verificētu profilu!"
 		"ru"		"в канале {purple}#{1} {default}пройти проверку!"
-		"ro"		"Îcn chanalul {purple}#{1} {default}pentru a te verifica!"
+		"ro"		"În chanalul {purple}#{1} {default}pentru a te verifica!"
 	}
 	
 	"CallAdminReportHandledTitle"
