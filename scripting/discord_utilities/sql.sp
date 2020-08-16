@@ -124,7 +124,7 @@ public int SQLQuery_GetUserData(Handle owner, Handle hndl, char [] error, any da
 	char steamid[32];
 	GetClientAuthId(client, AuthId_SteamID64, steamid, sizeof(steamid));
 	int uniqueNum = GetRandomInt(100000, 999999);
-	Format(g_sUniqueCode[client], sizeof(g_sUniqueCode), "%i-%i-%s", uniqueNum, g_cServerID.IntValue, steamid);
+	Format(g_sUniqueCode[client], sizeof(g_sUniqueCode), "%i-%i-%s", g_cServerID.IntValue, uniqueNum, steamid);
 	g_bChecked[client] = true;
 }
 
