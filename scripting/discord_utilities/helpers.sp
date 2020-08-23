@@ -353,6 +353,7 @@ void CreateCvars()
 	g_cUseSWGM = AutoExecConfig_CreateConVar("sm_du_use_swgm_file", "0", "Use SWGM config file for restricting commands.");
 	g_cTimeStamps = AutoExecConfig_CreateConVar("sm_du_display_timestamps", "0", "Display timestamps? Used in gameserver => discord server relay AND AdminLog");
 	g_cServerID = AutoExecConfig_CreateConVar("sm_du_server_id", "1", "Increase this with every server you put this plugin in. Prevents multiple replies from the bot in verfication channel.");
+	g_cPrimaryServer = AutoExecConfig_CreateConVar("sm_du_server_primary", "1", "Is this the primary server in the verification channel? Only this server will respond to generic queries.", .min=0.0, .max=1.0, .hasMin=true, .hasMax=true);
 
 	g_cLinkCommand = AutoExecConfig_CreateConVar("sm_du_link_command", "!link", "Command to use in text channel.");
 	g_cViewIDCommand = AutoExecConfig_CreateConVar("sm_du_viewid_command", "sm_viewid", "Command to view id.");

@@ -814,25 +814,33 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 	discordmessage.GetAuthor().GetDiscriminator(discriminator, sizeof(discriminator));
 	discordmessage.GetAuthor().GetID(userID, sizeof(userID));
 
-	int retrieved = ExplodeString(message, " ", szValues, sizeof(szValues), sizeof(szValues[]));
-	
-	if (retrieved < 2)
-	{
-		//Prevent multiple replies if no params were set
-		return;
-	}
-	
+	int retrieved1 = ExplodeString(message, " ", szValues, sizeof(szValues), sizeof(szValues[]));	
 	TrimString(szValues[1]);
 	
 	char _szValues[3][75];
-	retrieved = ExplodeString(szValues[1], "-", _szValues, sizeof(_szValues), sizeof(_szValues[]));
+	int retrieved2 = ExplodeString(szValues[1], "-", _szValues, sizeof(_szValues), sizeof(_szValues[]));
+
+	bool bIsPrimary = g_cPrimaryServer.BoolValue;
 
 	if(StrEqual(szValues[0], g_sLinkCommand))
 	{
-		if (retrieved != 3)
+		if (retrieved1 < 2)
 		{
-			Format(szReply, sizeof(szReply), "%T", "DiscordInvalidID", LANG_SERVER, userID, g_sViewIDCommand);
-			Bot.SendMessage(channel, szReply);
+			//Prevent multiple replies, only allow the primary server to respond
+			if (bIsPrimary)
+			{
+				Format(szReply, sizeof(szReply), "%T", "DiscordMissingParameters", LANG_SERVER, userID);
+				Bot.SendMessage(channel, szReply);
+			}
+			return;
+		}
+		else if (retrieved2 != 3)
+		{
+			if (bIsPrimary)
+			{
+				Format(szReply, sizeof(szReply), "%T", "DiscordInvalidID", LANG_SERVER, userID, g_sViewIDCommand);
+				Bot.SendMessage(channel, szReply);
+			}
 			return;
 		}
 		
@@ -866,7 +874,7 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 	}
 	else
 	{
-		if(g_cServerID.IntValue == 1)
+		if (bIsPrimary)
 		{
 			Format(szReply, sizeof(szReply), "%T", "DiscordInfo", LANG_SERVER, userID, g_sLinkCommand);
 			Bot.SendMessage(channel, szReply);

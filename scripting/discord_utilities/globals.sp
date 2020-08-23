@@ -20,6 +20,7 @@ ConVar g_cAPIKey, g_cBotToken, g_cDNSServerIP, g_cCheckInterval, g_cUseSWGM, g_c
 ConVar g_cLinkCommand, g_cViewIDCommand, g_cInviteLink;
 ConVar g_cDiscordPrefix, g_cServerPrefix;
 ConVar g_cDatabaseName, g_cTableName, g_cPruneDays;
+ConVar g_cPrimaryServer;
 
 char g_sCallAdmin_Webhook[128], g_sCallAdmin_BotName[32], g_sCallAdmin_BotAvatar[128], g_sCallAdmin_Color[8], g_sCallAdmin_Content[256], g_sCallAdmin_FooterIcon[128];
 char g_sBugReport_Webhook[128], g_sBugReport_BotName[32], g_sBugReport_BotAvatar[128], g_sBugReport_Color[8], g_sBugReport_Content[256], g_sBugReport_FooterIcon[128];
