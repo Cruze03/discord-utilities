@@ -814,12 +814,18 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 	discordmessage.GetAuthor().GetDiscriminator(discriminator, sizeof(discriminator));
 	discordmessage.GetAuthor().GetID(userID, sizeof(userID));
 
-	ExplodeString(message, " ", szValues, sizeof(szValues), sizeof(szValues[]));
+	int retrieved = ExplodeString(message, " ", szValues, sizeof(szValues), sizeof(szValues[]));
+	
+	if (retrieved < 2)
+	{
+		//Prevent multiple replies if no params were set
+		return;
+	}
 	
 	TrimString(szValues[1]);
 	
 	char _szValues[3][75];
-	int retrieved = ExplodeString(szValues[1], "-", _szValues, sizeof(_szValues), sizeof(_szValues[]));
+	retrieved = ExplodeString(szValues[1], "-", _szValues, sizeof(_szValues), sizeof(_szValues[]));
 
 	if(StrEqual(szValues[0], g_sLinkCommand))
 	{
