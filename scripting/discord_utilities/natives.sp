@@ -1,3 +1,8 @@
+public int Native_IsChecked(Handle plugin, int numparams)
+{
+	return g_bChecked[GetNativeCell(1)];
+}
+
 public int Native_IsDiscordMember(Handle plugin, int numparams)
 {
 	if(!g_bChecked[GetNativeCell(1)])

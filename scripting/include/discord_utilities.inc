@@ -32,6 +32,13 @@ forward void DU_OnCheckedAccounts(const char[] bottoken, const char[] guildid, c
 native void DU_RefreshClients();
 
 /**
+ * Discord Database Check
+ *
+ * @returns true if client was already checked for member status.
+ */
+native bool DU_IsChecked(int client);
+
+/**
  * Discord Member Check
  *
  * @returns true if client is member of discord server else false.
@@ -87,6 +94,7 @@ public SharedPlugin __pl_discord_utilities =
 #if !defined REQUIRE_PLUGIN
 public void __pl_discord_utilities_SetNTVOptional()
 {
+	MarkNativeAsOptional("DU_IsChecked");
 	MarkNativeAsOptional("DU_IsMember");
 	MarkNativeAsOptional("DU_GetUserId");
 	MarkNativeAsOptional("DU_RefreshClients");

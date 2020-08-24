@@ -855,7 +855,7 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 			Format(szReply, sizeof(szReply), "%T", "DiscordInvalid", LANG_SERVER, userID);
 			Bot.SendMessage(channel, szReply);
 		}
-		else
+		else if (!g_bMember[client])
 		{
 			DataPack datapack = new DataPack();
 			datapack.WriteCell(client);
@@ -864,12 +864,22 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 			datapack.WriteString(discriminator);
 			//datapack.WriteString(messageID);
 
-			char szSteamId[20];
+			char szSteamId[32];
 			GetClientAuthId(client, AuthId_Steam2, szSteamId, sizeof(szSteamId));
 
 			char Query[512];
 			g_hDB.Format(Query, sizeof(Query), "SELECT userid FROM %s WHERE steamid = '%s'", g_sTableName, szSteamId);
 			SQL_TQuery(g_hDB, SQLQuery_CheckUserData, Query, datapack);
+			
+			//Security addition - renew unique code in case another user copies it before query returns (?)
+			GetClientAuthId(client, AuthId_SteamID64, szSteamId, sizeof(szSteamId));
+			int uniqueNum = GetRandomInt(100000, 999999);
+			Format(g_sUniqueCode[client], sizeof(g_sUniqueCode), "%i-%i-%s", g_cServerID.IntValue, uniqueNum, szSteamId);
+		} else
+		{
+			//Don't bother querying the DB if user is already a member
+			Format(szReply, sizeof(szReply), "%T", "DiscordAlreadyLinked", LANG_SERVER, userID);
+			Bot.SendMessage(channel, szReply);
 		}
 	}
 	else
