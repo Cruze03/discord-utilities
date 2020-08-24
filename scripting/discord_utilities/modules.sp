@@ -831,6 +831,7 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 			{
 				Format(szReply, sizeof(szReply), "%T", "DiscordMissingParameters", LANG_SERVER, userID);
 				Bot.SendMessage(channel, szReply);
+				DU_DeleteMessageID(discordmessage);
 			}
 			return;
 		}
@@ -840,6 +841,7 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 			{
 				Format(szReply, sizeof(szReply), "%T", "DiscordInvalidID", LANG_SERVER, userID, g_sViewIDCommand);
 				Bot.SendMessage(channel, szReply);
+				DU_DeleteMessageID(discordmessage);
 			}
 			return;
 		}
@@ -890,4 +892,5 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 			Bot.SendMessage(channel, szReply);
 		}
 	}
+	DU_DeleteMessageID(discordmessage);
 }

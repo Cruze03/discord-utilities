@@ -839,3 +839,13 @@ public Action Timer_RefreshClients(Handle timer)
 {
 	RefreshClients();
 }
+
+stock void DU_DeleteMessageID(DiscordMessage discordmessage)
+{
+	char channelid[64], msgid[64];
+	
+	discordmessage.GetChannelID(channelid, sizeof(channelid));
+	discordmessage.GetID(msgid, sizeof(msgid));
+	
+	Bot.DeleteMessageID(channelid, msgid);
+}
