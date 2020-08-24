@@ -877,6 +877,8 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 			GetClientAuthId(client, AuthId_SteamID64, szSteamId, sizeof(szSteamId));
 			int uniqueNum = GetRandomInt(100000, 999999);
 			Format(g_sUniqueCode[client], sizeof(g_sUniqueCode), "%i-%i-%s", g_cServerID.IntValue, uniqueNum, szSteamId);
+			
+			return; //Dont delete this message so user has positive confirmation
 		} else
 		{
 			//Don't bother querying the DB if user is already a member
