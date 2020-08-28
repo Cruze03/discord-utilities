@@ -40,6 +40,7 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 	
 	RegPluginLibrary("DiscordUtilities");
 	
+	CreateNative("DU_IsChecked", Native_IsChecked);
 	CreateNative("DU_IsMember", Native_IsDiscordMember);
 	CreateNative("DU_GetUserId", Native_GetUserId);
 	CreateNative("DU_RefreshClients", Native_RefreshClients);

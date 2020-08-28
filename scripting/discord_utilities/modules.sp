@@ -814,19 +814,35 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 	discordmessage.GetAuthor().GetDiscriminator(discriminator, sizeof(discriminator));
 	discordmessage.GetAuthor().GetID(userID, sizeof(userID));
 
-	ExplodeString(message, " ", szValues, sizeof(szValues), sizeof(szValues[]));
-	
+	int retrieved1 = ExplodeString(message, " ", szValues, sizeof(szValues), sizeof(szValues[]));	
 	TrimString(szValues[1]);
 	
 	char _szValues[3][75];
-	int retrieved = ExplodeString(szValues[1], "-", _szValues, sizeof(_szValues), sizeof(_szValues[]));
+	int retrieved2 = ExplodeString(szValues[1], "-", _szValues, sizeof(_szValues), sizeof(_szValues[]));
+
+	bool bIsPrimary = g_cPrimaryServer.BoolValue;
 
 	if(StrEqual(szValues[0], g_sLinkCommand))
 	{
-		if (retrieved != 3)
+		if (retrieved1 < 2)
 		{
-			Format(szReply, sizeof(szReply), "%T", "DiscordInvalidID", LANG_SERVER, userID, g_sViewIDCommand);
-			Bot.SendMessage(channel, szReply);
+			//Prevent multiple replies, only allow the primary server to respond
+			if (bIsPrimary)
+			{
+				Format(szReply, sizeof(szReply), "%T", "DiscordMissingParameters", LANG_SERVER, userID);
+				Bot.SendMessage(channel, szReply);
+				DU_DeleteMessageID(discordmessage);
+			}
+			return;
+		}
+		else if (retrieved2 != 3)
+		{
+			if (bIsPrimary)
+			{
+				Format(szReply, sizeof(szReply), "%T", "DiscordInvalidID", LANG_SERVER, userID, g_sViewIDCommand);
+				Bot.SendMessage(channel, szReply);
+				DU_DeleteMessageID(discordmessage);
+			}
 			return;
 		}
 		
@@ -841,7 +857,7 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 			Format(szReply, sizeof(szReply), "%T", "DiscordInvalid", LANG_SERVER, userID);
 			Bot.SendMessage(channel, szReply);
 		}
-		else
+		else if (!g_bMember[client])
 		{
 			DataPack datapack = new DataPack();
 			datapack.WriteCell(client);
@@ -850,20 +866,33 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 			datapack.WriteString(discriminator);
 			//datapack.WriteString(messageID);
 
-			char szSteamId[20];
+			char szSteamId[32];
 			GetClientAuthId(client, AuthId_Steam2, szSteamId, sizeof(szSteamId));
 
 			char Query[512];
 			g_hDB.Format(Query, sizeof(Query), "SELECT userid FROM %s WHERE steamid = '%s'", g_sTableName, szSteamId);
 			SQL_TQuery(g_hDB, SQLQuery_CheckUserData, Query, datapack);
+			
+			//Security addition - renew unique code in case another user copies it before query returns (?)
+			GetClientAuthId(client, AuthId_SteamID64, szSteamId, sizeof(szSteamId));
+			int uniqueNum = GetRandomInt(100000, 999999);
+			Format(g_sUniqueCode[client], sizeof(g_sUniqueCode), "%i-%i-%s", g_cServerID.IntValue, uniqueNum, szSteamId);
+			
+			return; //Dont delete this message so user has positive confirmation
+		} else
+		{
+			//Don't bother querying the DB if user is already a member
+			Format(szReply, sizeof(szReply), "%T", "DiscordAlreadyLinked", LANG_SERVER, userID);
+			Bot.SendMessage(channel, szReply);
 		}
 	}
 	else
 	{
-		if(g_cServerID.IntValue == 1)
+		if (bIsPrimary)
 		{
 			Format(szReply, sizeof(szReply), "%T", "DiscordInfo", LANG_SERVER, userID, g_sLinkCommand);
 			Bot.SendMessage(channel, szReply);
 		}
 	}
+	DU_DeleteMessageID(discordmessage);
 }

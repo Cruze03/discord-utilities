@@ -39,6 +39,18 @@
 		"en"		"{purple}{1}#{2}{default}: {3}"
 	}
 	
+	"DiscordMissingParameters"
+	{
+		"#format"	"{1:s}"
+		"en"		"<@{1}> You need to provide an ID for this command!"
+		"hu"		"<@{1}> Meg kell adnia egy azonosítót ehhez a parancshoz!"
+		"fr"		"<@{1}> Vous devez fournir un identifiant pour cette commande!"
+		"nl"		"<@{1}> U moet een ID opgeven voor deze opdracht!"
+		"lv"		"<@{1}> Jums ir jānorāda šīs komandas ID!"
+		"ru"		"<@{1}> Вам необходимо указать идентификатор для этой команды!"
+		"ro"		"<@{1}> Trebuie să furnizați un ID pentru această comandă!"
+	}
+
 	"DiscordInvalidID"
 	{
 		"#format"	"{1:s},{2:s}"
