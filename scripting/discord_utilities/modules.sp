@@ -879,7 +879,8 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 			Format(g_sUniqueCode[client], sizeof(g_sUniqueCode), "%i-%i-%s", g_cServerID.IntValue, uniqueNum, szSteamId);
 			
 			return; //Dont delete this message so user has positive confirmation
-		} else
+		}
+		else
 		{
 			//Don't bother querying the DB if user is already a member
 			Format(szReply, sizeof(szReply), "%T", "DiscordAlreadyLinked", LANG_SERVER, userID);
