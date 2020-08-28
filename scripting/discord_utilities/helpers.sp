@@ -11,20 +11,27 @@ void AccountsCheck()
 	{
 		return;
 	}
-
-	char Query[256];
-	g_hDB.Format(Query, sizeof(Query), "SELECT userid FROM %s", g_sTableName);
-	SQL_TQuery(g_hDB, SQLQuery_AccountCheck, Query);
+	
+	if(g_hDB == null)
+	{
+		CreateTimer(5.0, Timer_Query_AccountCheck, _, TIMER_FLAG_NO_MAPCHANGE);
+	}
+	else
+	{
+		char Query[256];
+		g_hDB.Format(Query, sizeof(Query), "SELECT userid FROM %s", g_sTableName);
+		SQL_TQuery(g_hDB, SQLQuery_AccountCheck, Query);
+	}
 
 	Handle hData = json_object();
 	json_object_set_new(hData, "limit", json_integer(1000));
 	json_object_set_new(hData, "afterID", json_string(""));
-	GetMember(hData);
+	GetMembers(hData);
 }
 
-void GetMember(Handle hData = INVALID_HANDLE)
+void GetMembers(Handle hData = INVALID_HANDLE)
 {
-	if(StrEqual(g_sGuildID, ""))
+	if(StrEqual(g_sGuildID, "") && !StrEqual(g_sVerificationChannelID, ""))
 	{
 		LogError("[Discord-Utilities] GuildID is not provided. GetMember won't work!");
 		return;
@@ -64,14 +71,124 @@ public int HTTPCompleted(Handle request, bool failure, bool requestSuccessful, E
 
 public void MembersDataReceive(Handle request, bool failure, int offset, int statuscode, any dp)
 {
+	if(failure || (statuscode != 200))
+	{
+		if(statuscode == 429 || statuscode == 500)
+		{
+			GetMembers(dp);
+			delete request;
+			return;
+		}
+		delete request;
+		delete view_as<Handle>(dp);
+		return;
+	}
+	SteamWorks_GetHTTPResponseBodyCallback(request, GetMembersData, dp);
 	delete request;
+}
+
+public int GetMembersData(const char[] data, any dp)
+{
+	Handle hJson = json_load(data);
+	Handle hData = view_as<Handle>(dp);
+	OnGetMembersAll(hJson);
+	if(JsonObjectGetBool(hData, "autoPaginate"))
+	{
+		int size = json_array_size(hJson);
+		int limit = JsonObjectGetInt(hData, "limit");
+		if(limit == size)
+		{
+			Handle hLast = json_array_get(hJson, size - 1);
+			char lastID[32];
+			json_string_value(hLast, lastID, sizeof(lastID));
+			delete hJson;
+			delete hLast;
+
+			json_object_set_new(hData, "afterID", json_string(lastID));
+			GetMembers(hData);
+			return;
+		}
+	}
+	
+	delete hJson;
+	delete hData;
+}
+
+public void OnGetMembersAll(Handle hMemberList)
+{
+	char userid[20];
+	DiscordGuildUser GuildUser;
+	DiscordUser user;
+	bool found;
+	char Query[256];
+	bool[] bUpdate = new bool[MaxClients+1];
+	for(int x = 1; x <= MaxClients; x++)
+	{
+		if(!IsClientInGame(x))
+		{
+			continue;
+		}
+		if(!g_bMember[x])
+		{
+			continue;
+		}
+		found = false;
+		for(int i = 0; i < json_array_size(hMemberList); i++)
+		{
+			GuildUser = view_as<DiscordGuildUser>(json_array_get(hMemberList, i));
+			user = GuildUser.GetUser();
+			user.GetID(userid, sizeof(userid));
+			if(strcmp(userid, g_sUserID[x]) == 0)
+			{
+				found = true;
+				break;
+			}
+		}
+		if(!found)
+		{
+			char steamid[32];
+			GetClientAuthId(x, AuthId_Steam2, steamid, sizeof(steamid));
+			if(g_bIsMySQl)
+			{
+				g_hDB.Format(Query, sizeof(Query), "UPDATE `%s` SET `userid` = '%s', member = '0' WHERE `steamid` = '%s';", g_sTableName, NULL_STRING, steamid);
+			}
+			else
+			{
+				g_hDB.Format(Query, sizeof(Query), "UPDATE %s SET userid = '%s', member = '0' WHERE steamid = '%s';", g_sTableName, NULL_STRING, steamid);
+			}
+			SQL_TQuery(g_hDB, SQLQuery_UpdatePlayer, Query);
+			bUpdate[x] = true;
+			CPrintToChat(x, "%s %T", g_sServerPrefix, "DiscordRevoked", x);
+			Call_StartForward(g_hOnAccountRevoked);
+			Call_PushCell(x);
+			Call_PushString(g_sUserID[x]);
+			Call_Finish();
+		}
+	}
+
+	delete user;
+	delete GuildUser;
+	
+	for(int i = 1; i <= MaxClients; i++)
+	{
+		if(!IsClientInGame(i))
+		{
+			continue;
+		}
+		if(!bUpdate[i])
+		{
+			continue;
+		}
+		OnClientPutInServer(i);
+		OnClientPreAdminCheck(i);
+	}
 }
 
 void GetGuildMember(char[] userid)
 {
 	Handle hData = json_object();
 	json_object_set_new(hData, "userID", json_string(userid[0]));
-	GetMember(hData);
+	GetMembers(hData);
 }
 
 void SendChatRelay(int client, const char[] sArgs, char[] url, bool bAdmin = true, bool bAllChat = false)
@@ -294,6 +411,7 @@ stock void RemoveColors(char[] text, int size)
 
 void CreateCvars()
 {
+	#if defined USE_AutoExecConfig
 	AutoExecConfig_SetFile("Discord-Utilities");
 	AutoExecConfig_SetCreateFile(true);
 
@@ -368,6 +486,79 @@ void CreateCvars()
 
 	AutoExecConfig_ExecuteFile();
 	AutoExecConfig_CleanFile();
+	
+	#else
+	g_cCallAdmin_Webhook = CreateConVar("sm_du_calladmin_webhook", "", "Webhook for calladmin reports and report handled print. Blank to disable.", FCVAR_PROTECTED);
+	g_cCallAdmin_BotName = CreateConVar("sm_du_calladmin_botname", "Discord Utilities", "BotName for calladmin. Blank to use webhook name.");
+	g_cCallAdmin_BotAvatar = CreateConVar("sm_du_calladmin_avatar", "", "Avatar link for calladmin bot. Blank to use webhook avatar.");
+	g_cCallAdmin_Color = CreateConVar("sm_du_calladmin_color", "#ff9911", "Color for embed message of calladmin.");
+	g_cCallAdmin_Content = CreateConVar("sm_du_calladmin_content", "When in-game type !calladmin_handle <ReportID> in chat to handle this report.", "Content for embed message of calladmin. Blank to disable.");
+	g_cCallAdmin_FooterIcon = CreateConVar("sm_du_calladmin_footericon", "", "Link to footer icon for calladmin. Blank for no footer icon.");
+
+	g_cBugReport_Webhook = CreateConVar("sm_du_bugreport_webhook", "", "Webhook for bugreport reports. Blank to disable.", FCVAR_PROTECTED);
+	g_cBugReport_BotName = CreateConVar("sm_du_bugreport_botname", "Discord Utilities", "BotName for bugreport. Blank to use webhook name.");
+	g_cBugReport_BotAvatar = CreateConVar("sm_du_bugreport_avatar", "", "Avatar link for bugreport bot. Blank to use webhook avatar.");
+	g_cBugReport_Color = CreateConVar("sm_du_bugreport_color", "#ff9911", "Color for embed message of bugreport.");
+	g_cBugReport_Content = CreateConVar("sm_du_bugreport_content", "", "Content for embed message of bugreport. Blank to disable.");
+	g_cBugReport_FooterIcon = CreateConVar("sm_du_bugreport_footericon", "", "Link to footer icon for bugreport. Blank for no footer icon.");
+
+	g_cSourceBans_Webhook = CreateConVar("sm_du_sourcebans_webhook", "", "Webhook for sourcebans. Blank to disable.", FCVAR_PROTECTED);
+	g_cSourceBans_BotName = CreateConVar("sm_du_sourcebans_botname", "Discord Utilities", "BotName for sourcebans. Blank to use webhook name.");
+	g_cSourceBans_BotAvatar = CreateConVar("sm_du_sourcebans_avatar", "", "Avatar link for sourcebans bot. Blank to use webhook avatar.");
+	g_cSourceBans_Color = CreateConVar("sm_du_sourcebans_color", "#0E40E6", "Color for embed message of sourcebans.");
+	g_cSourceBans_PermaColor = CreateConVar("sm_du_sourcebans_perma_color", "#f00000", "Color for embed message of sourcebans when permanent banned.");
+	g_cSourceBans_Content = CreateConVar("sm_du_sourcebans_content", "", "Content for embed message of sourcebans. Blank to disable.");
+	g_cSourceBans_FooterIcon = CreateConVar("sm_du_sourcebans_footericon", "", "Link to footer icon for sourcebans. Blank for no footer icon.");
+
+	g_cSourceComms_Webhook = CreateConVar("sm_du_sourcecomms_webhook", "", "Webhook for sourcecomms. Blank to disable.", FCVAR_PROTECTED);
+	g_cSourceComms_BotName = CreateConVar("sm_du_sourcecomms_botname", "Discord Utilities", "BotName for sourcecomms. Blank to use webhook name.");
+	g_cSourceComms_BotAvatar = CreateConVar("sm_du_sourcecomms_avatar", "", "Avatar link for sourcecomms bot. Blank to use webhook avatar.");
+	g_cSourceComms_Color = CreateConVar("sm_du_sourcecomms_color", "#FF69B4", "Color for embed message of sourcecomms.");
+	g_cSourceComms_PermaColor = CreateConVar("sm_du_sourcecomms_perma_color", "#f00000", "Color for embed message of sourcecomms when permanent banned.");
+	g_cSourceComms_Content = CreateConVar("sm_du_sourcecomms_content", "", "Content for embed message of sourcecomms. Blank to disable.");
+	g_cSourceComms_FooterIcon = CreateConVar("sm_du_sourcecomms_footericon", "", "Link to footer icon for sourcecomms. Blank for no footer icon.");
+
+	g_cMap_Webhook = CreateConVar("sm_du_map_webhook", "", "Webhook for map notification. Blank to disable.", FCVAR_PROTECTED);
+	g_cMap_BotName = CreateConVar("sm_du_map_botname", "Discord Utilities", "BotName for map notification. Blank to use webhook name.");
+	g_cMap_BotAvatar = CreateConVar("sm_du_map_avatar", "", "Avatar link for map notification bot. Blank to use webhook avatar.");
+	g_cMap_Color = CreateConVar("sm_du_map_color", "#6a0dad", "Color for embed message of map notification.");
+	g_cMap_Content = CreateConVar("sm_du_map_content", "", "Content for embed message of map notification. Blank to disable.");
+	g_cMap_Delay = CreateConVar("sm_du_map_delay", "25", "Seconds to wait after mapstart to send the map notification webhook. 0 for no delay.");
+
+	g_cChatRelay_Webhook = CreateConVar("sm_du_chat_webhook", "", "Webhook for game server => discord server chat messages. Blank to disable.", FCVAR_PROTECTED);
+	g_cChatRelay_BlockList = CreateConVar("sm_du_chat_blocklist", "rtv, nominate", "Text that shouldn't appear in gameserver => discord server chat messages. Separate it with \", \"");
+	g_cAdminChatRelay_Webhook = CreateConVar("sm_du_adminchat_webhook", "", "Webhook for game server => discord server chat messages where chat messages are to admins (say_team with @ / sm_chat). Blank to disable.", FCVAR_PROTECTED);
+	g_cAdminChatRelay_BlockList = CreateConVar("sm_du_adminchat_blocklist", "rtv, nominate", "Text that shouldn't appear in gameserver => discord server where chat messages are to admin. Separate it with \", \"");
+	g_cAdminLog_Webhook = CreateConVar("sm_du_adminlog_webhook", "", "Webhook for channel where all admin commands are logged. Blank to disable.", FCVAR_PROTECTED);
+	g_cAdminLog_BlockList = CreateConVar("sm_du_adminlog_blocklist", "slapped, firebombed", "Log with this string will be ignored. Separate it with \", \"");
+
+	g_cVerificationChannelID = CreateConVar("sm_du_verfication_channelid", "", "Channel ID for verfication. Blank to disable.");
+	g_cChatRelayChannelID = CreateConVar("sm_du_chat_channelid", "", "Channel ID for discord server => game server messages. Blank to disable.");
+	g_cGuildID = CreateConVar("sm_du_verification_guildid", "", "Guild ID of your discord server. Blank to disable. Needed for verification module.");
+	g_cRoleID = CreateConVar("sm_du_verification_roleid", "", "Role ID to give to user when user is verified. Blank to give no role. Verification module needs to be running.");
+
+	g_cAPIKey = CreateConVar("sm_du_apikey", "", "Steam API Key (https://steamcommunity.com/dev/apikey). Needed for gameserver => discord server relay and/or admin chat relay and/or Admin logs. Blank will show default author icon of discord.", FCVAR_PROTECTED);
+	g_cBotToken = CreateConVar("sm_du_bottoken", "", "Bot Token. Needed for discord server => gameserver and/or verification module.", FCVAR_PROTECTED);
+	g_cDNSServerIP = CreateConVar("sm_du_dns_ip", "", "DNS IP address of your game server. Blank to use real IP.");
+	g_cCheckInterval = CreateConVar("sm_du_accounts_check_interval", "300", "Time in seconds between verifying accounts.");
+	g_cUseSWGM = CreateConVar("sm_du_use_swgm_file", "0", "Use SWGM config file for restricting commands.");
+	g_cTimeStamps = CreateConVar("sm_du_display_timestamps", "0", "Display timestamps? Used in gameserver => discord server relay AND AdminLog");
+	g_cServerID = CreateConVar("sm_du_server_id", "1", "Increase this with every server you put this plugin in. Prevents multiple replies from the bot in verfication channel.");
+	g_cPrimaryServer = CreateConVar("sm_du_server_primary", "1", "Is this the primary server in the verification channel? Only this server will respond to generic queries.", .min=0.0, .max=1.0, .hasMin=true, .hasMax=true);
+
+	g_cLinkCommand = CreateConVar("sm_du_link_command", "!link", "Command to use in text channel.");
+	g_cViewIDCommand = CreateConVar("sm_du_viewid_command", "sm_viewid", "Command to view id.");
+	g_cInviteLink = CreateConVar("sm_du_link", "https://discord.gg/83g5xcE", "Invite link of your discord server.");
+
+	g_cDiscordPrefix = CreateConVar("sm_du_discord_prefix", "[{lightgreen}Discord{default}]", "Prefix for discord messages.");
+	g_cServerPrefix = CreateConVar("sm_du_server_prefix", "[{lightgreen}Discord-Utilities{default}]", "Prefix for chat messages.");
+
+	g_cDatabaseName = CreateConVar("sm_du_database_name", "du", "Section name in databases.cfg.");
+	g_cTableName = CreateConVar("sm_du_table_name", "du_users", "Table Name.");
+	g_cPruneDays = CreateConVar("sm_du_prune_days", "60", "Prune database with players whose last connect is X DAYS and he is not member of discord server. 0 to disable.");
+	
+	AutoExecConfig(true, "Discord-Utilities");
+	#endif
 	
 	HookConVarChange(g_cCallAdmin_Webhook, OnSettingsChanged);
 	HookConVarChange(g_cCallAdmin_BotName, OnSettingsChanged);
@@ -815,9 +1006,21 @@ public Action VerifyAccounts(Handle timer)
 	AccountsCheck();
 }
 
+public Action Timer_Query_AccountCheck(Handle timer)
+{
+	if(g_hDB == null)
+	{
+		CreateTimer(5.0, Timer_Query_AccountCheck, _, TIMER_FLAG_NO_MAPCHANGE);
+		return;
+	}
+	char Query[256];
+	g_hDB.Format(Query, sizeof(Query), "SELECT userid FROM %s", g_sTableName);
+	SQL_TQuery(g_hDB, SQLQuery_AccountCheck, Query);
+}
+
 public Action SendGetMembers(Handle timer, any data)
 {
-	GetMember(view_as<Handle>(data));
+	GetMembers(view_as<Handle>(data));
 }
 
 public Action SendManageRole(Handle timer, Handle hData)
