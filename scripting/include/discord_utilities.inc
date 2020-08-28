@@ -82,7 +82,7 @@ native void DU_DeleteRole(int client, char[] roleid);
 
 public SharedPlugin __pl_discord_utilities =
 {
-		name = "discord_utilities",
+		name = "DiscordUtilities",
 		file = "discord_utilities.smx",
 	#if defined REQUIRE_PLUGIN
 		required = 1,
