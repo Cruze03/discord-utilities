@@ -15,6 +15,15 @@
 forward void DU_OnLinkedAccount(int client, const char[] userid, const char[] username, const char[] discriminator);
 
 /**
+ * Called after a client's member status has been revoked.
+ *
+ * @param client        		Client index.
+ * @param userid        		Discord userid of the client.
+ * @noreturn
+ */
+forward void DU_OnAccountRevoked(int client, const char[] userid);
+
+/**
  * Called before checking accounts. return Plugin_Handled to block checking.
  *
  * @param bottoken        		Token of bot which will be checking accounts.
