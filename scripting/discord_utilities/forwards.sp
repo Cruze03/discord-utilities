@@ -72,6 +72,7 @@ public void OnMapEnd()
 
 public void OnMapStart()
 {
+	CreateTimer(g_cCheckInterval.FloatValue, VerifyAccounts, _, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
 	if(StrEqual(g_sMap_Webhook, ""))
 	{
 		return;
@@ -89,7 +90,6 @@ public void OnMapStart()
 		data.WriteString(displayname);
 		data.WriteString(buffer);
 	}
-	CreateTimer(g_cCheckInterval.FloatValue, VerifyAccounts, _, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
 }
 
 public Action Command_AdminChat(int client, const char[] command, int argc)
@@ -476,6 +476,11 @@ public Action Command_ViewId(int client, int args)
 {
 	if(!client || StrEqual(g_sVerificationChannelID, ""))
 	{
+		return Plugin_Handled;
+	}
+	if(!g_bChecked[client])
+	{
+		CReplyToCommand(client, "%s %T", g_sServerPrefix, "TryAgainLater", client);
 		return Plugin_Handled;
 	}
 	
