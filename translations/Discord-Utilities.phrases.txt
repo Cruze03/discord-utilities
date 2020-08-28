@@ -1,4 +1,4 @@
-﻿"Phrases"
+"Phrases"
 {
 	"CurrentMapField"
 	{
@@ -37,6 +37,17 @@
 	{
 		"#format"	"{1:s},{2:s},{3:s}"		//1 = Username | 2 = Discriminator | 3 = Message
 		"en"		"{purple}{1}#{2}{default}: {3}"
+	}
+	
+	"TryAgainLater"
+	{
+		"en"		"Please wait. Your member status hasn't been fetched yet."
+	}
+	
+	"DiscordRevoked"
+	{
+		"en"		"You are no longer in our discord server therefore your discord member status has been revoked!"
+		"ro"        "Numai faci parte din server-ul nostru de discord, rolul tău de membru a fost sters!"
 	}
 	
 	"DiscordMissingParameters"
