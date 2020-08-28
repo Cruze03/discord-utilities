@@ -1,4 +1,4 @@
-#define PLUGIN_VERSION "2.2-BETA"
+#define PLUGIN_VERSION "2.3-BETA"
 
 #define PLUGIN_NAME "Discord Utilities"
 #define PLUGIN_AUTHOR "Cruze"
@@ -8,6 +8,8 @@
 #define DEFAULT_COLOR "#00FF00"
 
 #define MAX_BLOCKLIST_LIMIT 20
+
+#define USE_AutoExecConfig
 
 ConVar g_cCallAdmin_Webhook, g_cCallAdmin_BotName, g_cCallAdmin_BotAvatar, g_cCallAdmin_Color, g_cCallAdmin_Content, g_cCallAdmin_FooterIcon;
 ConVar g_cBugReport_Webhook, g_cBugReport_BotName, g_cBugReport_BotAvatar, g_cBugReport_Color, g_cBugReport_Content, g_cBugReport_FooterIcon;
@@ -52,7 +54,7 @@ bool g_bMember[MAXPLAYERS+1];
 char g_sUserID[MAXPLAYERS+1][20];
 char g_sUniqueCode[MAXPLAYERS+1][36];
 
-Handle g_hOnCheckedAccounts, g_hOnLinkedAccount;
+Handle g_hOnCheckedAccounts, g_hOnLinkedAccount, g_hOnAccountRevoked;
 
 DiscordBot Bot;
 
