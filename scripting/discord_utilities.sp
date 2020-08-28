@@ -49,6 +49,7 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 	CreateNative("DU_DeleteRole", Native_DeleteRole);
 
 	g_hOnLinkedAccount = CreateGlobalForward("DU_OnLinkedAccount", ET_Ignore, Param_Cell, Param_String, Param_String, Param_String);
+	g_hOnAccountRevoked = CreateGlobalForward("DU_OnAccountRevoked", ET_Ignore, Param_Cell, Param_String);
 	g_hOnCheckedAccounts = CreateGlobalForward("DU_OnCheckedAccounts", ET_Event, Param_String, Param_String, Param_String);
 	return APLRes_Success;
 }
