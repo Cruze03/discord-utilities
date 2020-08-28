@@ -143,20 +143,14 @@ public int SQLQuery_AccountCheck(Handle owner, Handle hndl, char [] error, DataP
 		LogError("[DU-AccountsCheck] Query failure: %s", error);
 		return;
 	}
-	int count;
 	char szUserIdDB[80];
 	while (SQL_FetchRow(hndl))
 	{
-		count++;
 		SQL_FetchString(hndl, 0, szUserIdDB, sizeof(szUserIdDB));
 		if (strlen(szUserIdDB) > 15)
 		{
 			GetGuildMember(szUserIdDB);
 		}
-	}
-	if(count != 0)
-	{
-		RefreshClients();
 	}
 }
 
