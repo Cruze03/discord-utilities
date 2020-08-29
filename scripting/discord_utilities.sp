@@ -24,7 +24,7 @@
 
 #pragma newdecls required
 #pragma semicolon 1
-#pragma dynamic 25000
+#pragma dynamic 100000
 
 public Plugin myinfo = 
 {
