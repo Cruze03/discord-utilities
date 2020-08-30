@@ -109,7 +109,7 @@ public Action Command_AdminChat(int client, const char[] command, int argc)
 
 public Action OnClientSayCommand(int client, const char[] command, const char[] sArgs)
 {
-	if(StrEqual(g_sChatRelay_Webhook, "") && StrEqual(g_sAdminChatRelay_Webhook, ""))
+	if(StrEqual(g_sChatRelay_Webhook, "") || StrEqual(g_sAdminChatRelay_Webhook, ""))
 	{
 		return Plugin_Continue;
 	}
