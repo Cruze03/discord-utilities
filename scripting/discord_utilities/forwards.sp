@@ -109,7 +109,7 @@ public Action Command_AdminChat(int client, const char[] command, int argc)
 
 public Action OnClientSayCommand(int client, const char[] command, const char[] sArgs)
 {
-	if(StrEqual(g_sChatRelay_Webhook, "") && StrEqual(g_sAdminChatRelay_Webhook, ""))
+	if(StrEqual(g_sChatRelay_Webhook, "") || StrEqual(g_sAdminChatRelay_Webhook, ""))
 	{
 		return Plugin_Continue;
 	}
@@ -172,6 +172,7 @@ public void OnClientPutInServer(int client)
 	g_bMember[client] = false;
 	g_sUniqueCode[client][0] = '\0';
 	g_sUserID[client][0] = '\0';
+	g_bRoleGiven[client] = false;
 }
 
 public Action OnClientPreAdminCheck(int client)
