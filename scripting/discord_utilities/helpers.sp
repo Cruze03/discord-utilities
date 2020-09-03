@@ -36,6 +36,10 @@ void GetMembers(Handle hData = INVALID_HANDLE)
 		LogError("[Discord-Utilities] GuildID is not provided. GetMember won't work!");
 		return;
 	}
+	if(Bot == view_as<DiscordBot>(INVALID_HANDLE))
+	{
+		return;
+	}
 	int limit = JsonObjectGetInt(hData, "limit");
 	char afterID[32];
 	JsonObjectGetString(hData, "afterID", afterID, sizeof(afterID));
