@@ -1,4 +1,4 @@
-#define PLUGIN_VERSION "2.3-BETA"
+#define PLUGIN_VERSION "2.4-BETA"
 
 #define PLUGIN_NAME "Discord Utilities"
 #define PLUGIN_AUTHOR "Cruze"
@@ -51,6 +51,7 @@ char g_sLastMapPath[PLATFORM_MAX_PATH];
 char g_sAvatarURL[MAXPLAYERS+1][128];
 bool g_bChecked[MAXPLAYERS+1];
 bool g_bMember[MAXPLAYERS+1];
+bool g_bRoleGiven[MAXPLAYERS+1];
 char g_sUserID[MAXPLAYERS+1][20];
 char g_sUniqueCode[MAXPLAYERS+1][36];
 
