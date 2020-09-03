@@ -114,6 +114,7 @@ public int SQLQuery_GetUserData(Handle owner, Handle hndl, char [] error, any da
 		SQL_FetchString(hndl, 0, g_sUserID[client], sizeof(g_sUserID));
 		g_bMember[client] = !!SQL_FetchInt(hndl, 1);
 	}
+	/*
 	if(g_bMember[client])
 	{
 		if(strlen(g_sRoleID) > 5)
@@ -121,6 +122,7 @@ public int SQLQuery_GetUserData(Handle owner, Handle hndl, char [] error, any da
 			ManagingRole(g_sUserID[client], g_sRoleID, k_EHTTPMethodPUT);
 		}
 	}
+	*/
 	char steamid[32];
 	GetClientAuthId(client, AuthId_SteamID64, steamid, sizeof(steamid));
 	int uniqueNum = GetRandomInt(100000, 999999);
