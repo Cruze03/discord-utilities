@@ -789,20 +789,31 @@ public void SourceComms_OnBlockAdded(int admin, int target, int time, int commty
 
 public void ChatRelayReceived(DiscordBot bawt, DiscordChannel channel, DiscordMessage discordmessage)
 {
-	if(discordmessage.GetAuthor().IsBot()) return;
+	DiscordUser author = discordmessage.GetAuthor();
+	if(author.IsBot()) 
+	{
+		delete author;
+		return;
+	}
 
 	char message[512];
 	char userName[32], discriminator[6];
 	discordmessage.GetContent(message, sizeof(message));
-	discordmessage.GetAuthor().GetUsername(userName, sizeof(userName));
-	discordmessage.GetAuthor().GetDiscriminator(discriminator, sizeof(discriminator));
+	author.GetUsername(userName, sizeof(userName));
+	author.GetDiscriminator(discriminator, sizeof(discriminator));
+	delete author;
 
 	CPrintToChatAll("%s %T", g_sDiscordPrefix, "ChatRelayFormat", LANG_SERVER, userName, discriminator, message);
 }
 
 public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMessage discordmessage)
 {
-	if(discordmessage.GetAuthor().IsBot()) return;
+	DiscordUser author = discordmessage.GetAuthor();
+	if(author.IsBot()) 
+	{
+		delete author;
+		return;
+	}
 
 	char szValues[2][99];
 	char szReply[512];
@@ -810,9 +821,10 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 	char userID[20], userName[32], discriminator[6];
 
 	discordmessage.GetContent(message, sizeof(message));
-	discordmessage.GetAuthor().GetUsername(userName, sizeof(userName));
-	discordmessage.GetAuthor().GetDiscriminator(discriminator, sizeof(discriminator));
-	discordmessage.GetAuthor().GetID(userID, sizeof(userID));
+	author.GetUsername(userName, sizeof(userName));
+	author.GetDiscriminator(discriminator, sizeof(discriminator));
+	author.GetID(userID, sizeof(userID));
+	delete author;
 
 	int retrieved1 = ExplodeString(message, " ", szValues, sizeof(szValues), sizeof(szValues[]));	
 	TrimString(szValues[1]);
@@ -848,6 +860,9 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 		
 		if(StringToInt(_szValues[0]) != g_cServerID.IntValue)
 		{
+			delete bawt;
+			delete channel;
+			delete discordmessage;
 			return; //Prevent multiple replies from the bot (for e.g. the plugin is installed on more than 1 server and they're using the same bot & channel)
 		}
 
@@ -877,7 +892,7 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 			GetClientAuthId(client, AuthId_SteamID64, szSteamId, sizeof(szSteamId));
 			int uniqueNum = GetRandomInt(100000, 999999);
 			Format(g_sUniqueCode[client], sizeof(g_sUniqueCode), "%i-%i-%s", g_cServerID.IntValue, uniqueNum, szSteamId);
-			
+
 			return; //Dont delete this message so user has positive confirmation
 		}
 		else
