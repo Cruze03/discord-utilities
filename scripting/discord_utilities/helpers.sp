@@ -11,21 +11,11 @@ void AccountsCheck()
 	{
 		return;
 	}
-	
-	if(g_hDB == null)
-	{
-		CreateTimer(5.0, Timer_Query_AccountCheck, _, TIMER_FLAG_NO_MAPCHANGE);
-	}
-	else
-	{
-		char Query[256];
-		g_hDB.Format(Query, sizeof(Query), "SELECT userid FROM %s", g_sTableName);
-		SQL_TQuery(g_hDB, SQLQuery_AccountCheck, Query);
-	}
-
+	delete hFinalMemberList;
 	Handle hData = json_object();
-	json_object_set_new(hData, "limit", json_integer(5000));
-	json_object_set_new(hData, "afterID", json_string(""));
+	hFinalMemberList = json_array();
+	json_object_set_new(hData, "limit", json_integer(1000));
+	json_object_set_new(hData, "after", json_string(""));
 	GetMembers(hData);
 }
 
@@ -34,24 +24,28 @@ void GetMembers(Handle hData = INVALID_HANDLE)
 	if(StrEqual(g_sGuildID, "") && !StrEqual(g_sVerificationChannelID, ""))
 	{
 		LogError("[Discord-Utilities] GuildID is not provided. GetMember won't work!");
+		delete hData;
+		delete hFinalMemberList;
 		return;
 	}
-	if(Bot == view_as<DiscordBot>(INVALID_HANDLE))
+	if(Bot == null)
 	{
+		delete hData;
+		delete hFinalMemberList;
 		return;
 	}
 	int limit = JsonObjectGetInt(hData, "limit");
-	char afterID[32];
-	JsonObjectGetString(hData, "afterID", afterID, sizeof(afterID));
+	char after[32];
+	JsonObjectGetString(hData, "after", after, sizeof(after));
 
 	char url[256];
-	if(StrEqual(afterID, ""))
+	if(StrEqual(after, ""))
 	{
 		FormatEx(url, sizeof(url), "https://discord.com/api/guilds/%s/members?limit=%i", g_sGuildID, limit);
 	}
 	else
 	{
-		FormatEx(url, sizeof(url), "https://discord.com/api/guilds/%s/members?limit=%i&afterID=%s", g_sGuildID, limit, afterID);
+		FormatEx(url, sizeof(url), "https://discord.com/api/guilds/%s/members?limit=%i&after=%s", g_sGuildID, limit, after);
 	}
 
 	char route[128];
@@ -83,6 +77,7 @@ public void MembersDataReceive(Handle request, bool failure, int offset, int sta
 			delete request;
 			return;
 		}
+		delete hFinalMemberList;
 		delete request;
 		delete view_as<Handle>(dp);
 		return;
@@ -94,28 +89,36 @@ public void MembersDataReceive(Handle request, bool failure, int offset, int sta
 public int GetMembersData(const char[] data, any dp)
 {
 	Handle hJson = json_load(data);
+	json_array_extend(hFinalMemberList, hJson);
 	Handle hData = view_as<Handle>(dp);
-	OnGetMembersAll(hJson);
-	if(JsonObjectGetBool(hData, "autoPaginate"))
-	{
-		int size = json_array_size(hJson);
-		int limit = JsonObjectGetInt(hData, "limit");
-		if(limit == size)
-		{
-			Handle hLast = json_array_get(hJson, size - 1);
-			char lastID[32];
-			json_string_value(hLast, lastID, sizeof(lastID));
-			delete hJson;
-			delete hLast;
 
-			json_object_set_new(hData, "afterID", json_string(lastID));
-			GetMembers(hData);
-			return;
-		}
+	int size = json_array_size(hJson);
+	int limit = JsonObjectGetInt(hData, "limit");
+
+	if(limit == size)
+	{
+		char userid[32];
+		DiscordGuildUser GuildUser;
+		DiscordUser user;
+
+		GuildUser = view_as<DiscordGuildUser>(json_array_get(hJson, limit - 1));
+		user = GuildUser.GetUser();
+		user.GetID(userid, sizeof(userid));
+		delete GuildUser;
+		delete user;
+
+		delete hJson;
+
+		json_object_set_new(hData, "after", json_string(userid));
+		GetMembers(hData);
+		return;
 	}
+		
+	OnGetMembersAll(hFinalMemberList);
 	
 	delete hJson;
 	delete hData;
+	delete hFinalMemberList;
 }
 
 public void OnGetMembersAll(Handle hMemberList)
@@ -145,6 +148,8 @@ public void OnGetMembersAll(Handle hMemberList)
 			if(strcmp(userid, g_sUserID[x]) == 0)
 			{
 				found = true;
+				delete user;
+				delete GuildUser;
 				break;
 			}
 			delete user;
@@ -195,13 +200,6 @@ public void OnGetMembersAll(Handle hMemberList)
 		OnClientPutInServer(i);
 		OnClientPreAdminCheck(i);
 	}
-}
-
-void GetGuildMember(char[] userid)
-{
-	Handle hData = json_object();
-	json_object_set_new(hData, "userID", json_string(userid[0]));
-	GetMembers(hData);
 }
 
 void SendChatRelay(int client, const char[] sArgs, char[] url, bool bAdmin = true, bool bAllChat = false)
@@ -464,6 +462,7 @@ void CreateCvars()
 	g_cMap_Color = AutoExecConfig_CreateConVar("sm_du_map_color", "#6a0dad", "Color for embed message of map notification.");
 	g_cMap_Content = AutoExecConfig_CreateConVar("sm_du_map_content", "", "Content for embed message of map notification. Blank to disable.");
 	g_cMap_Delay = AutoExecConfig_CreateConVar("sm_du_map_delay", "25", "Seconds to wait after mapstart to send the map notification webhook. 0 for no delay.");
+	g_cMap_Thumbnail = AutoExecConfig_CreateConVar("sm_du_map_thumbnail", "https://image.gametracker.com/images/maps/160x120/csgo/MAPNAME.jpg", "Thumbnail link for map notification. Make sure \"MAPNAME\" is added in the link just like the default value. Blank for none.");
 
 	g_cChatRelay_Webhook = AutoExecConfig_CreateConVar("sm_du_chat_webhook", "", "Webhook for game server => discord server chat messages. Blank to disable.", FCVAR_PROTECTED);
 	g_cChatRelay_BlockList = AutoExecConfig_CreateConVar("sm_du_chat_blocklist", "rtv, nominate", "Text that shouldn't appear in gameserver => discord server chat messages. Separate it with \", \"");
@@ -480,11 +479,11 @@ void CreateCvars()
 	g_cAPIKey = AutoExecConfig_CreateConVar("sm_du_apikey", "", "Steam API Key (https://steamcommunity.com/dev/apikey). Needed for gameserver => discord server relay and/or admin chat relay and/or Admin logs. Blank will show default author icon of discord.", FCVAR_PROTECTED);
 	g_cBotToken = AutoExecConfig_CreateConVar("sm_du_bottoken", "", "Bot Token. Needed for discord server => gameserver and/or verification module.", FCVAR_PROTECTED);
 	g_cDNSServerIP = AutoExecConfig_CreateConVar("sm_du_dns_ip", "", "DNS IP address of your game server. Blank to use real IP.");
-	g_cCheckInterval = AutoExecConfig_CreateConVar("sm_du_accounts_check_interval", "300", "Time in seconds between verifying accounts.");
+	g_cCheckInterval = AutoExecConfig_CreateConVar("sm_du_accounts_check_interval", "300", "Time in seconds between verifying accounts. 0 for no check.");
 	g_cUseSWGM = AutoExecConfig_CreateConVar("sm_du_use_swgm_file", "0", "Use SWGM config file for restricting commands.");
 	g_cTimeStamps = AutoExecConfig_CreateConVar("sm_du_display_timestamps", "0", "Display timestamps? Used in gameserver => discord server relay AND AdminLog");
 	g_cServerID = AutoExecConfig_CreateConVar("sm_du_server_id", "1", "Increase this with every server you put this plugin in. Prevents multiple replies from the bot in verfication channel.");
-	g_cPrimaryServer = AutoExecConfig_CreateConVar("sm_du_server_primary", "1", "Is this the primary server in the verification channel? Only this server will respond to generic queries.", .min=0.0, .max=1.0, .hasMin=true, .hasMax=true);
+	g_cPrimaryServer = AutoExecConfig_CreateConVar("sm_du_server_primary", "1", "Is this the primary server in the verification channel? Only this server will respond to generic queries.");
 
 	g_cLinkCommand = AutoExecConfig_CreateConVar("sm_du_link_command", "!link", "Command to use in text channel.");
 	g_cViewIDCommand = AutoExecConfig_CreateConVar("sm_du_viewid_command", "sm_viewid", "Command to view id.");
@@ -537,6 +536,7 @@ void CreateCvars()
 	g_cMap_Color = CreateConVar("sm_du_map_color", "#6a0dad", "Color for embed message of map notification.");
 	g_cMap_Content = CreateConVar("sm_du_map_content", "", "Content for embed message of map notification. Blank to disable.");
 	g_cMap_Delay = CreateConVar("sm_du_map_delay", "25", "Seconds to wait after mapstart to send the map notification webhook. 0 for no delay.");
+	g_cMap_Thumbnail = CreateConVar("sm_du_map_thumbnail", "https://image.gametracker.com/images/maps/160x120/csgo/MAPNAME.jpg", "Thumbnail link for map notification. Make sure \"MAPNAME\" is added in the link just like the default value. Blank for none.");
 
 	g_cChatRelay_Webhook = CreateConVar("sm_du_chat_webhook", "", "Webhook for game server => discord server chat messages. Blank to disable.", FCVAR_PROTECTED);
 	g_cChatRelay_BlockList = CreateConVar("sm_du_chat_blocklist", "rtv, nominate", "Text that shouldn't appear in gameserver => discord server chat messages. Separate it with \", \"");
@@ -553,7 +553,7 @@ void CreateCvars()
 	g_cAPIKey = CreateConVar("sm_du_apikey", "", "Steam API Key (https://steamcommunity.com/dev/apikey). Needed for gameserver => discord server relay and/or admin chat relay and/or Admin logs. Blank will show default author icon of discord.", FCVAR_PROTECTED);
 	g_cBotToken = CreateConVar("sm_du_bottoken", "", "Bot Token. Needed for discord server => gameserver and/or verification module.", FCVAR_PROTECTED);
 	g_cDNSServerIP = CreateConVar("sm_du_dns_ip", "", "DNS IP address of your game server. Blank to use real IP.");
-	g_cCheckInterval = CreateConVar("sm_du_accounts_check_interval", "300", "Time in seconds between verifying accounts.");
+	g_cCheckInterval = CreateConVar("sm_du_accounts_check_interval", "300", "Time in seconds between verifying accounts. 0 for no check.");
 	g_cUseSWGM = CreateConVar("sm_du_use_swgm_file", "0", "Use SWGM config file for restricting commands.");
 	g_cTimeStamps = CreateConVar("sm_du_display_timestamps", "0", "Display timestamps? Used in gameserver => discord server relay AND AdminLog");
 	g_cServerID = CreateConVar("sm_du_server_id", "1", "Increase this with every server you put this plugin in. Prevents multiple replies from the bot in verfication channel.");
@@ -816,18 +816,21 @@ void ManageRole(Handle hData)
 	if(StrEqual(g_sGuildID, ""))
 	{
 		LogError("[Discord-Utilities] GuildID is not provided. Role cannot be provided!");
+		delete hData;
 		return;
 	}
 	char userid[128];
 	if (!JsonObjectGetString(hData, "userid", userid, sizeof(userid)))
 	{
 		LogError("JsonObjectGetString \"userid\" failed");
+		delete hData;
 		return;
 	}
 	char roleid[128];
 	if (!JsonObjectGetString(hData, "roleid", roleid, sizeof(roleid)))
 	{
 		LogError("JsonObjectGetString \"roleid\" failed");
+		delete hData;
 		return;
 	}
 	EHTTPMethod method = view_as<EHTTPMethod>(JsonObjectGetInt(hData, "method"));
@@ -850,7 +853,20 @@ void ManageRole(Handle hData)
 
 public void OnManageRoleSent(Handle request, bool failure, int offset, int statuscode, any dp)
 {
-	delete request;
+	if(failure || (statuscode != 200))
+	{
+		if(statuscode == 429 || statuscode == 500)
+		{
+			ManageRole(dp);
+			delete request;
+			return;
+		}
+		delete request;
+		delete view_as<Handle>(dp);
+		return;
+	}
+	delete request
+	delete view_as<Handle>(dp);
 }
 
 void LoadCommands()
@@ -929,17 +945,15 @@ stock void RefreshClients()
 	}
 }
 
-stock void CreateBot(bool guilds = true, bool listen = true)
+stock void CreateBot()
 {
 	if(StrEqual(g_sBotToken, "") || StrEqual(g_sChatRelayChannelID, "") && StrEqual(g_sVerificationChannelID, ""))
 	{
 		return;
 	}
+	KillBot();
 	Bot = new DiscordBot(g_sBotToken);
-	if(guilds)
-	{
-		Bot.GetGuilds(GuildList, _, listen);
-	}
+	CreateTimer(5.0, Timer_GuildList, _, TIMER_FLAG_NO_MAPCHANGE);
 }
 
 stock void KillBot()
@@ -990,12 +1004,22 @@ void ServerIP(char[] sIP, int size)
 	}
 }
 
-/*
-stock void GetGuilds(bool listen = true)
+
+stock void GetGuilds()
 {	
-	Bot.GetGuilds(GuildList, _, listen);
+	Bot.GetGuilds(GuildList, _, true);
 }
-*/
+
+
+stock void DU_DeleteMessageID(DiscordMessage discordmessage)
+{
+	char channelid[64], msgid[64];
+	
+	discordmessage.GetChannelID(channelid, sizeof(channelid));
+	discordmessage.GetID(msgid, sizeof(msgid));
+	
+	Bot.DeleteMessageID(channelid, msgid);
+}
 
 stock void Discord_EscapeString(char[] string, int maxlen, bool name = false)
 {
@@ -1022,26 +1046,14 @@ public Action VerifyAccounts(Handle timer)
 	AccountsCheck();
 }
 
-public Action Timer_Query_AccountCheck(Handle timer)
-{
-	if(g_hDB == null)
-	{
-		CreateTimer(5.0, Timer_Query_AccountCheck, _, TIMER_FLAG_NO_MAPCHANGE);
-		return;
-	}
-	char Query[256];
-	g_hDB.Format(Query, sizeof(Query), "SELECT userid FROM %s", g_sTableName);
-	SQL_TQuery(g_hDB, SQLQuery_AccountCheck, Query);
-}
-
 public Action SendGetMembers(Handle timer, any data)
 {
 	GetMembers(view_as<Handle>(data));
 }
 
-public Action SendManageRole(Handle timer, Handle hData)
+public Action SendManageRole(Handle timer, any data)
 {
-	ManageRole(hData);
+	ManageRole(view_as<Handle>(data));
 }
 
 public Action SendRequestAgain(Handle timer, DataPack dp)
@@ -1059,12 +1071,7 @@ public Action Timer_RefreshClients(Handle timer)
 	RefreshClients();
 }
 
-stock void DU_DeleteMessageID(DiscordMessage discordmessage)
+public Action Timer_GuildList(Handle timer)
 {
-	char channelid[64], msgid[64];
-	
-	discordmessage.GetChannelID(channelid, sizeof(channelid));
-	discordmessage.GetID(msgid, sizeof(msgid));
-	
-	Bot.DeleteMessageID(channelid, msgid);
+	GetGuilds();
 }
