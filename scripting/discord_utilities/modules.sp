@@ -22,7 +22,11 @@ public Action Timer_DisplayMapNotification(Handle timer, DataPack pack)
 	
 	MessageEmbed embed = new MessageEmbed();
 	
-	embed.SetThumb(thumb);
+	if(thumb[0])
+	{
+		embed.SetThumb(thumb);
+	}
+	
 	if(StrContains(g_sMap_Color, "#") != -1)
 	{
 		embed.SetColor(g_sMap_Color);
@@ -860,9 +864,6 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 		
 		if(StringToInt(_szValues[0]) != g_cServerID.IntValue)
 		{
-			delete bawt;
-			delete channel;
-			delete discordmessage;
 			return; //Prevent multiple replies from the bot (for e.g. the plugin is installed on more than 1 server and they're using the same bot & channel)
 		}
 
