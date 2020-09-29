@@ -7,6 +7,8 @@ public int SQLQuery_Connect(Handle owner, Handle hndl, char[] error, any data)
 	}
 	else
 	{
+		delete g_hDB;
+
 		g_hDB = view_as<Database>(hndl);
 		
 		char Ident[4096];
@@ -68,7 +70,7 @@ public void PruneDatabase()
 	SQL_TQuery(g_hDB, SQLQuery_PruneDatabase, buffer);
 }
 
-public int SQLQuery_PruneDatabase(Handle owner, Handle hndl, char [] error, any data)
+public int SQLQuery_PruneDatabase(Handle owner, Handle hndl, char[] error, any data)
 {
 	if(hndl == INVALID_HANDLE)
 	{
@@ -76,7 +78,7 @@ public int SQLQuery_PruneDatabase(Handle owner, Handle hndl, char [] error, any 
 	}
 }
 
-public int SQLQuery_GetUserData(Handle owner, Handle hndl, char [] error, any data)
+public int SQLQuery_GetUserData(Handle owner, Handle hndl, char[] error, any data)
 {
 	int client;
 	
@@ -135,24 +137,6 @@ public int SQLQuery_InsertNewPlayer(Handle owner, Handle hndl, char[] error, any
 	if(hndl == INVALID_HANDLE)
 	{
 		LogError("[DU-InsertNewPlayer] Query failure: %s", error);
-	}
-}
-
-public int SQLQuery_AccountCheck(Handle owner, Handle hndl, char [] error, DataPack pack)
-{
-	if(hndl == INVALID_HANDLE)
-	{
-		LogError("[DU-AccountsCheck] Query failure: %s", error);
-		return;
-	}
-	char szUserIdDB[80];
-	while (SQL_FetchRow(hndl))
-	{
-		SQL_FetchString(hndl, 0, szUserIdDB, sizeof(szUserIdDB));
-		if (strlen(szUserIdDB) > 15)
-		{
-			GetGuildMember(szUserIdDB);
-		}
 	}
 }
 
@@ -224,7 +208,6 @@ public int SQLQuery_LinkedAccount(Handle owner, Handle hndl, char [] error, any 
 	if(hndl == INVALID_HANDLE)
 	{
 		LogError("[DU-LinkedAccount] Query failure: %s", error);
-		return;
 	}
 }
 
@@ -233,6 +216,13 @@ public int SQLQuery_UpdatePlayer(Handle owner, Handle hndl, char [] error, any d
 	if(hndl == INVALID_HANDLE)
 	{
 		LogError("[DU-UpdatePlayer] Query failure: %s", error);
-		return;
+	}
+}
+
+public int SQLQuery_DeleteAccount(Handle owner, Handle hndl, char[] error, any data)
+{
+	if(hndl == INVALID_HANDLE)
+	{
+		LogError("[DU-DeleteAccount] Query failure: %s", error);
 	}
 }
