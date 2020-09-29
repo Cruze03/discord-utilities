@@ -1,4 +1,4 @@
-#define PLUGIN_VERSION "2.4-BETAfix"
+#define PLUGIN_VERSION "2.5-BETA"
 
 #define PLUGIN_NAME "Discord Utilities"
 #define PLUGIN_AUTHOR "Cruze"
@@ -15,7 +15,7 @@ ConVar g_cCallAdmin_Webhook, g_cCallAdmin_BotName, g_cCallAdmin_BotAvatar, g_cCa
 ConVar g_cBugReport_Webhook, g_cBugReport_BotName, g_cBugReport_BotAvatar, g_cBugReport_Color, g_cBugReport_Content, g_cBugReport_FooterIcon;
 ConVar g_cSourceBans_Webhook, g_cSourceBans_BotName, g_cSourceBans_BotAvatar, g_cSourceBans_Color, g_cSourceBans_PermaColor, g_cSourceBans_Content, g_cSourceBans_FooterIcon;
 ConVar g_cSourceComms_Webhook, g_cSourceComms_BotName, g_cSourceComms_BotAvatar, g_cSourceComms_Color, g_cSourceComms_PermaColor, g_cSourceComms_Content, g_cSourceComms_FooterIcon;
-ConVar g_cMap_Webhook, g_cMap_BotName, g_cMap_Color, g_cMap_BotAvatar, g_cMap_Content, g_cMap_Delay;
+ConVar g_cMap_Webhook, g_cMap_BotName, g_cMap_Color, g_cMap_BotAvatar, g_cMap_Content, g_cMap_Delay, g_cMap_Thumbnail;
 ConVar g_cChatRelay_Webhook, g_cChatRelay_BlockList, g_cAdminChatRelay_Webhook, g_cAdminChatRelay_BlockList, g_cAdminLog_Webhook, g_cAdminLog_BlockList;
 ConVar g_cVerificationChannelID, g_cChatRelayChannelID, g_cGuildID, g_cRoleID;
 ConVar g_cAPIKey, g_cBotToken, g_cDNSServerIP, g_cCheckInterval, g_cUseSWGM, g_cTimeStamps, g_cServerID;
@@ -68,3 +68,5 @@ bool g_bLateLoad = false;
 Handle hRateLimit = null;
 Handle hRateReset = null;
 Handle hRateLeft = null;
+
+Handle hFinalMemberList;
