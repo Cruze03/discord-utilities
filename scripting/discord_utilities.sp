@@ -22,7 +22,7 @@
 #include "discord_utilities/sql.sp"
 #include "discord_utilities/modules.sp"
 
-#pragma dynamic 25000
+#pragma dynamic 250000
 #pragma newdecls required
 #pragma semicolon 1
 
@@ -80,7 +80,7 @@ public void OnPluginStart()
 		OnAllPluginsLoaded();
 		OnPluginEnd();
 		OnConfigsExecuted();
-		CreateTimer(3.0, Timer_RefreshClients, _, TIMER_FLAG_NO_MAPCHANGE);
-		CreateTimer(4.0, VerifyAccounts, _, TIMER_FLAG_NO_MAPCHANGE);
+		CreateTimer(7.0, Timer_RefreshClients, _, TIMER_FLAG_NO_MAPCHANGE);
+		CreateTimer(10.0, VerifyAccounts, _, TIMER_FLAG_NO_MAPCHANGE);
 	}
 }
