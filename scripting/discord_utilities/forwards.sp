@@ -48,21 +48,30 @@ public void OnConfigsExecuted()
 		FindConVar("hostname").GetString(g_sServerName, sizeof(g_sServerName));
 	}
 	
-	if(Bot == view_as<DiscordBot>(INVALID_HANDLE))
+	if(!StrEqual(g_sBotToken, ""))
 	{
-		if(!CommandExists(g_sViewIDCommand))
+		if(Bot == view_as<DiscordBot>(INVALID_HANDLE))
 		{
-			RegConsoleCmd(g_sViewIDCommand, Command_ViewId);
+			if(!CommandExists(g_sViewIDCommand))
+			{
+				RegConsoleCmd(g_sViewIDCommand, Command_ViewId);
+			}
+			CreateBot();
 		}
-		CreateBot();
+		char sDTB[32];
+		g_cDatabaseName.GetString(sDTB, sizeof(sDTB));
+		g_cTableName.GetString(g_sTableName, sizeof(g_sTableName));
+		SQL_TConnect(SQLQuery_Connect, sDTB);
+
+		LoadCommands();
+
+		if(!CommandExists("sm_deleteaccount"))
+		{
+			RegConsoleCmd("sm_deleteaccount", Command_DeleteAccount, "Discord Utilities delete steamid from database.");
+		}
 	}
 	
-	LoadCommands();
 	
-	char sDTB[32];
-	g_cDatabaseName.GetString(sDTB, sizeof(sDTB));
-	g_cTableName.GetString(g_sTableName, sizeof(g_sTableName));
-	SQL_TConnect(SQLQuery_Connect, sDTB);
 }
 
 public void OnMapEnd()
@@ -72,7 +81,10 @@ public void OnMapEnd()
 
 public void OnMapStart()
 {
-	CreateTimer(g_cCheckInterval.FloatValue, VerifyAccounts, _, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
+	if(g_cCheckInterval.FloatValue)
+	{
+		CreateTimer(g_cCheckInterval.FloatValue, VerifyAccounts, _, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
+	}
 	if(StrEqual(g_sMap_Webhook, ""))
 	{
 		return;
@@ -81,7 +93,9 @@ public void OnMapStart()
 	GetLastMap(PrevMap, sizeof(PrevMap));
 	GetCurrentMap(map, sizeof(map));
 	GetMapDisplayName(map, displayname, sizeof(displayname));
-	Format(buffer, sizeof(buffer), "https://image.gametracker.com/images/maps/160x120/csgo/%s.jpg", displayname);
+
+	g_cMap_Thumbnail.GetString(buffer, sizeof(buffer));
+	ReplaceString(buffer, sizeof(buffer), "MAPNAME", displayname);
 	
 	if(strcmp(PrevMap, displayname) != 0)
 	{
@@ -109,7 +123,7 @@ public Action Command_AdminChat(int client, const char[] command, int argc)
 
 public Action OnClientSayCommand(int client, const char[] command, const char[] sArgs)
 {
-	if(StrEqual(g_sChatRelay_Webhook, "") || StrEqual(g_sAdminChatRelay_Webhook, ""))
+	if(StrEqual(g_sChatRelay_Webhook, "") && StrEqual(g_sAdminChatRelay_Webhook, ""))
 	{
 		return Plugin_Continue;
 	}
@@ -126,32 +140,50 @@ public Action OnClientSayCommand(int client, const char[] command, const char[] 
 		if(strcmp(command, "say_team") == 0 && sArgs[0] == '@')
 		{
 			bool bAdmin = CheckCommandAccess(client, "", ADMFLAG_GENERIC);
-			SendChatRelay(client, sArgs[1], g_sAdminChatRelay_Webhook, bAdmin);
+			if(g_sAdminChatRelay_Webhook[0])
+			{
+				SendChatRelay(client, sArgs[1], g_sAdminChatRelay_Webhook, bAdmin);
+			}
 			return Plugin_Continue;
 		}
 		if(strcmp(command, "say") == 0 && sArgs[0] == '@')
 		{
-			SendChatRelay(client, sArgs[1], g_sChatRelay_Webhook, true, true);
+			if(g_sChatRelay_Webhook[0])
+			{
+				SendChatRelay(client, sArgs[1], g_sChatRelay_Webhook, true, true);
+			}
 			return Plugin_Continue;
 		}
-		SendChatRelay(client, sArgs, g_sChatRelay_Webhook);
+		if(g_sChatRelay_Webhook[0])
+		{
+			SendChatRelay(client, sArgs, g_sChatRelay_Webhook);
+		}
 	}
 	return Plugin_Continue;
 }
 
 public Action OnLogAction(Handle hSource, Identity ident, int client, int target, const char[] sMsg)
 {
+	if(StrEqual(g_sAdminLog_Webhook, ""))
+	{
+		delete hSource;
+		return Plugin_Continue;
+	}
+
 	if(client <= 0)
 	{
+		delete hSource;
 		return Plugin_Continue;
 	}
 
 	if(StrContains(sMsg, "sm_chat", false) != -1)
 	{
+		delete hSource;
 		return Plugin_Continue;// dont log sm_chat because it's already being showed in admin chat relay channel.
 	}
 	
 	SendAdminLog(client, sMsg);
+	delete hSource;
 	
 	return Plugin_Continue;
 }
@@ -184,14 +216,7 @@ public Action OnClientPreAdminCheck(int client)
 	
 	char szQuery[512], szSteamId[32];
 	GetClientAuthId(client, AuthId_Steam2, szSteamId, sizeof(szSteamId));
-	if(g_bIsMySQl)
-	{
-		g_hDB.Format(szQuery, sizeof(szQuery), "SELECT userid, member FROM %s WHERE steamid = '%s';", g_sTableName, szSteamId);
-	}
-	else
-	{
-		g_hDB.Format(szQuery, sizeof(szQuery), "SELECT userid, member FROM %s WHERE steamid = '%s'", g_sTableName, szSteamId);
-	}
+	g_hDB.Format(szQuery, sizeof(szQuery), "SELECT userid, member FROM %s WHERE steamid = '%s'", g_sTableName, szSteamId);
 	SQL_TQuery(g_hDB, SQLQuery_GetUserData, szQuery, GetClientUserId(client));
 
 	
@@ -421,10 +446,13 @@ public int OnSettingsChanged(ConVar convar, const char[] oldVal, const char[] ne
 	else if(convar == g_cTableName)
 	{
 		strcopy(g_sTableName, sizeof(g_sTableName), newVal);
-		char dtbname[32];
-		g_cDatabaseName.GetString(dtbname, sizeof(dtbname));
-		SQL_TConnect(SQLQuery_Connect, dtbname);
-		RefreshClients();
+		if(!StrEqual(g_sBotToken, ""))
+		{
+			char dtbname[32];
+			g_cDatabaseName.GetString(dtbname, sizeof(dtbname));
+			SQL_TConnect(SQLQuery_Connect, dtbname);
+			RefreshClients();
+		}
 	}
 }
 
@@ -436,6 +464,10 @@ public void GuildList(DiscordBot bawt, char[] id, char[] name, char[] icon, bool
 public void ChannelList(DiscordBot bawt, const char[] guild, DiscordChannel Channel, const bool listen)
 {
 	if(StrEqual(g_sBotToken, "") || StrEqual(g_sChatRelayChannelID, "") && StrEqual(g_sVerificationChannelID, ""))
+	{
+		return;
+	}
+	if(Bot == null || Channel == null)
 	{
 		return;
 	}
@@ -492,7 +524,62 @@ public Action Command_ViewId(int client, int args)
 	
 	CPrintToChat(client, "%s %T", g_sServerPrefix, "LinkUsage", client, g_sLinkCommand, g_sUniqueCode[client]);
 	CPrintToChat(client, "%s %T", g_sServerPrefix, "LinkUsage2", client, g_sVerificationChannelName);
+	CPrintToChat(client, "%s %T", g_sServerPrefix, "CopyPasteFromConsole", client);
+
+	char buf[128], g_sServerPrefix2[128];
+	Format(g_sServerPrefix2, sizeof(g_sServerPrefix2), g_sServerPrefix);
+	for(int i = 0; i < sizeof(C_Tag); i++)
+	{
+		ReplaceString(g_sServerPrefix2, sizeof(g_sServerPrefix2), C_Tag[i], "");
+	}
 	
+	PrintToConsole(client, "*****************************************************");
+	PrintToConsole(client, "%s %T", g_sServerPrefix2, "LinkConnect", client);
+	PrintToConsole(client, "%s %s", g_sServerPrefix2, g_sInviteLink);
+	Format(buf, sizeof(buf), "%T", "LinkUsage", client, g_sLinkCommand, g_sUniqueCode[client]);
+	for(int i = 0; i < sizeof(C_Tag); i++)
+	{
+		ReplaceString(buf, sizeof(buf), C_Tag[i], "");
+	}
+	PrintToConsole(client, "%s %s", g_sServerPrefix2,  buf);
+	PrintToConsole(client, "*****************************************************");
+	
+	return Plugin_Handled;
+}
+
+public Action Command_DeleteAccount(int client, int args)
+{
+	if(g_hDB == null)
+	{
+		CReplyToCommand(client, "%s %T", g_sServerPrefix, "TryAgainLater", client);
+		return Plugin_Handled;
+	}
+	if(args != 1)
+	{
+		CReplyToCommand(client, "%s USAGE: sm_deleteaccount <playername>/STEAMID", g_sServerPrefix);
+		return Plugin_Handled;
+	}
+	char buffer[64], Query[256];
+	GetCmdArg(0, buffer, sizeof(buffer));
+	if(StrContains(buffer, "STEAM_") == -1)
+	{
+		int iTarget = FindTarget(client, buffer);
+		if(iTarget == -1)
+		{
+			CReplyToCommand(client, "%s Invalid steamid format/playername. Please re-check!", g_sServerPrefix);
+			return Plugin_Handled;
+		}
+		GetClientAuthId(iTarget, AuthId_Steam2, buffer, sizeof(buffer));
+	}
+	if(g_bIsMySQl)
+	{
+		g_hDB.Format(Query, sizeof(Query), "UPDATE `%s` SET `userid` = '%s', member = '0' WHERE `steamid` = '%s';", g_sTableName, NULL_STRING, buffer);
+	}
+	else
+	{
+		g_hDB.Format(Query, sizeof(Query), "UPDATE %s SET userid = '%s', member = '0' WHERE steamid = '%s';", g_sTableName, NULL_STRING, buffer);
+	}
+	SQL_TQuery(g_hDB, SQLQuery_DeleteAccount, Query);
 	return Plugin_Handled;
 }
 
