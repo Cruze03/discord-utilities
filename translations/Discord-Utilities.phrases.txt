@@ -229,13 +229,6 @@
 		"ro"		"În chanalul {purple}#{1} {default}pentru a te verifica!"
 	}
 	
-	"CopyPasteFromConsole"
-	{
-		"en"		"You can also {yellow}copy-paste{default} from {green}console{default} :)"
-		"ru"		"Вы также можете  {yellow}скопировать-вставить{default} из {green}консоли{default} :)"
-		"ua"		"Ви також можете {yellow}скопіювати-вставити{default} з {green}консолі{default} :)"
-	}
-	
 	"CallAdminReportHandledTitle"
 	{
 		"en"		"CallAdmin Report is being handled!"
