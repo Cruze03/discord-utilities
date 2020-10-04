@@ -139,7 +139,7 @@
 		"en"		"Private To Admins: "
 		"nl"		"Prive naar Admins: "
 		"lv"		"Privāti adminiem: "
-		"ru"		"Приват для администраторов: "
+		"ru"		"Лично для администраторов: "
 		"ro"		"Privat către Admini: "
 	}
 	
@@ -148,7 +148,7 @@
 		"en"		"All Chat: "
 		"nl"		"Openbare Chat: "
 		"lv"		"Visu Čats: "
-		"ru"		"весь чат: "
+		"ru"		"Весь чат: "
 		"ro"		"General Chat: "
 	}
 	
@@ -177,7 +177,7 @@
 		"fr"		"Connectez-vous à notre serveur de discord avec:"
 		"nl"		"Join onze Discord server via:"
 		"lv"		"Pievienojies mūsu discord serverim šeit:"
-		"ru"		"Подключитесь к нашему серверу раздоров на:"
+		"ru"		"Подключитесь к нашему серверу Discord:"
 		"ro"		"Conectează-te la server-ul nostru de discord (link):"
 	}
 
@@ -189,7 +189,7 @@
 		"fr"		"Utiliser {yellow}{1} {2}"
 		"nl"		"Gebruik {yellow}{1} {2}"
 		"lv"		"Izmanto {yellow}{1} {2}"
-		"ru"		"использование {yellow}{1} {2}"
+		"ru"		"Использование {yellow}{1} {2}"
 		"ro"		"Folosește {yellow}{1} {2}"
 	}
 
@@ -216,7 +216,7 @@
 		"en"		"CallAdmin Report is being handled!"
 		"nl"		"De CallAdmin Report wordt behandelt!"
 		"lv"		"CallAdmin Ziņojums tiek izskatīts!"
-		"ru"		"CallAdmin Репорт обрабатывается!"
+		"ru"		"Вызов Администратора обрабатывается!"
 		"ro"		"CallAdmin Report se gestionează!"
 	}
 	
@@ -253,7 +253,7 @@
 		"en"		"New CallAdmin Report!"
 		"lv"		"Jauns CallAdmin Ziņojums!"
 		"nl"		"Nieuwe CallAdmin Report!"
-		"ru"		"Новый CallAdmin Репорт!"
+		"ru"		"Новый Вызов Администратора!"
 		"ro"		"Nou Report CallAdmin"
 	}
 	
@@ -280,7 +280,7 @@
 		"en"		"Reporter:"
 		"nl"		"Raporteerder:"
 		"lv"		"Ziņotājs:"
-		"ru"		"Репортер:"
+		"ru"		"Докладчик:"
 		"ro"		"Reporter:"
 	}
 	
@@ -307,7 +307,7 @@
 		"en"		"New Bug Report!"
 		"nl"		"Nieuwe Fout Gerapporteerd!"
 		"lv"		"Jauns kļūdas ziņojums!"
-		"ru"		"Новая  Буг Репорт!"
+		"ru"		"Новый Баг-Репорт!"
 		"ro"		"Nou Bug Report!"
 	}
 	
@@ -335,7 +335,7 @@
 		"en"		"New Player Server Banned!"
 		"lv"		"Jauns spēlētājs ir saņēmis banu!"
 		"nl"		"Nieuwe Speler Server Geband!"
-		"ru"		"Новый игрок Сервер Banned!"
+		"ru"		"Новый игрок был забанен!"
 		"ro"		"Jucător nou banat!"
 	}
 	"AdminField"
@@ -367,7 +367,7 @@
 		"fr"		"TEMPORAIRE"
 		"nl"		"TIJDELIJK"
 		"lv"		"PAGAIDU"
-		"ru"		"ВРЕМЕННОЕ"
+		"ru"		"ВРЕМЕННАЯ"
 		"ro"		"TEMPORAR"
 	}
 	
@@ -399,7 +399,7 @@
 		"fr"		"PERMANENT"
 		"nl"		"PERMANENT"
 		"lv"		"MŪŽĪGS"
-		"ru"		"ПОСТОЯННАЯ"
+		"ru"		"ВЕЧНАЯ"
 		"ro"		"PERMANENT"
 	}
 
@@ -428,7 +428,7 @@
 		"en"		"New Player Comm-Banned!"
 		"nl"		"Nieuwe Speler Comm-Banned!"
 		"lv"		"New Player Comm-Banned!"
-		"ru"		"Новый игрок Comm-Banned!"
+		"ru"		"Новый игрок был заглушен!"
 		"ro"		"Jucător nou Comm-banat"
 	}
 	
@@ -478,7 +478,7 @@
 		"fr"		"Vous devez vérifier votre {blue}Discord {default}account! Ecrit {orange}{1}"
 		"nl"		"Je moet je {blue}Discord {default}account verifieren! Type {orange}{1}"
 		"lv"		"Verificē savu {blue}Discord {default}profilu! Raksti {orange}{1}"
-		"ru"		"Вы должны подтвердить свой {blue}Discord {default}учетная запись! Тип {orange}{1}"
+		"ru"		"Вы должны подтвердить свою {blue}Discord {default}учетную запись! Напишите {orange}{1}"
 		"ro"		"Trebuie să îti asociezi Discord-ul tău! Tastează {orange}{1}"
 	}
 }
