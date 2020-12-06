@@ -42,12 +42,14 @@
 	"TryAgainLater"
 	{
 		"en"		"Please wait. Your member status hasn't been fetched yet."
+        "ru"		"Пожалуйста, подождите. Ваш статус участника ещё не получен."
 	}
 	
 	"DiscordRevoked"
 	{
 		"en"		"You are no longer in our discord server therefore your discord member status has been revoked!"
 		"ro"        "Nu mai faci parte din server-ul nostru de discord, rolul tău de membru a fost sters!"
+		"ru"		"Вы больше не находитесь на нашем сервере Discord, поэтому ваш статус участника Discord был отменён!"
 	}
 	
 	"DiscordMissingParameters"
@@ -82,7 +84,7 @@
 		"fr"		"<@{1}> Il n'y a pas de client avec cet identifiant, assurez-vous d'être connecté au serveur de jeu et vérifiez à nouveau votre identifiant!"
 		"nl"		"<@{1}> Er is geen client met deze ID, zorg ervoor dat je verbonden bent met de spelserver en controleer je ID opnieuw!"
 		"lv"		"<@{1}> Nav neviena klienta ar šo ID, pārliecinieties, vai esat izveidojis savienojumu ar spēles serveri, un pārbaudiet savu ID vēlreiz!"
-		"ru"		"<@{1}> Нет клиента с таким идентификатором, убедитесь, что вы подключены к игровому серверу, и еще раз проверьте свой идентификатор!"
+		"ru"		"<@{1}> Нет клиента с таким идентификатором, убедитесь, что вы подключены к игровому серверу, и ещё раз проверьте свой идентификатор!"
 		"ro"		"<@{1}> Nu există niciun client cu acest ID, fii sigur că ești conectat la joc si verifică ID din nou!"
 	}
 	
@@ -130,7 +132,7 @@
 		"fr"		"<@{1}> Ce compte Discord est déjà lié! ❌"
 		"nl"		"<@{1}> Dit Discord account is al gekoppeld! ❌"
 		"lv"		"<@{1}> Jūsu discord profils jau ir savienots! ❌"
-		"ru"		"<@{1}> Эта учетная запись уже связана! ❌"
+		"ru"		"<@{1}> Эта учётная запись уже связана! ❌"
 		"ro"		"<@{1}> Acest cont de discord este deja asociat! ❌"
 	}
 	
@@ -139,7 +141,7 @@
 		"en"		"Private To Admins: "
 		"nl"		"Prive naar Admins: "
 		"lv"		"Privāti adminiem: "
-		"ru"		"Приват для администраторов: "
+		"ru"		"Частно для администраторов: "
 		"ro"		"Privat către Admini: "
 	}
 	
@@ -177,7 +179,7 @@
 		"fr"		"Connectez-vous à notre serveur de discord avec:"
 		"nl"		"Join onze Discord server via:"
 		"lv"		"Pievienojies mūsu discord serverim šeit:"
-		"ru"		"Подключитесь к нашему серверу раздоров на:"
+		"ru"		"Подключитесь к нашему серверу в discord на:"
 		"ro"		"Conectează-te la server-ul nostru de discord:"
 	}
 
@@ -208,6 +210,7 @@
 	"CopyPasteFromConsole"
 	{
 		"en"		"You can also {yellow}copy-paste{default} from {green}console{default} :)"
+		"ru"		"Вы также можете {yellow}скопировать и вставить{default} из {green}консоли{default} :)"
 	}
 	
 	
@@ -216,7 +219,7 @@
 		"en"		"CallAdmin Report is being handled!"
 		"nl"		"De CallAdmin Report wordt behandelt!"
 		"lv"		"CallAdmin Ziņojums tiek izskatīts!"
-		"ru"		"CallAdmin Репорт обрабатывается!"
+		"ru"		"Жалоба CallAdmin обрабатывается!"
 		"ro"		"CallAdmin Report se gestionează!"
 	}
 	
@@ -234,7 +237,7 @@
 		"en"		"Report ID:"
 		"nl"		"Report ID:"
 		"lv"		"Ziņojuma ID:"
-		"ru"		"Репорт ID:"
+		"ru"		"ID жалобы:"
 		"ro"		"Report ID:"
 	}
 	
@@ -253,7 +256,7 @@
 		"en"		"New CallAdmin Report!"
 		"lv"		"Jauns CallAdmin Ziņojums!"
 		"nl"		"Nieuwe CallAdmin Report!"
-		"ru"		"Новый CallAdmin Репорт!"
+		"ru"		"Новая жалоба CallAdmin!"
 		"ro"		"Nou Report CallAdmin"
 	}
 	
@@ -280,7 +283,7 @@
 		"en"		"Reporter:"
 		"nl"		"Raporteerder:"
 		"lv"		"Ziņotājs:"
-		"ru"		"Репортер:"
+		"ru"		"Отправитель:"
 		"ro"		"Reporter:"
 	}
 	
@@ -307,7 +310,7 @@
 		"en"		"New Bug Report!"
 		"nl"		"Nieuwe Fout Gerapporteerd!"
 		"lv"		"Jauns kļūdas ziņojums!"
-		"ru"		"Новая  Буг Репорт!"
+		"ru"		"Новое сообщение об ошибке!"
 		"ro"		"Nou Bug Report!"
 	}
 	
@@ -335,7 +338,7 @@
 		"en"		"New Player Server Banned!"
 		"lv"		"Jauns spēlētājs ir saņēmis banu!"
 		"nl"		"Nieuwe Speler Server Geband!"
-		"ru"		"Новый игрок Сервер Banned!"
+		"ru"		"Новый игрок сервера забанен!"
 		"ro"		"Jucător nou banat!"
 	}
 	"AdminField"
@@ -345,7 +348,7 @@
 		"fr"		"ADMIN:"
 		"nl"		"ADMIN:"
 		"lv"		"ADMIN:"
-		"ru"		"ADMIN:"
+		"ru"		"АДМИН:"
 		"ro"		"ADMIN:"
 	}
 
@@ -399,7 +402,7 @@
 		"fr"		"PERMANENT"
 		"nl"		"PERMANENT"
 		"lv"		"MŪŽĪGS"
-		"ru"		"ПОСТОЯННАЯ"
+		"ru"		"НАВСЕГДА"
 		"ro"		"PERMANENT"
 	}
 
@@ -419,7 +422,7 @@
 		"en"		"New Report!"
 		"nl"		"Nieuwe Report!"
 		"lv"		"Jauns Ziņojums!"
-		"ru"		"Новый Репорт!"
+		"ru"		"Новая жалоба!"
 		"ro"		"Report nou!"
 	}
 	
@@ -428,7 +431,7 @@
 		"en"		"New Player Comm-Banned!"
 		"nl"		"Nieuwe Speler Comm-Banned!"
 		"lv"		"New Player Comm-Banned!"
-		"ru"		"Новый игрок Comm-Banned!"
+		"ru"		"Новый игрок был забанен!"
 		"ro"		"Jucător nou Comm-banat"
 	}
 	
@@ -437,7 +440,7 @@
 		"en"		"MUTE"
 		"nl"		"MUTE"
 		"lv"		"MUTE"
-		"ru"		"МУТЕ"
+		"ru"		"ЗАГЛУШИТЬ"
 		"ro"		"MUTE"
 	}
 	
@@ -446,7 +449,7 @@
 		"en"		"GAG"
 		"nl"		"GAG"
 		"lv"		"GAG"
-		"ru"		"ГАГ"
+		"ru"		"КЛЯП"
 		"ro"		"GAG"
 	}
 	
@@ -478,7 +481,7 @@
 		"fr"		"Vous devez vérifier votre {blue}Discord {default}account! Ecrit {orange}{1}"
 		"nl"		"Je moet je {blue}Discord {default}account verifieren! Type {orange}{1}"
 		"lv"		"Verificē savu {blue}Discord {default}profilu! Raksti {orange}{1}"
-		"ru"		"Вы должны подтвердить свой {blue}Discord {default}учетная запись! Тип {orange}{1}"
+		"ru"		"Вы должны подтвердить свою учётную запись {blue}Discord {default}! Введите {orange}{1}"
 		"ro"		"Trebuie să îti asociezi contul de Discord! Tastează {orange}{1}"
 	}
 }
