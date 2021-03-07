@@ -9,6 +9,7 @@
 		"lv"		"Šobrīd Mape:"
 		"ru"		"Текущая карта:"
 		"ro"		"Mapa curentă:"
+		"ko"		"현재 맵:"
 	}
 
 	"PlayersOnlineField"
@@ -20,6 +21,7 @@
 		"lv"		"Spēlētāji Online:"
 		"ru"		"Игроки онлайн:"
 		"ro"		"Playeri Online:"
+		"ko"		"접속중인 플레이어:"
 	}
 
 	"DirectConnectField"
@@ -31,6 +33,7 @@
 		"lv"		"Tiešā savienošana:"
 		"ru"		"Прямое соединение:"
 		"ro"		"Conectare Directă:"
+		"ko"		"빠른 접속:"
 	}
 	
 	"ChatRelayFormat"
@@ -42,12 +45,14 @@
 	"TryAgainLater"
 	{
 		"en"		"Please wait. Your member status hasn't been fetched yet."
+		"ko"		"멤버 상태를 가져오지 못했습니다. 잠시만 기다려주세요."
 	}
 	
 	"DiscordRevoked"
 	{
 		"en"		"You are no longer in our discord server therefore your discord member status has been revoked!"
 		"ro"        "Nu mai faci parte din server-ul nostru de discord, rolul tău de membru a fost sters!"
+		"ko"		"더 이상 해당 디스코드 서버에 들어가 있지 않습니다. 당신의 해당 서버 멤버 설정은 삭제될 것 입니다!"
 	}
 	
 	"DiscordMissingParameters"
@@ -60,6 +65,7 @@
 		"lv"		"<@{1}> Jums ir jānorāda šīs komandas ID!"
 		"ru"		"<@{1}> Вам необходимо указать идентификатор для этой команды!"
 		"ro"		"<@{1}> Trebuie să furnizezi un ID pentru această comandă!"
+		"ko"		"<@{1}> 이 명령어를 사용하기 위해서는 ID를 제공해야 합니다!"
 	}
 
 	"DiscordInvalidID"
@@ -72,6 +78,7 @@
 		"lv"		"<@{1}> Šis ID nav derīgs. Lūdzu, ierakstiet {2} spēlē un mēģiniet vēlreiz!"
 		"ru"		"<@{1}> Этот идентификатор недействителен, введите в игре {2} и повторите попытку!"
 		"ro"		"<@{1}> Acest ID este invalid, te rugăm să tastezi {2} în joc să incerci din nou!"
+		"ko"		"<@{1}> 잘못된 ID 입니다. 인게임에서 {2}를 입력한 후 다시 시도하여 주십시오."
 	}
 
 	"DiscordInvalid"
@@ -84,6 +91,7 @@
 		"lv"		"<@{1}> Nav neviena klienta ar šo ID, pārliecinieties, vai esat izveidojis savienojumu ar spēles serveri, un pārbaudiet savu ID vēlreiz!"
 		"ru"		"<@{1}> Нет клиента с таким идентификатором, убедитесь, что вы подключены к игровому серверу, и еще раз проверьте свой идентификатор!"
 		"ro"		"<@{1}> Nu există niciun client cu acest ID, fii sigur că ești conectat la joc si verifică ID din nou!"
+		"ko"		"<@{1}> ID와 일치하는 클라이언트가 없습니다, 게임 서버에 접속 중이라면 ID를 다시 한번 확인해주십시오!"
 	}
 	
 	"DiscordInfo"
@@ -96,6 +104,7 @@
 		"lv"		"<@{1}> Šis kanāls tiek lietots profilu savienošanas!\nPielietojums: {2} <verifikācijas kods>"
 		"ru"		"<@{1}> Этот канал используется для привязки аккаунта!\nИспользование: {2} <код подтверждения>"
 		"ro"		"<@{1}> Acest canal este folosit pentru a-ți verifica, contul!\nFolosește: {2} <cod de verificare>"
+		"ko"		"<@{1}> 이 채널은 계정 연결을 위해 사용되고 있습니다!\n사용 중: {2} <인증 코드>"
 	}
 	
 	"DiscordVerified"
@@ -108,6 +117,7 @@
 		"lv"		"Jūs verificējāt savu profilu. ({green}{1}#{2}{default})"
 		"ru"		"Вы подтвердили свой аккаунт. ({green}{1}#{2}{default})"
 		"ro"		"Ți-ai verificat contul tău. ({green}{1}#{2}{default})"
+		"ko"		"계정이 인증되었습니다. ({green}{1}#{2}{default})"
 	}
 	
 	"DiscordLinked"
@@ -120,6 +130,7 @@
 		"lv"		"<@{1}> Tu savienoji savu profilu! ✅"
 		"ru"		"<@{1}> Вы связали свой аккаунт! ✅"
 		"ro"		"<@{1}> Ți-ai asociat contul cu succes! ✅"
+		"ko"		"<@{1}> 계정을 성공적으로 연결했습니다! ✅"
 	}
 	
 	"DiscordAlreadyLinked"
@@ -132,6 +143,7 @@
 		"lv"		"<@{1}> Jūsu discord profils jau ir savienots! ❌"
 		"ru"		"<@{1}> Эта учетная запись уже связана! ❌"
 		"ro"		"<@{1}> Acest cont de discord este deja asociat! ❌"
+		"ko"		"<@{1}> 해당 디스코드 계정은 이미 연결되어 있습니다! ❌"
 	}
 	
 	"ChatRelayPrivateToAdmins"
@@ -141,6 +153,7 @@
 		"lv"		"Privāti adminiem: "
 		"ru"		"Приват для администраторов: "
 		"ro"		"Privat către Admini: "
+		"ko"		"관리자에게: "
 	}
 	
 	"ChatRelayAllChat"
@@ -150,6 +163,7 @@
 		"lv"		"Visu Čats: "
 		"ru"		"весь чат: "
 		"ro"		"General Chat: "
+		"ko"		"전체 채팅: "
 	}
 	
 	"AdminLogFormat"
@@ -168,6 +182,7 @@
 		"lv"		"Tavs ID: {grey}{1}"
 		"ru"		"Ваш ID: {grey}{1}"
 		"ro"		"ID-ul tău: {grey}{1}"
+		"ko"		"당신의 ID: {grey}{1}"
 	}
 	
 	"LinkConnect"
@@ -179,6 +194,7 @@
 		"lv"		"Pievienojies mūsu discord serverim šeit:"
 		"ru"		"Подключитесь к нашему серверу раздоров на:"
 		"ro"		"Conectează-te la server-ul nostru de discord:"
+		"ko"		"서버 디스코드에 접속 해야합니다:"
 	}
 
 	"LinkUsage"
@@ -191,6 +207,7 @@
 		"lv"		"Izmanto {yellow}{1} {2}"
 		"ru"		"использование {yellow}{1} {2}"
 		"ro"		"Folosește {yellow}{1} {2}"
+		"ko"		"사용 {yellow}{1} {2}"
 	}
 
 	"LinkUsage2"
@@ -203,11 +220,13 @@
 		"lv"		"verifikācijas kodu kanālā {purple}#{1} {default}lai verificētu profilu!"
 		"ru"		"в канале {purple}#{1} {default}пройти проверку!"
 		"ro"		"Pe canalul {purple}#{1} {default}pentru a-ți verifica, contul!"
+		"ko"		"{purple}#{1} {default}채널에서 확인해보세요!"
 	}
 	
 	"CopyPasteFromConsole"
 	{
 		"en"		"You can also {yellow}copy-paste{default} from {green}console{default} :)"
+		"ko"		"당신은 {green}콘솔{default}에서도 {yellow}복사, 붙여넣기{default}를 할 수 있습니다 :)"
 	}
 	
 	
@@ -218,6 +237,7 @@
 		"lv"		"CallAdmin Ziņojums tiek izskatīts!"
 		"ru"		"CallAdmin Репорт обрабатывается!"
 		"ro"		"CallAdmin Report se gestionează!"
+		"ko"		"신고가 정상적으로 처리되었습니다!"
 	}
 	
 	"CallAdminReportHandlerName"
@@ -227,6 +247,7 @@
 		"lv"		"Ziņu izskatījā:"
 		"ru"		"Имя обработчика:"
 		"ro"		"Nume de legătură:"
+		"ko"		"처리자:"
 	}
 	
 	"CallAdminReportIDField"
@@ -236,6 +257,7 @@
 		"lv"		"Ziņojuma ID:"
 		"ru"		"Репорт ID:"
 		"ro"		"Report ID:"
+		"ko"		"신고 ID:"
 	}
 	
 	"ServerField"
@@ -246,6 +268,7 @@
 		"lv"		"Server: {1}"
 		"ru"		"Сервер: {1}"
 		"ro"		"Server: {1}"
+		"ko"		"서버: {1}"
 	}
 	
 	"CallAdminReportTitle"
@@ -255,6 +278,7 @@
 		"nl"		"Nieuwe CallAdmin Report!"
 		"ru"		"Новый CallAdmin Репорт!"
 		"ro"		"Nou Report CallAdmin"
+		"ko"		"새로운 신고가 들어왔습니다!"
 	}
 	
 	"CONSOLE"
@@ -264,6 +288,7 @@
 		"lv"		"CONSOLE"
 		"ru"		"CONSOLE"
 		"ro"		"CONSOLE"
+		"ko"		"콘솔"
 	}
 	
 	"SERVER"
@@ -273,6 +298,7 @@
 		"lv"		"SERVER"
 		"ru"		"SERVER"
 		"ro"		"SERVER"
+		"ko"		"서버"
 	}
 	
 	"ReporterField"
@@ -282,6 +308,7 @@
 		"lv"		"Ziņotājs:"
 		"ru"		"Репортер:"
 		"ro"		"Reporter:"
+		"ko"		"신고자:"
 	}
 	
 	"TargetField"
@@ -291,6 +318,7 @@
 		"nl"		"Doel:"
 		"ru"		"Цель:"
 		"ro"		"Target:"
+		"ko"		"대상:"
 	}
 	
 	"ReasonField"
@@ -300,6 +328,7 @@
 		"lv"		"Iemesls:"
 		"ru"		"Причина:" 
 		"ro"		"Motiv:"
+		"ko"		"사유:"
 	}
 	
 	"BugReportTitle"
@@ -309,6 +338,7 @@
 		"lv"		"Jauns kļūdas ziņojums!"
 		"ru"		"Новая  Буг Репорт!"
 		"ro"		"Nou Bug Report!"
+		"ko"		"새로운 버그가 제보되었습니다!"
 	}
 	
 	"MapField"
@@ -318,6 +348,7 @@
 		"lv"		"Mape:"
 		"ru"		"Карта:"
 		"ro"		"Mapă:"
+		"ko"		"맵:"
 	}
 	
 	"NoReasonSpecified"
@@ -328,6 +359,7 @@
 		"lv"		"iemesls nav norādīts"
 		"ru"		"Причина не указана."
 		"ro"		"Niciun motiv specificat."
+		"ko"		"사유 없음"
 	}
 	
 	"SourceBansTitle"
@@ -337,6 +369,7 @@
 		"nl"		"Nieuwe Speler Server Geband!"
 		"ru"		"Новый игрок Сервер Banned!"
 		"ro"		"Jucător nou banat!"
+		"ko"		"새 플레이어가 밴 되었습니다!"
 	}
 	"AdminField"
 	{
@@ -347,6 +380,7 @@
 		"lv"		"ADMIN:"
 		"ru"		"ADMIN:"
 		"ro"		"ADMIN:"
+		"ko"		"관리자:"
 	}
 
 	"PlayerField"
@@ -358,6 +392,7 @@
 		"lv"		"PLAYER:"
 		"ru"		"ИГРОК:"
 		"ro"		"PLAYER:"
+		"ko"		"플레이어:"
 	}
 	
 	"TEMPORARY"
@@ -369,6 +404,7 @@
 		"lv"		"PAGAIDU"
 		"ru"		"ВРЕМЕННОЕ"
 		"ro"		"TEMPORAR"
+		"ko"		"임시"
 	}
 	
 	"MINUTE"
@@ -380,6 +416,7 @@
 		"lv"		"minūte"
 		"ru"		"минут"
 		"ro"		"minut"
+		"ko"		"분"
 	}
 	
 	"MINUTES"
@@ -390,6 +427,7 @@
 		"lv"		"minūtes"
 		"ru"		"минут"
 		"ro"		"minute"
+		"ko"		"분"
 	}
 	
 	"PERMANENT"
@@ -401,6 +439,7 @@
 		"lv"		"MŪŽĪGS"
 		"ru"		"ПОСТОЯННАЯ"
 		"ro"		"PERMANENT"
+		"ko"		"영구"
 	}
 
 	"LengthField"
@@ -412,6 +451,7 @@
 		"lv"		"ILGUMS"
 		"ru"		"ДЛИНА"
 		"ro"		"DURATĂ"
+		"ko"		"기간"
 	}
 	
 	"SourceBansReportTitle"
@@ -421,6 +461,7 @@
 		"lv"		"Jauns Ziņojums!"
 		"ru"		"Новый Репорт!"
 		"ro"		"Report nou!"
+		"ko"		"신규 신고"
 	}
 	
 	"SourceCommsTitle"
@@ -430,6 +471,7 @@
 		"lv"		"New Player Comm-Banned!"
 		"ru"		"Новый игрок Comm-Banned!"
 		"ro"		"Jucător nou Comm-banat"
+		"ko"		"새 플레이어가 채팅/보이스 밴 되었습니다!"
 	}
 	
 	"MUTE"
@@ -439,6 +481,7 @@
 		"lv"		"MUTE"
 		"ru"		"МУТЕ"
 		"ro"		"MUTE"
+		"ko"		"MUTE|보이스"
 	}
 	
 	"GAG"
@@ -448,6 +491,7 @@
 		"lv"		"GAG"
 		"ru"		"ГАГ"
 		"ro"		"GAG"
+		"ko"		"GAG|채팅"
 	}
 	
 	"SILENCE"
@@ -457,6 +501,7 @@
 		"lv"		"SILENCE"
 		"ru"		"МОЛЧАНИЕ"
 		"ro"		"SILENCE"
+		"ko"		"SILENCE|채팅/보이스"
 	}
 	
 	"TypeField"
@@ -468,6 +513,7 @@
 		"lv"		"VEIDS"
 		"ru"		"ТИП"
 		"ro"		"TIP"
+		"ko"		"유형"
 	}
 	
 	"MustVerify"
@@ -480,5 +526,6 @@
 		"lv"		"Verificē savu {blue}Discord {default}profilu! Raksti {orange}{1}"
 		"ru"		"Вы должны подтвердить свой {blue}Discord {default}учетная запись! Тип {orange}{1}"
 		"ro"		"Trebuie să îti asociezi contul de Discord! Tastează {orange}{1}"
+		"ko"		"당신의 {blue}디스코드 {default}계정을 인증해야 합니다! {orange}{1}을 입력하세요."
 	}
 }
