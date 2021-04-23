@@ -39,6 +39,12 @@
 		"en"		"{orange}{1}#{2}{default}: {3}"
 	}
 	
+	"AdminChatRelayFormat"
+	{
+		"#format"	"{1:s},{2:s},{3:s}"		//1 = Username | 2 = Discriminator | 3 = Message
+		"en"		"Admin: {orange}{1}#{2}{default}: {3}"
+	}
+	
 	"TryAgainLater"
 	{
 		"en"		"Please wait. Your member status hasn't been fetched yet."
@@ -158,6 +164,12 @@
 		"en"		"{1}`{2}|{3}` => {4}"
 	}
 	
+	"AdminChatFormat"
+	{
+		"#format"	"{1:s},{2:s},{3:s},{4:s}"		//1 = TimeStamp | 2 = ServerName | 3 = PrivateToAdmins/Blank | 4 = Message
+		"en"		"{1}`{2}` => {3}{4}"
+	}
+	
 	"LinkYourID"
 	{
 		"#format"	"{1:s}"
@@ -185,8 +197,7 @@
 	{
 		"en"		"You can also {lime}copy-paste{default} from {orange}console{default} :)"
 	}
-	
-	
+
 	"CallAdminReportHandledTitle"
 	{
 		"en"		"CallAdmin Report is being handled!"
@@ -449,12 +460,12 @@
 	"MustVerify"
 	{
 		"#format"	"{1:s}"
-		"en"		"You have to verify your {lime}Discord account!{default} Type {orange}{1}"
-		"hu"		"Meg kell erősítened a {blue}Discord {default}fiókodat! Írd be, hogy {orange}{1}"
-		"fr"		"Vous devez vérifier votre {blue}Discord {default}account! Ecrit {orange}{1}"
-		"nl"		"Je moet je {blue}Discord {default}account verifieren! Type {orange}{1}"
-		"lv"		"Verificē savu {blue}Discord {default}profilu! Raksti {orange}{1}"
-		"ru"		"Вы должны подтвердить свой {blue}Discord {default}учетная запись! Тип {orange}{1}"
+		"en"		"You have to verify your {lightblue}Discord {default}account! Type {orange}{1}"
+		"hu"		"Meg kell erősítened a {lightblue}Discord {default}fiókodat! Írd be, hogy {orange}{1}"
+		"fr"		"Vous devez vérifier votre {lightblue}Discord {default}account! Ecrit {orange}{1}"
+		"nl"		"Je moet je {lightblue}Discord {default}account verifieren! Type {orange}{1}"
+		"lv"		"Verificē savu {lightblue}Discord {default}profilu! Raksti {orange}{1}"
+		"ru"		"Вы должны подтвердить свой {lightblue}Discord {default}учетная запись! Тип {orange}{1}"
 		"ro"		"Trebuie să îti asociezi Discord-ul tău! Tastează {orange}{1}"
 	}
 }
