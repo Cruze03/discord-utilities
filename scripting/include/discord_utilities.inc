@@ -4,6 +4,14 @@
 #define _discord_utilities_included
 
 /**
+ * Called after a client's data has been retrieved from database. 
+ *
+ * @param client        		Client index loaded client.
+ * @noreturn
+ */
+forward void DU_OnClientLoaded(int client);
+
+/**
  * Called after a client has verfied his discord account.
  *
  * @param client        		Client index of the verified client.
@@ -32,6 +40,16 @@ forward void DU_OnAccountRevoked(int client, const char[] userid);
  * @noreturn
  */
 forward void DU_OnCheckedAccounts(const char[] bottoken, const char[] guildid, const char[] tablename);
+
+
+/**
+ * Called before a blocked command being used by client.
+ *
+ * @param client        		Player who used command.
+ * @param command        		Command used.
+ * @return Continue to let him use, Handled to let plugin behave normally, Stop to stop him executing command manually.
+ */
+forward Action DU_OnBlockedCommandUse(int client, char[] command);
 
 /**
  * Refreshing every client online in server. Can be used for grasping steam avatar of client and re-checking client in database.
@@ -88,6 +106,15 @@ native void DU_AddRole(int client, char[] roleid);
  * @noreturn
  */
 native void DU_DeleteRole(int client, char[] roleid);
+
+/**
+ * Checks role from client according to roleid
+ * @param client		Client index to delete role from.
+ * @param roleid		String containing roleid.
+ * @param maxsize		Max size of string.
+ * @noreturn
+ */
+native void DU_CheckRole(int client, char[] roleid);
 
 public SharedPlugin __pl_discord_utilities =
 {
