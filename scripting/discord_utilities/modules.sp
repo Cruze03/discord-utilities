@@ -791,6 +791,41 @@ public void SourceComms_OnBlockAdded(int admin, int target, int time, int commty
 	delete hook;
 }
 
+public void AdminChatRelayReceived(DiscordBot bawt, DiscordChannel channel, DiscordMessage discordmessage)
+{
+	if((g_sAdminChatRelay_Mode[0] == '0' && g_sAdminChatRelay_Mode[1] == '\0') || (g_sAdminChatRelay_Mode[0] != '\0' && g_sAdminChatRelay_Mode[0] != '0' && g_sAdminChatRelay_Mode[1] != '\0'))
+	{
+		return;
+	}
+	DiscordUser author = discordmessage.GetAuthor();
+	if(author.IsBot()) 
+	{
+		delete author;
+		return;
+	}
+
+	char message[512];
+	char userName[32], discriminator[6];
+	discordmessage.GetContent(message, sizeof(message));
+	author.GetUsername(userName, sizeof(userName));
+	author.GetDiscriminator(discriminator, sizeof(discriminator));
+	delete author;
+
+	char sFlag[5];
+	if(g_sAdminChatRelay_Mode[0] == '0' && g_sAdminChatRelay_Mode[1] != '\0')
+	{
+		sFlag[0] = g_sAdminChatRelay_Mode[1];
+	}
+	else
+	{
+		sFlag[0] = g_sAdminChatRelay_Mode[0];
+	}
+	for(int i = 1; i <= MaxClients; i++) if(IsClientInGame(i) && !IsFakeClient(i) && CheckAdminFlags(i, ReadFlagString(sFlag)))
+	{
+		CPrintToChat(i, "%s %T", g_sDiscordPrefix, "AdminChatRelayFormat", i, userName, discriminator, message);
+	}
+}
+
 public void ChatRelayReceived(DiscordBot bawt, DiscordChannel channel, DiscordMessage discordmessage)
 {
 	DiscordUser author = discordmessage.GetAuthor();
@@ -887,7 +922,7 @@ public void OnMessageReceived(DiscordBot bawt, DiscordChannel channel, DiscordMe
 
 			char Query[512];
 			g_hDB.Format(Query, sizeof(Query), "SELECT userid FROM %s WHERE steamid = '%s'", g_sTableName, szSteamId);
-			SQL_TQuery(g_hDB, SQLQuery_CheckUserData, Query, datapack);
+			g_hDB.Query(SQLQuery_CheckUserData, Query, datapack);
 			
 			//Security addition - renew unique code in case another user copies it before query returns (?)
 			GetClientAuthId(client, AuthId_SteamID64, szSteamId, sizeof(szSteamId));
