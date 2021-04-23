@@ -36,7 +36,7 @@
 	"ChatRelayFormat"
 	{
 		"#format"	"{1:s},{2:s},{3:s}"		//1 = Username | 2 = Discriminator | 3 = Message
-		"en"		"{purple}{1}#{2}{default}: {3}"
+		"en"		"{orange}{1}#{2}{default}: {3}"
 	}
 	
 	"TryAgainLater"
@@ -47,7 +47,7 @@
 	"DiscordRevoked"
 	{
 		"en"		"You are no longer in our discord server therefore your discord member status has been revoked!"
-		"ro"        "Nu mai faci parte din server-ul nostru de discord, rolul tău de membru a fost sters!"
+		"ro"        "Numai faci parte din server-ul nostru de discord, rolul tău de membru a fost sters!"
 	}
 	
 	"DiscordMissingParameters"
@@ -59,7 +59,7 @@
 		"nl"		"<@{1}> U moet een ID opgeven voor deze opdracht!"
 		"lv"		"<@{1}> Jums ir jānorāda šīs komandas ID!"
 		"ru"		"<@{1}> Вам необходимо указать идентификатор для этой команды!"
-		"ro"		"<@{1}> Trebuie să furnizezi un ID pentru această comandă!"
+		"ro"		"<@{1}> Trebuie să furnizați un ID pentru această comandă!"
 	}
 
 	"DiscordInvalidID"
@@ -71,7 +71,7 @@
 		"nl"		"<@{1}> Deze ID is niet geldig. Typ {2} in de game en probeer het opnieuw!"
 		"lv"		"<@{1}> Šis ID nav derīgs. Lūdzu, ierakstiet {2} spēlē un mēģiniet vēlreiz!"
 		"ru"		"<@{1}> Этот идентификатор недействителен, введите в игре {2} и повторите попытку!"
-		"ro"		"<@{1}> Acest ID este invalid, te rugăm să tastezi {2} în joc să incerci din nou!"
+		"ro"		"<@{1}> Acest ID nu este valid, te rog sa tastezi {2} în joc să incerci din nou!"
 	}
 
 	"DiscordInvalid"
@@ -95,7 +95,7 @@
 		"nl"		"<@{1}> Dit kanaal wordt gebruikt om je account te koppelen!\nGebruik: {2} <verificatie code>"
 		"lv"		"<@{1}> Šis kanāls tiek lietots profilu savienošanas!\nPielietojums: {2} <verifikācijas kods>"
 		"ru"		"<@{1}> Этот канал используется для привязки аккаунта!\nИспользование: {2} <код подтверждения>"
-		"ro"		"<@{1}> Acest canal este folosit pentru a-ți verifica, contul!\nFolosește: {2} <cod de verificare>"
+		"ro"		"<@{1}> Acest canal este folosit pentru a-ți verifica contul!\nFolosește: {2} <cod de verificare>"
 	}
 	
 	"DiscordVerified"
@@ -107,7 +107,7 @@
 		"nl"		"Je hebt je account geverifieerd. ({green}{1}#{2}{default})"
 		"lv"		"Jūs verificējāt savu profilu. ({green}{1}#{2}{default})"
 		"ru"		"Вы подтвердили свой аккаунт. ({green}{1}#{2}{default})"
-		"ro"		"Ți-ai verificat contul tău. ({green}{1}#{2}{default})"
+		"ro"		"Ti-a verificat contul tău. ({green}{1}#{2}{default})"
 	}
 	
 	"DiscordLinked"
@@ -119,7 +119,7 @@
 		"nl"		"<@{1}> Je hebt je account gekoppeld! ✅"
 		"lv"		"<@{1}> Tu savienoji savu profilu! ✅"
 		"ru"		"<@{1}> Вы связали свой аккаунт! ✅"
-		"ro"		"<@{1}> Ți-ai asociat contul cu succes! ✅"
+		"ro"		"<@{1}> Ti-a asociat contul cu succes! ✅"
 	}
 	
 	"DiscordAlreadyLinked"
@@ -172,42 +172,18 @@
 	
 	"LinkConnect"
 	{
-		"en"		"Connect to our discord server at:"
-		"hu"		"Csatlakozz discord szerverünkre:"
-		"fr"		"Connectez-vous à notre serveur de discord avec:"
-		"nl"		"Join onze Discord server via:"
-		"lv"		"Pievienojies mūsu discord serverim šeit:"
-		"ru"		"Подключитесь к нашему серверу раздоров на:"
-		"ro"		"Conectează-te la server-ul nostru de discord:"
+		"en"		"Join our discord server:"
 	}
 
 	"LinkUsage"
 	{
-		"#format"	"{1:s},{2:s}"
-		"en"		"Use {yellow}{1} {2}"
-		"hu"		"Használd a {yellow}{1} {2}"
-		"fr"		"Utiliser {yellow}{1} {2}"
-		"nl"		"Gebruik {yellow}{1} {2}"
-		"lv"		"Izmanto {yellow}{1} {2}"
-		"ru"		"использование {yellow}{1} {2}"
-		"ro"		"Folosește {yellow}{1} {2}"
-	}
-
-	"LinkUsage2"
-	{
-		"#format"	"{1:s}"
-		"en"		"in channel {purple}#{1} {default}to get verified!"
-		"hu"		"parancsot a {purple}#{1} {default}szobában a megerősítéshez!"
-		"fr"		"dans le canal {purple}#{1} {default}pour se faire vérifier!"
-		"nl"		"in kanaal {purple}#{1} {default}om geverifieerd te worden!"
-		"lv"		"verifikācijas kodu kanālā {purple}#{1} {default}lai verificētu profilu!"
-		"ru"		"в канале {purple}#{1} {default}пройти проверку!"
-		"ro"		"Pe canalul {purple}#{1} {default}pentru a-ți verifica, contul!"
+		"#format"	"{1:s},{2:s},{3:s}"
+		"en"		"Type {lime}{1} {2} {default}in {orange}#{3}"
 	}
 	
 	"CopyPasteFromConsole"
 	{
-		"en"		"You can also {yellow}copy-paste{default} from {green}console{default} :)"
+		"en"		"You can also {lime}copy-paste{default} from {orange}console{default} :)"
 	}
 	
 	
@@ -473,12 +449,12 @@
 	"MustVerify"
 	{
 		"#format"	"{1:s}"
-		"en"		"You have to verify your {blue}Discord {default}account! Type {orange}{1}"
+		"en"		"You have to verify your {lime}Discord account!{default} Type {orange}{1}"
 		"hu"		"Meg kell erősítened a {blue}Discord {default}fiókodat! Írd be, hogy {orange}{1}"
 		"fr"		"Vous devez vérifier votre {blue}Discord {default}account! Ecrit {orange}{1}"
 		"nl"		"Je moet je {blue}Discord {default}account verifieren! Type {orange}{1}"
 		"lv"		"Verificē savu {blue}Discord {default}profilu! Raksti {orange}{1}"
 		"ru"		"Вы должны подтвердить свой {blue}Discord {default}учетная запись! Тип {orange}{1}"
-		"ro"		"Trebuie să îti asociezi contul de Discord! Tastează {orange}{1}"
+		"ro"		"Trebuie să îti asociezi Discord-ul tău! Tastează {orange}{1}"
 	}
 }
