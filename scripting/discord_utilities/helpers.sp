@@ -169,7 +169,7 @@ public void OnGetMembersAll(Handle hMemberList)
 			{
 				g_hDB.Format(Query, sizeof(Query), "UPDATE %s SET userid = '%s', member = '0' WHERE steamid = '%s';", g_sTableName, NULL_STRING, steamid);
 			}
-			SQL_TQuery(g_hDB, SQLQuery_UpdatePlayer, Query);
+			g_hDB.Query(SQLQuery_UpdatePlayer, Query);
 			bUpdate[x] = true;
 			CPrintToChat(x, "%s %T", g_sServerPrefix, "DiscordRevoked", x);
 			Call_StartForward(g_hOnAccountRevoked);
@@ -258,7 +258,7 @@ void SendChatRelay(int client, const char[] sArgs, char[] url, bool bAdmin = tru
 	Format(sAllChat, sizeof(sAllChat), "%T", "ChatRelayAllChat", LANG_SERVER);
 	if(strcmp(url, g_sAdminChatRelay_Webhook) == 0)
 	{
-		Format(sMessage, sizeof(sMessage), "%s`%s` => %s%s", timestamp, g_sServerName, bAdmin ? "" : sPrivateToAdmins, sMessage);
+		Format(sMessage, sizeof(sMessage), "%T", "AdminChatFormat", LANG_SERVER, timestamp, g_sServerName, bAdmin ? "" : sPrivateToAdmins, sMessage);
 	}
 	else
 	{
@@ -327,7 +327,7 @@ void UpdatePlayer(int client)
 	{
 		g_hDB.Format(szQuery, sizeof(szQuery), "UPDATE %s SET last_accountuse = '%d' WHERE steamid = '%s'", g_sTableName, GetTime(), steamid);
 	}
-	SQL_TQuery(g_hDB, SQLQuery_UpdatePlayer, szQuery, GetClientUserId(client));
+	g_hDB.Query(SQLQuery_UpdatePlayer, szQuery, GetClientUserId(client));
 }
 
 void GetLastMap(char[] sMap, int iSize)
@@ -466,13 +466,15 @@ void CreateCvars()
 
 	g_cChatRelay_Webhook = AutoExecConfig_CreateConVar("sm_du_chat_webhook", "", "Webhook for game server => discord server chat messages. Blank to disable.", FCVAR_PROTECTED);
 	g_cChatRelay_BlockList = AutoExecConfig_CreateConVar("sm_du_chat_blocklist", "rtv, nominate", "Text that shouldn't appear in gameserver => discord server chat messages. Separate it with \", \"");
-	g_cAdminChatRelay_Webhook = AutoExecConfig_CreateConVar("sm_du_adminchat_webhook", "", "Webhook for game server => discord server chat messages where chat messages are to admins (say_team with @ / sm_chat). Blank to disable.", FCVAR_PROTECTED);
+	g_cAdminChatRelay_Mode = AutoExecConfig_CreateConVar("sm_du_adminchat_mode", "0b", "0 - Only \"say_team with @ / sm_chat\"\n0b - \"say_team with @ / sm_chat\" with discord to game server chat to admin.\nAny admin flag - Show messages of specific flag in channel.");
+	g_cAdminChatRelay_Webhook = AutoExecConfig_CreateConVar("sm_du_adminchat_webhook", "", "Webhook for game server => discord server chat messages where chat messages are to (say_team with @ / sm_chat) / are of admins. Blank to disable.", FCVAR_PROTECTED);
 	g_cAdminChatRelay_BlockList = AutoExecConfig_CreateConVar("sm_du_adminchat_blocklist", "rtv, nominate", "Text that shouldn't appear in gameserver => discord server where chat messages are to admin. Separate it with \", \"");
 	g_cAdminLog_Webhook = AutoExecConfig_CreateConVar("sm_du_adminlog_webhook", "", "Webhook for channel where all admin commands are logged. Blank to disable.", FCVAR_PROTECTED);
 	g_cAdminLog_BlockList = AutoExecConfig_CreateConVar("sm_du_adminlog_blocklist", "slapped, firebombed", "Log with this string will be ignored. Separate it with \", \"");
 
 	g_cVerificationChannelID = AutoExecConfig_CreateConVar("sm_du_verfication_channelid", "", "Channel ID for verfication. Blank to disable.");
 	g_cChatRelayChannelID = AutoExecConfig_CreateConVar("sm_du_chat_channelid", "", "Channel ID for discord server => game server messages. Blank to disable.");
+	g_cAdminChatRelayChannelID = AutoExecConfig_CreateConVar("sm_du_adminchat_channelid", "", "Channel ID for discord server => game server messages only of admins. Blank to disable.");
 	g_cGuildID = AutoExecConfig_CreateConVar("sm_du_verification_guildid", "", "Guild ID of your discord server. Blank to disable. Needed for verification module.");
 	g_cRoleID = AutoExecConfig_CreateConVar("sm_du_verification_roleid", "", "Role ID to give to user when user is verified. Blank to give no role. Verification module needs to be running.");
 
@@ -540,13 +542,15 @@ void CreateCvars()
 
 	g_cChatRelay_Webhook = CreateConVar("sm_du_chat_webhook", "", "Webhook for game server => discord server chat messages. Blank to disable.", FCVAR_PROTECTED);
 	g_cChatRelay_BlockList = CreateConVar("sm_du_chat_blocklist", "rtv, nominate", "Text that shouldn't appear in gameserver => discord server chat messages. Separate it with \", \"");
-	g_cAdminChatRelay_Webhook = CreateConVar("sm_du_adminchat_webhook", "", "Webhook for game server => discord server chat messages where chat messages are to admins (say_team with @ / sm_chat). Blank to disable.", FCVAR_PROTECTED);
+	g_cAdminChatRelay_Mode = CreateConVar("sm_du_adminchat_mode", "0b", "0 - Only \"say_team with @ / sm_chat\"\n0b - \"say_team with @ / sm_chat\" with discord to game server chat to admin.\nAny admin flag - Show messages of specific flag in channel.");
+	g_cAdminChatRelay_Webhook = CreateConVar("sm_du_adminchat_webhook", "", "Webhook for game server => discord server chat messages where chat messages are to (say_team with @ / sm_chat) / are of admins. Blank to disable.", FCVAR_PROTECTED);
 	g_cAdminChatRelay_BlockList = CreateConVar("sm_du_adminchat_blocklist", "rtv, nominate", "Text that shouldn't appear in gameserver => discord server where chat messages are to admin. Separate it with \", \"");
 	g_cAdminLog_Webhook = CreateConVar("sm_du_adminlog_webhook", "", "Webhook for channel where all admin commands are logged. Blank to disable.", FCVAR_PROTECTED);
 	g_cAdminLog_BlockList = CreateConVar("sm_du_adminlog_blocklist", "slapped, firebombed", "Log with this string will be ignored. Separate it with \", \"");
 
 	g_cVerificationChannelID = CreateConVar("sm_du_verfication_channelid", "", "Channel ID for verfication. Blank to disable.");
 	g_cChatRelayChannelID = CreateConVar("sm_du_chat_channelid", "", "Channel ID for discord server => game server messages. Blank to disable.");
+	g_cAdminChatRelayChannelID = CreateConVar("sm_du_adminchat_channelid", "", "Channel ID for discord server => game server messages only of admins. Blank to disable.");
 	g_cGuildID = CreateConVar("sm_du_verification_guildid", "", "Guild ID of your discord server. Blank to disable. Needed for verification module.");
 	g_cRoleID = CreateConVar("sm_du_verification_roleid", "", "Role ID to give to user when user is verified. Blank to give no role. Verification module needs to be running.");
 
@@ -611,6 +615,7 @@ void CreateCvars()
 
 	HookConVarChange(g_cChatRelay_Webhook, OnSettingsChanged);
 	HookConVarChange(g_cChatRelay_BlockList, OnSettingsChanged);
+	HookConVarChange(g_cAdminChatRelay_Mode, OnSettingsChanged);
 	HookConVarChange(g_cAdminChatRelay_Webhook, OnSettingsChanged);
 	HookConVarChange(g_cAdminChatRelay_BlockList, OnSettingsChanged);
 	HookConVarChange(g_cAdminLog_Webhook, OnSettingsChanged);
@@ -618,6 +623,7 @@ void CreateCvars()
 
 	HookConVarChange(g_cVerificationChannelID, OnSettingsChanged);
 	HookConVarChange(g_cChatRelayChannelID, OnSettingsChanged);
+	HookConVarChange(g_cAdminChatRelayChannelID, OnSettingsChanged);
 	HookConVarChange(g_cGuildID, OnSettingsChanged);
 	HookConVarChange(g_cRoleID, OnSettingsChanged);
 
@@ -677,6 +683,7 @@ void LoadCvars()
 	g_cChatRelay_Webhook.GetString(g_sChatRelay_Webhook, sizeof(g_sChatRelay_Webhook));
 	g_cChatRelay_BlockList.GetString(sBlockList, sizeof(sBlockList));
 	ExplodeString(sBlockList, ", ", g_sChatRelay_BlockList, MAX_BLOCKLIST_LIMIT, 64);
+	g_cAdminChatRelay_Mode.GetString(g_sAdminChatRelay_Mode, sizeof(g_sAdminChatRelay_Mode));
 	g_cAdminChatRelay_Webhook.GetString(g_sAdminChatRelay_Webhook, sizeof(g_sAdminChatRelay_Webhook));
 	g_cAdminChatRelay_BlockList.GetString(sBlockList, sizeof(sBlockList));
 	ExplodeString(sBlockList, ", ", g_sAdminChatRelay_BlockList, MAX_BLOCKLIST_LIMIT, 64);
@@ -686,6 +693,7 @@ void LoadCvars()
 	
 	g_cVerificationChannelID.GetString(g_sVerificationChannelID, sizeof(g_sVerificationChannelID));
 	g_cChatRelayChannelID.GetString(g_sChatRelayChannelID, sizeof(g_sChatRelayChannelID));
+	g_cAdminChatRelayChannelID.GetString(g_sAdminChatRelayChannelID, sizeof(g_sAdminChatRelayChannelID));
 	g_cGuildID.GetString(g_sGuildID, sizeof(g_sGuildID));
 	g_cRoleID.GetString(g_sRoleID, sizeof(g_sRoleID));
 	
@@ -800,6 +808,105 @@ public void APIWebResponse(const char[] sData, int client)
 
 	kvResponse.GetString("avatarfull", g_sAvatarURL[client], sizeof(g_sAvatarURL[]));
 	delete kvResponse;
+}
+
+void CheckingRole(char[] userid, char[] roleid, EHTTPMethod method)
+{
+	Handle hData = json_object();
+	json_object_set_new(hData, "userid", json_string(userid));
+	json_object_set_new(hData, "roleid", json_string(roleid));
+	json_object_set_new(hData, "method", json_integer(view_as<int>(method)));
+	CheckRole(hData);
+}
+
+void CheckRole(Handle hData)
+{
+	if(StrEqual(g_sGuildID, ""))
+	{
+		LogError("[Discord-Utilities] GuildID is not provided. Role cannot be provided!");
+		delete hData;
+		return;
+	}
+	char userid[128];
+	if (!JsonObjectGetString(hData, "userid", userid, sizeof(userid)))
+	{
+		LogError("JsonObjectGetString \"userid\" failed");
+		delete hData;
+		return;
+	}
+	char roleid[128];
+	if (!JsonObjectGetString(hData, "roleid", roleid, sizeof(roleid)))
+	{
+		LogError("JsonObjectGetString \"roleid\" failed");
+		delete hData;
+		return;
+	}
+	EHTTPMethod method = view_as<EHTTPMethod>(JsonObjectGetInt(hData, "method"));
+	char url[1024];
+	FormatEx(url, sizeof(url), "https://discord.com/api/guilds/%s/roles", g_sGuildID);
+	char route[512];
+	FormatEx(route, sizeof(route), "guild/%s/roles", g_sGuildID);
+	DiscordRequest request = new DiscordRequest(url, method);
+	if (request == null)
+	{
+		CreateTimer(2.0, SendCheckRole, hData, TIMER_FLAG_NO_MAPCHANGE);
+		return;
+	}
+	request.SetCallbacks(HTTPCompleted, OnCheckRoleSent);
+	request.SetContentSize();
+	request.SetBot(Bot);
+	request.SetData(hData, route);
+	request.Send(route);
+}
+
+public void OnCheckRoleSent(Handle request, bool failure, int offset, int statuscode, any dp)
+{
+	if(failure || (statuscode != 200))
+	{
+		if(statuscode == 429 || statuscode == 500)
+		{
+			LogError("[OnCheckRoleSent-1] Status Code: %i | Failure: %i", statuscode, failure);
+			CheckRole(dp);
+			delete request;
+			return;
+		}
+		LogError("[OnCheckRoleSent-2] Status Code: %i | Failure: %i", statuscode, failure);
+		delete request;
+		delete view_as<Handle>(dp);
+		return;
+	}
+	LogError("[OnCheckRoleSent-3] Status Code: %i | Failure: %i", statuscode, failure);
+	SteamWorks_GetHTTPResponseBodyCallback(request, GetRolesData, dp);
+	delete request;
+}
+
+public int GetRolesData(const char[] data, any dp)
+{
+	Handle hJson = json_load(data);
+	Handle hData = view_as<Handle>(dp);
+	DiscordBot bot = view_as<DiscordBot>(json_object_get(hData, "bot"));
+	
+	Handle fwd = view_as<Handle>(JsonObjectGetInt(hData, "callback"));
+	
+	char guild[32];
+	JsonObjectGetString(hData, "guild", guild, sizeof(guild));
+	
+	any data1 = JsonObjectGetInt(hData, "data1");
+	
+	if(fwd != null)
+	{
+		Call_StartForward(fwd);
+		Call_PushCell(bot);
+		Call_PushString(guild);
+		Call_PushCell(view_as<RoleList>(hJson));
+		Call_PushCell(data1);
+		Call_Finish();
+	}
+	
+	delete bot;
+	delete hJson;
+	delete hData;
+	delete fwd;
 }
 
 void ManagingRole(char[] userid, char[] roleid, EHTTPMethod method)
@@ -1039,6 +1146,12 @@ stock void Discord_EscapeString(char[] string, int maxlen, bool name = false)
 	ReplaceString(string, maxlen, "\"", "＂");
 }
 
+bool CheckAdminFlags(int client, int iFlag)
+{
+	int iUserFlags = GetUserFlagBits(client);
+	return (iUserFlags & ADMFLAG_ROOT || (iUserFlags & iFlag) == iFlag);
+}
+
 /* TIMERS */
 
 public Action VerifyAccounts(Handle timer)
@@ -1054,6 +1167,11 @@ public Action SendGetMembers(Handle timer, any data)
 public Action SendManageRole(Handle timer, any data)
 {
 	ManageRole(view_as<Handle>(data));
+}
+
+public Action SendCheckRole(Handle timer, any data)
+{
+	CheckRole(view_as<Handle>(data));
 }
 
 public Action SendRequestAgain(Handle timer, DataPack dp)
