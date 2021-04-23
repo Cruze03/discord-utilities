@@ -16,8 +16,8 @@ ConVar g_cBugReport_Webhook, g_cBugReport_BotName, g_cBugReport_BotAvatar, g_cBu
 ConVar g_cSourceBans_Webhook, g_cSourceBans_BotName, g_cSourceBans_BotAvatar, g_cSourceBans_Color, g_cSourceBans_PermaColor, g_cSourceBans_Content, g_cSourceBans_FooterIcon;
 ConVar g_cSourceComms_Webhook, g_cSourceComms_BotName, g_cSourceComms_BotAvatar, g_cSourceComms_Color, g_cSourceComms_PermaColor, g_cSourceComms_Content, g_cSourceComms_FooterIcon;
 ConVar g_cMap_Webhook, g_cMap_BotName, g_cMap_Color, g_cMap_BotAvatar, g_cMap_Content, g_cMap_Delay, g_cMap_Thumbnail;
-ConVar g_cChatRelay_Webhook, g_cChatRelay_BlockList, g_cAdminChatRelay_Webhook, g_cAdminChatRelay_BlockList, g_cAdminLog_Webhook, g_cAdminLog_BlockList;
-ConVar g_cVerificationChannelID, g_cChatRelayChannelID, g_cGuildID, g_cRoleID;
+ConVar g_cChatRelay_Webhook, g_cChatRelay_BlockList, g_cAdminChatRelay_Mode, g_cAdminChatRelay_Webhook, g_cAdminChatRelay_BlockList, g_cAdminLog_Webhook, g_cAdminLog_BlockList;
+ConVar g_cVerificationChannelID, g_cChatRelayChannelID, g_cAdminChatRelayChannelID, g_cGuildID, g_cRoleID;
 ConVar g_cAPIKey, g_cBotToken, g_cDNSServerIP, g_cCheckInterval, g_cUseSWGM, g_cTimeStamps, g_cServerID;
 ConVar g_cLinkCommand, g_cViewIDCommand, g_cInviteLink;
 ConVar g_cDiscordPrefix, g_cServerPrefix;
@@ -29,8 +29,8 @@ char g_sBugReport_Webhook[128], g_sBugReport_BotName[32], g_sBugReport_BotAvatar
 char g_sSourceBans_Webhook[128], g_sSourceBans_BotName[32], g_sSourceBans_BotAvatar[128], g_sSourceBans_Color[8], g_sSourceBans_PermaColor[8], g_sSourceBans_Content[256], g_sSourceBans_FooterIcon[128];
 char g_sSourceComms_Webhook[128], g_sSourceComms_BotName[32], g_sSourceComms_BotAvatar[128], g_sSourceComms_Color[8], g_sSourceComms_PermaColor[8], g_sSourceComms_Content[256], g_sSourceComms_FooterIcon[128];
 char g_sMap_Webhook[128], g_sMap_BotName[32], g_sMap_BotAvatar[128], g_sMap_Color[8], g_sMap_Content[256];
-char g_sChatRelay_Webhook[128], g_sChatRelay_BlockList[MAX_BLOCKLIST_LIMIT][64], g_sAdminChatRelay_Webhook[128], g_sAdminChatRelay_BlockList[MAX_BLOCKLIST_LIMIT][64], g_sAdminLog_Webhook[128], g_sAdminLog_BlockList[MAX_BLOCKLIST_LIMIT][64];
-char g_sVerificationChannelID[20], g_sChatRelayChannelID[20], g_sGuildID[20], g_sRoleID[20];
+char g_sChatRelay_Webhook[128], g_sChatRelay_BlockList[MAX_BLOCKLIST_LIMIT][64], g_sAdminChatRelay_Mode[16], g_sAdminChatRelay_Webhook[128], g_sAdminChatRelay_BlockList[MAX_BLOCKLIST_LIMIT][64], g_sAdminLog_Webhook[128], g_sAdminLog_BlockList[MAX_BLOCKLIST_LIMIT][64];
+char g_sVerificationChannelID[20], g_sChatRelayChannelID[20], g_sAdminChatRelayChannelID[20], g_sGuildID[20], g_sRoleID[20];
 char g_sAPIKey[64], g_sBotToken[60], g_sServerIP[128];
 char g_sLinkCommand[20], g_sViewIDCommand[20], g_sInviteLink[30];
 char g_sDiscordPrefix[128], g_sServerPrefix[128];
@@ -55,7 +55,7 @@ bool g_bRoleGiven[MAXPLAYERS+1];
 char g_sUserID[MAXPLAYERS+1][20];
 char g_sUniqueCode[MAXPLAYERS+1][36];
 
-Handle g_hOnCheckedAccounts, g_hOnLinkedAccount, g_hOnAccountRevoked;
+Handle g_hOnCheckedAccounts, g_hOnLinkedAccount, g_hOnAccountRevoked, g_hOnClientLoaded, g_hOnBlockedCommandUse;
 
 DiscordBot Bot;
 
