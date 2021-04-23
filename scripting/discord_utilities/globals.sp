@@ -1,4 +1,4 @@
-#define PLUGIN_VERSION "2.5-BETA"
+#define PLUGIN_VERSION "2.6-BETA"
 
 #define PLUGIN_NAME "Discord Utilities"
 #define PLUGIN_AUTHOR "Cruze"
