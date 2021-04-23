@@ -46,17 +46,72 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 	CreateNative("DU_GetUserId", Native_GetUserId);
 	CreateNative("DU_RefreshClients", Native_RefreshClients);
 	CreateNative("DU_GetIP", Native_GetIP);
+	CreateNative("DU_CheckRole", Native_CheckRole);
 	CreateNative("DU_AddRole", Native_AddRole);
 	CreateNative("DU_DeleteRole", Native_DeleteRole);
 
 	g_hOnLinkedAccount = CreateGlobalForward("DU_OnLinkedAccount", ET_Ignore, Param_Cell, Param_String, Param_String, Param_String);
 	g_hOnAccountRevoked = CreateGlobalForward("DU_OnAccountRevoked", ET_Ignore, Param_Cell, Param_String);
 	g_hOnCheckedAccounts = CreateGlobalForward("DU_OnCheckedAccounts", ET_Event, Param_String, Param_String, Param_String);
+	g_hOnClientLoaded = CreateGlobalForward("DU_OnClientLoaded", ET_Ignore, Param_Cell);
+	g_hOnBlockedCommandUse = CreateGlobalForward("DU_OnBlockedCommandUse", ET_Event, Param_Cell, Param_String);
 	return APLRes_Success;
+}
+
+public Action Command_CheckRole(int client, int args)
+{
+	if(g_sUserID[client][0] == '\0')
+	{
+		return Plugin_Handled;
+	}
+	if(args != 1)
+	{
+		return Plugin_Handled;
+	}
+	char role[128];
+	GetCmdArg(1, role, sizeof(role));
+	CheckingRole(g_sUserID[client], role, k_EHTTPMethodGET);
+	return Plugin_Handled;
+}
+
+public Action Command_AddRole(int client, int args)
+{
+	if(g_sUserID[client][0] == '\0')
+	{
+		return Plugin_Handled;
+	}
+	if(args != 1)
+	{
+		return Plugin_Handled;
+	}
+	char role[128];
+	GetCmdArg(1, role, sizeof(role));
+	ManagingRole(g_sUserID[client], role, k_EHTTPMethodPUT);
+	return Plugin_Handled;
+}
+
+public Action Command_DeleteRole(int client, int args)
+{
+	if(g_sUserID[client][0] == '\0')
+	{
+		return Plugin_Handled;
+	}
+	if(args != 1)
+	{
+		return Plugin_Handled;
+	}
+	char role[128];
+	GetCmdArg(1, role, sizeof(role));
+	ManagingRole(g_sUserID[client], role, k_EHTTPMethodDELETE);
+	return Plugin_Handled;
 }
 
 public void OnPluginStart()
 {
+	RegAdminCmd("sm_checkrole", Command_CheckRole, ADMFLAG_ROOT);
+	RegAdminCmd("sm_addrole", Command_AddRole, ADMFLAG_ROOT);
+	RegAdminCmd("sm_deleterole", Command_DeleteRole, ADMFLAG_ROOT);
+	
 	hRateLeft = new StringMap();
 	hRateReset = new StringMap();
 	hRateLimit = new StringMap();
