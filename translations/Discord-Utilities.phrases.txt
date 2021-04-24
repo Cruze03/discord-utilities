@@ -48,6 +48,7 @@
 	"TryAgainLater"
 	{
 		"en"		"Please wait. Your member status hasn't been fetched yet."
+		"hu"		"Kérlek várj egy picit! A tagságod még lekérés alatt..."
 	}
 	
 	"DiscordRevoked"
@@ -60,7 +61,7 @@
 	{
 		"#format"	"{1:s}"
 		"en"		"<@{1}> You need to provide an ID for this command!"
-		"hu"		"<@{1}> Meg kell adnia egy azonosítót ehhez a parancshoz!"
+		"hu"		"<@{1}> Kérlek adj meg egy azonosítót a parancs használatához!"
 		"fr"		"<@{1}> Vous devez fournir un identifiant pour cette commande!"
 		"nl"		"<@{1}> U moet een ID opgeven voor deze opdracht!"
 		"lv"		"<@{1}> Jums ir jānorāda šīs komandas ID!"
@@ -72,7 +73,7 @@
 	{
 		"#format"	"{1:s},{2:s}"
 		"en"		"<@{1}> This ID is not valid, please type {2} in-game and try again!"
-		"hu"		"<@{1}> Ez az azonosító nem érvényes, kérjük, írja be a {2} játékon belüli játékot, és próbálja újra!"
+		"hu"		"<@{1}> Az általad megadott azonosító nem létezik. Használd a {2} parancsot a szerveren és próbáld újra!"
 		"fr"		"<@{1}> Cet identifiant n'est pas valide, veuillez saisir {2} dans le jeu et réessayer!"
 		"nl"		"<@{1}> Deze ID is niet geldig. Typ {2} in de game en probeer het opnieuw!"
 		"lv"		"<@{1}> Šis ID nav derīgs. Lūdzu, ierakstiet {2} spēlē un mēģiniet vēlreiz!"
@@ -84,7 +85,7 @@
 	{
 		"#format"	"{1:s}"
 		"en"		"<@{1}> There is no client with this ID, ensure you are connected to the game server and check your ID again!"
-		"hu"		"<@{1}> Nincs kliens ezzel az azonosítóval, ellenőrizze, hogy csatlakozik-e a játék szerveréhez, és ellenőrizze újra az azonosítóját!"
+		"hu"		"<@{1}> Nem található kliens ezzel az azonosítóval. Kérlek csatlakozz a szerverre és próbáld újra!"
 		"fr"		"<@{1}> Il n'y a pas de client avec cet identifiant, assurez-vous d'être connecté au serveur de jeu et vérifiez à nouveau votre identifiant!"
 		"nl"		"<@{1}> Er is geen client met deze ID, zorg ervoor dat je verbonden bent met de spelserver en controleer je ID opnieuw!"
 		"lv"		"<@{1}> Nav neviena klienta ar šo ID, pārliecinieties, vai esat izveidojis savienojumu ar spēles serveri, un pārbaudiet savu ID vēlreiz!"
@@ -96,7 +97,7 @@
 	{
 		"#format"	"{1:s},{2:s}"
 		"en"		"<@{1}> This channel is being used for account linking!\nUsage: {2} <verification code>"
-		"hu"		"<@{1}> Ezt a szobát a fiókok megerősítésére használjuk!\nHasználat: {2} <azonosító>"
+		"hu"		"<@{1}> Ezt a szobát a fiókok megerősítésére használjuk!\nHasználat: {2} <azonosítód>"
 		"fr"		"<@{1}> Ce canal est utilisé pour la liason de compte!\nUtilisation: {2} <code de vérification>"
 		"nl"		"<@{1}> Dit kanaal wordt gebruikt om je account te koppelen!\nGebruik: {2} <verificatie code>"
 		"lv"		"<@{1}> Šis kanāls tiek lietots profilu savienošanas!\nPielietojums: {2} <verifikācijas kods>"
@@ -108,7 +109,7 @@
 	{
 		"#format"	"{1:s},{2:s}"
 		"en"		"You have verified your account. ({green}{1}#{2}{default})"
-		"hu"		"Megerősítetted a fiókodat! ({green}{1}#{2}{default})"
+		"hu"		"Sikeresen megerősítetted a fiókodat! ({green}{1}#{2}{default})"
 		"fr"		"Vous avez validé votre compte. ({green}{1}#{2}{default})"
 		"nl"		"Je hebt je account geverifieerd. ({green}{1}#{2}{default})"
 		"lv"		"Jūs verificējāt savu profilu. ({green}{1}#{2}{default})"
@@ -120,7 +121,7 @@
 	{
 		"#format"	"{1:s}"
 		"en"		"<@{1}> You've linked your account! ✅"
-		"hu"		"<@{1}> Sikeresen megerősítetted a fiókodat! ✅ \nmostmár visszamehetsz a szerverre^-^"
+		"hu"		"<@{1}> Sikeresen megerősítetted a fiókodat! ✅"
 		"fr"		"<@{1}> Vous avez lié votre compte! ✅"
 		"nl"		"<@{1}> Je hebt je account gekoppeld! ✅"
 		"lv"		"<@{1}> Tu savienoji savu profilu! ✅"
@@ -143,6 +144,7 @@
 	"ChatRelayPrivateToAdmins"
 	{
 		"en"		"Private To Admins: "
+		"hu"		"Üzenet Adminoknak: "
 		"nl"		"Prive naar Admins: "
 		"lv"		"Privāti adminiem: "
 		"ru"		"Приват для администраторов: "
@@ -152,6 +154,7 @@
 	"ChatRelayAllChat"
 	{
 		"en"		"All Chat: "
+		"hu"		"Mindenkinek: "
 		"nl"		"Openbare Chat: "
 		"lv"		"Visu Čats: "
 		"ru"		"весь чат: "
@@ -185,22 +188,26 @@
 	"LinkConnect"
 	{
 		"en"		"Join our discord server:"
+		"hu"		"Csatlakozz a Discord szerverünkhöz:"
 	}
 
 	"LinkUsage"
 	{
 		"#format"	"{1:s},{2:s},{3:s}"
 		"en"		"Type {lime}{1} {2} {default}in {orange}#{3}"
+		"hu"		"Használd a {lime}{1} {2} {default}parancsot a {orange}#{3} {default}szobában"
 	}
 	
 	"CopyPasteFromConsole"
 	{
 		"en"		"You can also {lime}copy-paste{default} from {orange}console{default} :)"
+		"hu"		"Ki is {lime}másolhatod {default}a {orange}konzolból{default} :)"
 	}
 
 	"CallAdminReportHandledTitle"
 	{
 		"en"		"CallAdmin Report is being handled!"
+		"hu"		"Egy jelentést éppen kezelnek!"
 		"nl"		"De CallAdmin Report wordt behandelt!"
 		"lv"		"CallAdmin Ziņojums tiek izskatīts!"
 		"ru"		"CallAdmin Репорт обрабатывается!"
@@ -210,6 +217,7 @@
 	"CallAdminReportHandlerName"
 	{
 		"en"		"Handler Name:"
+		"hu"		"Admin:"
 		"nl"		"Naam van de Handelaar:"
 		"lv"		"Ziņu izskatījā:"
 		"ru"		"Имя обработчика:"
@@ -219,6 +227,7 @@
 	"CallAdminReportIDField"
 	{
 		"en"		"Report ID:"
+		"hu"		"Jelentés azonosító:"
 		"nl"		"Report ID:"
 		"lv"		"Ziņojuma ID:"
 		"ru"		"Репорт ID:"
@@ -229,6 +238,7 @@
 	{
 		"#format"	"{1:s}"
 		"en"		"Server: {1}"
+		"hu"		"Szerver: {1}"
 		"nl"		"Server: {1}"
 		"lv"		"Server: {1}"
 		"ru"		"Сервер: {1}"
@@ -238,6 +248,7 @@
 	"CallAdminReportTitle"
 	{
 		"en"		"New CallAdmin Report!"
+		"hu"		"Új jelentés érkezett!"
 		"lv"		"Jauns CallAdmin Ziņojums!"
 		"nl"		"Nieuwe CallAdmin Report!"
 		"ru"		"Новый CallAdmin Репорт!"
@@ -247,6 +258,7 @@
 	"CONSOLE"
 	{
 		"en"		"CONSOLE"
+		"hu"		"KONZOL"
 		"nl"		"CONSOLE"
 		"lv"		"CONSOLE"
 		"ru"		"CONSOLE"
@@ -256,6 +268,7 @@
 	"SERVER"
 	{
 		"en"		"SERVER"
+		"hu"		"SZERVER"
 		"nl"		"SERVER"
 		"lv"		"SERVER"
 		"ru"		"SERVER"
@@ -265,6 +278,7 @@
 	"ReporterField"
 	{
 		"en"		"Reporter:"
+		"hu"		"Jelentő:"
 		"nl"		"Raporteerder:"
 		"lv"		"Ziņotājs:"
 		"ru"		"Репортер:"
@@ -274,6 +288,7 @@
 	"TargetField"
 	{
 		"en"		"Target:"
+		"hu"		"Jelentett:"
 		"lv"		"Ziņo par:"
 		"nl"		"Doel:"
 		"ru"		"Цель:"
@@ -283,6 +298,7 @@
 	"ReasonField"
 	{
 		"en"		"Reason:"
+		"hu"		"Indok:"
 		"nl"		"Reden:"
 		"lv"		"Iemesls:"
 		"ru"		"Причина:" 
@@ -292,6 +308,7 @@
 	"BugReportTitle"
 	{
 		"en"		"New Bug Report!"
+		"hu"		"Egy új hibajelentés érkezett!"
 		"nl"		"Nieuwe Fout Gerapporteerd!"
 		"lv"		"Jauns kļūdas ziņojums!"
 		"ru"		"Новая  Буг Репорт!"
@@ -301,6 +318,7 @@
 	"MapField"
 	{
 		"en"		"Map:"
+		"hu"		"Pálya:"
 		"nl"		"Map:"
 		"lv"		"Mape:"
 		"ru"		"Карта:"
@@ -310,7 +328,7 @@
 	"NoReasonSpecified"
 	{
 		"en"		"No reason specified."
-		"hu"		"Nincs indok megadva"
+		"hu"		"Nincs indok megadva."
 		"nl"		"Geen reden gespecificeerd."
 		"lv"		"iemesls nav norādīts"
 		"ru"		"Причина не указана."
@@ -320,6 +338,7 @@
 	"SourceBansTitle"
 	{
 		"en"		"New Player Server Banned!"
+		"hu"		"Új Játékos Kitiltás!"
 		"lv"		"Jauns spēlētājs ir saņēmis banu!"
 		"nl"		"Nieuwe Speler Server Geband!"
 		"ru"		"Новый игрок Сервер Banned!"
@@ -339,7 +358,7 @@
 	"PlayerField"
 	{
 		"en"		"PLAYER:"
-		"hu"		"PLAYER:"
+		"hu"		"JÁTÉKOS:"
 		"fr"		"PLAYER:"
 		"nl"		"SPELER:"
 		"lv"		"PLAYER:"
@@ -372,6 +391,7 @@
 	"MINUTES"
 	{
 		"en"		"minutes"
+		"hu"		"perc"
 		"fr"		"minutes"
 		"nl"		"minuten"
 		"lv"		"minūtes"
@@ -404,6 +424,7 @@
 	"SourceBansReportTitle"
 	{
 		"en"		"New Report!"
+		"hu"		"Új jelentés!"
 		"nl"		"Nieuwe Report!"
 		"lv"		"Jauns Ziņojums!"
 		"ru"		"Новый Репорт!"
@@ -413,6 +434,7 @@
 	"SourceCommsTitle"
 	{
 		"en"		"New Player Comm-Banned!"
+		"hu"		"Új Játékos Némítás!"
 		"nl"		"Nieuwe Speler Comm-Banned!"
 		"lv"		"New Player Comm-Banned!"
 		"ru"		"Новый игрок Comm-Banned!"
@@ -422,6 +444,7 @@
 	"MUTE"
 	{
 		"en"		"MUTE"
+		"hu"		"HANG-TILTÁS"
 		"nl"		"MUTE"
 		"lv"		"MUTE"
 		"ru"		"МУТЕ"
@@ -431,6 +454,7 @@
 	"GAG"
 	{
 		"en"		"GAG"
+		"hu"		"ÍRÁS-TILTÁS"
 		"nl"		"GAG"
 		"lv"		"GAG"
 		"ru"		"ГАГ"
@@ -440,6 +464,7 @@
 	"SILENCE"
 	{
 		"en"		"SILENCE"
+		"hu"		"TELJES NÉMÍTÁS"
 		"nl"		"SILENCE"
 		"lv"		"SILENCE"
 		"ru"		"МОЛЧАНИЕ"
