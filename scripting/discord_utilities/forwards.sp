@@ -11,6 +11,7 @@ public void OnLibraryAdded(const char[] szLibrary)
 	else if(StrEqual(szLibrary, "shavit")) g_bShavit = true;
 	else if(StrEqual(szLibrary, "bugreport")) g_bBugReport = true;
 	else if(StrEqual(szLibrary, "basecomm")) g_bBaseComm = true;
+	else if(StrEqual(szLibrary, "materialadmin")) g_bMaterialAdmin = true;
 }
 
 public void OnLibraryRemoved(const char[] szLibrary)
@@ -21,6 +22,7 @@ public void OnLibraryRemoved(const char[] szLibrary)
 	else if(StrEqual(szLibrary, "shavit")) g_bShavit = false;
 	else if(StrEqual(szLibrary, "bugreport")) g_bBugReport = false;
 	else if(StrEqual(szLibrary, "basecomm")) g_bBaseComm = false;
+	else if(StrEqual(szLibrary, "materialadmin")) g_bMaterialAdmin = false;
 }
 
 public void OnAllPluginsLoaded()
@@ -36,6 +38,7 @@ public void OnAllPluginsLoaded()
 	g_bShavit = LibraryExists("shavit");
 	g_bBugReport = LibraryExists("bugreport");
 	g_bBaseComm = LibraryExists("basecomm");
+	g_bMaterialAdmin = LibraryExists("materialadmin");
 }
 
 public void OnConfigsExecuted()
