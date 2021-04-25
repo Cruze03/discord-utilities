@@ -25,12 +25,6 @@ methodmap DiscordBot < StringMap {
 	 * Retrieves a list of Channels the bot is listening to for messages
 	 */
 	public Handle GetListeningChannels() {
-		/*
-		if(json_typeof(this) == JSON_NULL)
-		{
-			return null;
-		}
-		*/
 		return json_object_get(this, "listeningChannels");
 	}
 	
@@ -102,8 +96,8 @@ methodmap DiscordBot < StringMap {
 			if(StrEqual(id, tempID, false)) {
 				json_array_remove(channels, i);
 				i--;
-				delete tempChannel;
 			}
+			delete tempChannel;
 		}
 		delete channels;
 	}
@@ -135,8 +129,8 @@ methodmap DiscordBot < StringMap {
 			if(StrEqual(id, tempID, false)) {
 				json_array_remove(channels, i);
 				i--;
-				delete tempChannel;
 			}
+			delete tempChannel;
 		}
 		delete channels;
 	}
@@ -174,6 +168,7 @@ methodmap DiscordBot < StringMap {
 		}
 		
 		json_array_append(channels, Channel);
+		delete channels;
 		
 		//Handle fForward = CreateForward(ET_Ignore, Param_Cell, Param_Cell, Param_String, Param_String, Param_String, Param_String, Param_String, Param_Cell);
 		//AddToForward(fForward, GetMyHandle(), callback);
