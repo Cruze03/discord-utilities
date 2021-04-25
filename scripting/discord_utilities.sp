@@ -13,6 +13,7 @@
 #include <multicolors>
 #include <bugreport>
 #include <basecomm>
+#include <materialadmin>
 #define REQUIRE_PLUGIN
 
 #include "discord_utilities/globals.sp"
