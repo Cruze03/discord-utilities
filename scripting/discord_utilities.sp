@@ -12,6 +12,7 @@
 #include <shavit>
 #include <multicolors>
 #include <bugreport>
+#include <basecomm>
 #define REQUIRE_PLUGIN
 
 #include "discord_utilities/globals.sp"
