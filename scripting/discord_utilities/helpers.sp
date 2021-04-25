@@ -440,21 +440,21 @@ void CreateCvars()
 	g_cBugReport_Content = AutoExecConfig_CreateConVar("sm_du_bugreport_content", "", "Content for embed message of bugreport. Blank to disable.");
 	g_cBugReport_FooterIcon = AutoExecConfig_CreateConVar("sm_du_bugreport_footericon", "", "Link to footer icon for bugreport. Blank for no footer icon.");
 
-	g_cSourceBans_Webhook = AutoExecConfig_CreateConVar("sm_du_sourcebans_webhook", "", "Webhook for sourcebans. Blank to disable.", FCVAR_PROTECTED);
-	g_cSourceBans_BotName = AutoExecConfig_CreateConVar("sm_du_sourcebans_botname", "Discord Utilities", "BotName for sourcebans. Blank to use webhook name.");
-	g_cSourceBans_BotAvatar = AutoExecConfig_CreateConVar("sm_du_sourcebans_avatar", "", "Avatar link for sourcebans bot. Blank to use webhook avatar.");
-	g_cSourceBans_Color = AutoExecConfig_CreateConVar("sm_du_sourcebans_color", "#0E40E6", "Color for embed message of sourcebans.");
-	g_cSourceBans_PermaColor = AutoExecConfig_CreateConVar("sm_du_sourcebans_perma_color", "#f00000", "Color for embed message of sourcebans when permanent banned.");
-	g_cSourceBans_Content = AutoExecConfig_CreateConVar("sm_du_sourcebans_content", "", "Content for embed message of sourcebans. Blank to disable.");
-	g_cSourceBans_FooterIcon = AutoExecConfig_CreateConVar("sm_du_sourcebans_footericon", "", "Link to footer icon for sourcebans. Blank for no footer icon.");
+	g_cSourceBans_Webhook = AutoExecConfig_CreateConVar("sm_du_sourcebans_webhook", "", "Webhook for Sourcebans or Sourcebans Material Admin. Blank to disable.", FCVAR_PROTECTED);
+	g_cSourceBans_BotName = AutoExecConfig_CreateConVar("sm_du_sourcebans_botname", "Discord Utilities", "BotName for Sourcebans or Sourcebans Material Admin. Blank to use webhook name.");
+	g_cSourceBans_BotAvatar = AutoExecConfig_CreateConVar("sm_du_sourcebans_avatar", "", "Avatar link for Sourcebans or Sourcebans Material Admin bot. Blank to use webhook avatar.");
+	g_cSourceBans_Color = AutoExecConfig_CreateConVar("sm_du_sourcebans_color", "#0E40E6", "Color for embed message of Sourcebans or Sourcebans Material Admin.");
+	g_cSourceBans_PermaColor = AutoExecConfig_CreateConVar("sm_du_sourcebans_perma_color", "#f00000", "Color for embed message of Sourcebans or Sourcebans Material Admin when permanent banned.");
+	g_cSourceBans_Content = AutoExecConfig_CreateConVar("sm_du_sourcebans_content", "", "Content for embed message of Sourcebans or Sourcebans Material Admin. Blank to disable.");
+	g_cSourceBans_FooterIcon = AutoExecConfig_CreateConVar("sm_du_sourcebans_footericon", "", "Link to footer icon for Sourcebans or Sourcebans Material Admin. Blank for no footer icon.");
 
-	g_cSourceComms_Webhook = AutoExecConfig_CreateConVar("sm_du_sourcecomms_webhook", "", "Webhook for sourcecomms. Blank to disable.", FCVAR_PROTECTED);
-	g_cSourceComms_BotName = AutoExecConfig_CreateConVar("sm_du_sourcecomms_botname", "Discord Utilities", "BotName for sourcecomms. Blank to use webhook name.");
-	g_cSourceComms_BotAvatar = AutoExecConfig_CreateConVar("sm_du_sourcecomms_avatar", "", "Avatar link for sourcecomms bot. Blank to use webhook avatar.");
-	g_cSourceComms_Color = AutoExecConfig_CreateConVar("sm_du_sourcecomms_color", "#FF69B4", "Color for embed message of sourcecomms.");
-	g_cSourceComms_PermaColor = AutoExecConfig_CreateConVar("sm_du_sourcecomms_perma_color", "#f00000", "Color for embed message of sourcecomms when permanent banned.");
-	g_cSourceComms_Content = AutoExecConfig_CreateConVar("sm_du_sourcecomms_content", "", "Content for embed message of sourcecomms. Blank to disable.");
-	g_cSourceComms_FooterIcon = AutoExecConfig_CreateConVar("sm_du_sourcecomms_footericon", "", "Link to footer icon for sourcecomms. Blank for no footer icon.");
+	g_cSourceComms_Webhook = AutoExecConfig_CreateConVar("sm_du_sourcecomms_webhook", "", "Webhook for Sourcecomms or Sourcecomms Material Admin. Blank to disable.", FCVAR_PROTECTED);
+	g_cSourceComms_BotName = AutoExecConfig_CreateConVar("sm_du_sourcecomms_botname", "Discord Utilities", "BotName for Sourcecomms or Sourcecomms Material Admin. Blank to use webhook name.");
+	g_cSourceComms_BotAvatar = AutoExecConfig_CreateConVar("sm_du_sourcecomms_avatar", "", "Avatar link for Sourcecomms or Sourcecomms Material Admin bot. Blank to use webhook avatar.");
+	g_cSourceComms_Color = AutoExecConfig_CreateConVar("sm_du_sourcecomms_color", "#FF69B4", "Color for embed message of Sourcecomms or Sourcecomms Material Admin.");
+	g_cSourceComms_PermaColor = AutoExecConfig_CreateConVar("sm_du_sourcecomms_perma_color", "#f00000", "Color for embed message of Sourcecomms or Sourcecomms Material Admin when permanent banned.");
+	g_cSourceComms_Content = AutoExecConfig_CreateConVar("sm_du_sourcecomms_content", "", "Content for embed message of Sourcecomms or Sourcecomms Material Admin. Blank to disable.");
+	g_cSourceComms_FooterIcon = AutoExecConfig_CreateConVar("sm_du_sourcecomms_footericon", "", "Link to footer icon for Sourcecomms or Sourcecomms Material Admin. Blank for no footer icon.");
 
 	g_cMap_Webhook = AutoExecConfig_CreateConVar("sm_du_map_webhook", "", "Webhook for map notification. Blank to disable.", FCVAR_PROTECTED);
 	g_cMap_BotName = AutoExecConfig_CreateConVar("sm_du_map_botname", "Discord Utilities", "BotName for map notification. Blank to use webhook name.");
@@ -516,21 +516,21 @@ void CreateCvars()
 	g_cBugReport_Content = CreateConVar("sm_du_bugreport_content", "", "Content for embed message of bugreport. Blank to disable.");
 	g_cBugReport_FooterIcon = CreateConVar("sm_du_bugreport_footericon", "", "Link to footer icon for bugreport. Blank for no footer icon.");
 
-	g_cSourceBans_Webhook = CreateConVar("sm_du_sourcebans_webhook", "", "Webhook for sourcebans. Blank to disable.", FCVAR_PROTECTED);
-	g_cSourceBans_BotName = CreateConVar("sm_du_sourcebans_botname", "Discord Utilities", "BotName for sourcebans. Blank to use webhook name.");
-	g_cSourceBans_BotAvatar = CreateConVar("sm_du_sourcebans_avatar", "", "Avatar link for sourcebans bot. Blank to use webhook avatar.");
-	g_cSourceBans_Color = CreateConVar("sm_du_sourcebans_color", "#0E40E6", "Color for embed message of sourcebans.");
-	g_cSourceBans_PermaColor = CreateConVar("sm_du_sourcebans_perma_color", "#f00000", "Color for embed message of sourcebans when permanent banned.");
-	g_cSourceBans_Content = CreateConVar("sm_du_sourcebans_content", "", "Content for embed message of sourcebans. Blank to disable.");
-	g_cSourceBans_FooterIcon = CreateConVar("sm_du_sourcebans_footericon", "", "Link to footer icon for sourcebans. Blank for no footer icon.");
+	g_cSourceBans_Webhook = CreateConVar("sm_du_sourcebans_webhook", "", "Webhook for Sourcebans or Sourcebans Material Admin. Blank to disable.", FCVAR_PROTECTED);
+	g_cSourceBans_BotName = CreateConVar("sm_du_sourcebans_botname", "Discord Utilities", "BotName for Sourcebans or Sourcebans Material Admin. Blank to use webhook name.");
+	g_cSourceBans_BotAvatar = CreateConVar("sm_du_sourcebans_avatar", "", "Avatar link for Sourcebans or Sourcebans Material Admin bot. Blank to use webhook avatar.");
+	g_cSourceBans_Color = CreateConVar("sm_du_sourcebans_color", "#0E40E6", "Color for embed message of Sourcebans or Sourcebans Material Admin.");
+	g_cSourceBans_PermaColor = CreateConVar("sm_du_sourcebans_perma_color", "#f00000", "Color for embed message of Sourcebans or Sourcebans Material Admin when permanent banned.");
+	g_cSourceBans_Content = CreateConVar("sm_du_sourcebans_content", "", "Content for embed message of Sourcebans or Sourcebans Material Admin. Blank to disable.");
+	g_cSourceBans_FooterIcon = CreateConVar("sm_du_sourcebans_footericon", "", "Link to footer icon for Sourcebans or Sourcebans Material Admin. Blank for no footer icon.");
 
-	g_cSourceComms_Webhook = CreateConVar("sm_du_sourcecomms_webhook", "", "Webhook for sourcecomms. Blank to disable.", FCVAR_PROTECTED);
-	g_cSourceComms_BotName = CreateConVar("sm_du_sourcecomms_botname", "Discord Utilities", "BotName for sourcecomms. Blank to use webhook name.");
-	g_cSourceComms_BotAvatar = CreateConVar("sm_du_sourcecomms_avatar", "", "Avatar link for sourcecomms bot. Blank to use webhook avatar.");
-	g_cSourceComms_Color = CreateConVar("sm_du_sourcecomms_color", "#FF69B4", "Color for embed message of sourcecomms.");
-	g_cSourceComms_PermaColor = CreateConVar("sm_du_sourcecomms_perma_color", "#f00000", "Color for embed message of sourcecomms when permanent banned.");
-	g_cSourceComms_Content = CreateConVar("sm_du_sourcecomms_content", "", "Content for embed message of sourcecomms. Blank to disable.");
-	g_cSourceComms_FooterIcon = CreateConVar("sm_du_sourcecomms_footericon", "", "Link to footer icon for sourcecomms. Blank for no footer icon.");
+	g_cSourceComms_Webhook = CreateConVar("sm_du_sourcecomms_webhook", "", "Webhook for Sourcecomms or Sourcecomms Material Admin. Blank to disable.", FCVAR_PROTECTED);
+	g_cSourceComms_BotName = CreateConVar("sm_du_sourcecomms_botname", "Discord Utilities", "BotName for Sourcecomms or Sourcecomms Material Admin. Blank to use webhook name.");
+	g_cSourceComms_BotAvatar = CreateConVar("sm_du_sourcecomms_avatar", "", "Avatar link for Sourcecomms or Sourcecomms Material Admin bot. Blank to use webhook avatar.");
+	g_cSourceComms_Color = CreateConVar("sm_du_sourcecomms_color", "#FF69B4", "Color for embed message of Sourcecomms or Sourcecomms Material Admin.");
+	g_cSourceComms_PermaColor = CreateConVar("sm_du_sourcecomms_perma_color", "#f00000", "Color for embed message of Sourcecomms or Sourcecomms Material Admin when permanent banned.");
+	g_cSourceComms_Content = CreateConVar("sm_du_sourcecomms_content", "", "Content for embed message of Sourcecomms or Sourcecomms Material Admin. Blank to disable.");
+	g_cSourceComms_FooterIcon = CreateConVar("sm_du_sourcecomms_footericon", "", "Link to footer icon for Sourcecomms or Sourcecomms Material Admin. Blank for no footer icon.");
 
 	g_cMap_Webhook = CreateConVar("sm_du_map_webhook", "", "Webhook for map notification. Blank to disable.", FCVAR_PROTECTED);
 	g_cMap_BotName = CreateConVar("sm_du_map_botname", "Discord Utilities", "BotName for map notification. Blank to use webhook name.");
@@ -784,7 +784,7 @@ public void APIWebResponse(const char[] sData, int client)
 
 	if (!kvResponse.ImportFromString(sData, "SteamAPIResponse"))
 	{
-		LogError("kvResponse.ImportFromString(\"SteamAPIResponse\") in APIWebResponse failed.");
+		LogError("kvResponse.ImportFromString(\"SteamAPIResponse\") in APIWebResponse failed. Try updating your steamworks extension.");
 
 		delete kvResponse;
 		return;
@@ -792,7 +792,7 @@ public void APIWebResponse(const char[] sData, int client)
 
 	if (!kvResponse.JumpToKey("players"))
 	{
-		LogError("kvResponse.JumpToKey(\"players\") in APIWebResponse failed.");
+		LogError("kvResponse.JumpToKey(\"players\") in APIWebResponse failed. Try updating your steamworks extension.");
 
 		delete kvResponse;
 		return;
@@ -800,7 +800,7 @@ public void APIWebResponse(const char[] sData, int client)
 
 	if (!kvResponse.GotoFirstSubKey())
 	{
-		LogError("kvResponse.GotoFirstSubKey() in APIWebResponse failed.");
+		LogError("kvResponse.GotoFirstSubKey() in APIWebResponse failed. Try updating your steamworks extension.");
 
 		delete kvResponse;
 		return;
