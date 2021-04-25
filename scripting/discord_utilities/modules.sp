@@ -791,6 +791,319 @@ public void SourceComms_OnBlockAdded(int admin, int target, int time, int commty
 	delete hook;
 }
 
+public void MAOnClientBanned(int admin, int target, char[] sIp, char[] sSteamID, char[] sName, int time, char[] reason)
+{
+	if(StrEqual(g_sSourceBans_Webhook, ""))
+	{
+		return;
+	}
+	if(!g_bMaterialAdmin)
+	{
+		return;
+	}
+	char clientName[MAX_NAME_LENGTH], clientAuth[32], clientAuth2[32];
+	char targetName[MAX_NAME_LENGTH], targetAuth[32], targetAuth2[32];
+	GetClientName(target, targetName, sizeof(targetName));
+	GetClientAuthId(target, AuthId_SteamID64, targetAuth, sizeof(targetAuth));
+	GetClientAuthId(target, AuthId_Steam2, targetAuth2, sizeof(targetAuth2));
+	Discord_EscapeString(targetName, sizeof(targetName));
+	
+	if(!admin)
+	{
+		Format(clientName, sizeof(clientName), "%T", "SERVER", LANG_SERVER);
+		Format(clientAuth, sizeof(clientAuth), "%T", "CONSOLE", LANG_SERVER);
+	}
+	else
+	{
+		GetClientAuthId(admin, AuthId_SteamID64, clientAuth, sizeof(clientAuth));
+		GetClientAuthId(admin, AuthId_Steam2, clientAuth2, sizeof(clientAuth2));
+		GetClientName(admin, clientName, sizeof(clientName));
+		Discord_EscapeString(clientName, sizeof(clientName));
+	}
+	
+	char sReason[64];
+	
+	strcopy(sReason, sizeof(sReason), reason);
+
+	if(strlen(sReason) < 2)
+	{
+		Format(sReason, sizeof(sReason), "%T", "NoReasonSpecified", LANG_SERVER);
+	}
+	Discord_EscapeString(sReason, sizeof(sReason));
+	
+	DiscordWebHook hook = new DiscordWebHook( g_sSourceBans_Webhook );
+	hook.SlackMode = true;
+	if(g_sSourceBans_BotName[0])
+	{
+		hook.SetUsername( g_sSourceBans_BotName );
+	}
+	
+	if(g_sSourceBans_BotAvatar[0])
+	{
+		hook.SetAvatar( g_sSourceBans_BotAvatar );
+	}
+	
+	MessageEmbed embed = new MessageEmbed();
+	
+	char buffer[512], trans[64];
+	Format( trans, sizeof( trans ), "%T", "SourceBansTitle", LANG_SERVER);
+	embed.SetTitle( trans );
+	
+	if(admin)
+	{
+		Format( buffer, sizeof( buffer ), "[%s](http://www.steamcommunity.com/profiles/%s) (%s)", clientName, clientAuth, clientAuth2 );
+	}
+	else
+	{
+		Format( buffer, sizeof( buffer ), "%s", clientName );
+		
+	}
+	Format( trans, sizeof( trans ), "%T", "AdminField", LANG_SERVER);
+	embed.AddField( trans, buffer, true );
+	
+	Format( trans, sizeof( trans ), "%T", "PlayerField", LANG_SERVER);
+	Format( buffer, sizeof( buffer ), "[%s](http://www.steamcommunity.com/profiles/%s) (%s)", targetName, targetAuth, targetAuth2 );
+	embed.AddField( trans, buffer, true	);
+	
+	char sTime[32];
+	IntToString(time, sTime, sizeof(sTime));
+	if(time < 0)
+	{
+		Format(buffer, sizeof( buffer ), "%T", "TEMPORARY", LANG_SERVER);
+		if(g_sSourceBans_Color[0])
+		{
+			embed.SetColor(g_sSourceBans_Color);
+		}
+		else
+		{
+			LogError("[Discord-Utilities] Sourcebans is using default color as you've set Sourcebans color to blank.");
+			embed.SetColor(DEFAULT_COLOR);
+		}
+	}
+	else if(time > 0)
+	{
+		char sMinute[16], sMinutes[16];
+		Format(sMinute, sizeof(sMinute), "%T", "MINUTE", LANG_SERVER);
+		Format(sMinutes, sizeof(sMinutes), "%T", "MINUTES", LANG_SERVER);
+		Format( buffer, sizeof( buffer ), "%d %s", time, time == 1 ? sMinute:sMinutes);
+		if(g_sSourceBans_Color[0])
+		{
+			embed.SetColor(g_sSourceBans_Color);
+		}
+		else
+		{
+			LogError("[Discord-Utilities] Sourcebans is using default color as you've set Sourcebans color to blank.");
+			embed.SetColor(DEFAULT_COLOR);
+		}
+	}
+	else
+	{
+		Format(buffer, sizeof( buffer ), "%T", "PERMANENT", LANG_SERVER);
+		if(g_sSourceBans_PermaColor[0])
+		{
+			embed.SetColor(g_sSourceBans_PermaColor);
+		}
+		else
+		{
+			LogError("[Discord-Utilities] Sourcebans permaban is using default color as you've set Sourcebans perma color to blank.");
+			embed.SetColor(DEFAULT_COLOR);
+		}
+	}
+	Format( trans, sizeof( trans ), "%T", "LengthField", LANG_SERVER);
+	embed.AddField( trans, buffer, true );
+	
+	Format( trans, sizeof( trans ), "%T", "ReasonField", LANG_SERVER);
+	embed.AddField( trans, sReason, true );
+	
+	Format( trans, sizeof( trans ), "%T", "DirectConnectField", LANG_SERVER);
+	Format( buffer, sizeof( buffer ), "steam://connect/%s", g_sServerIP );
+	embed.AddField( trans, buffer, true );
+	
+	if(g_sSourceBans_FooterIcon[0])
+	{
+		embed.SetFooterIcon( g_sSourceBans_FooterIcon );
+	}
+	
+	Format( buffer, sizeof( buffer ), "%T", "ServerField", LANG_SERVER, g_sServerName );
+	embed.SetFooter( buffer );
+	
+	if(g_sSourceBans_Content[0])
+	{
+		hook.SetContent(g_sSourceBans_Content);
+	}
+	
+	hook.Embed( embed );
+	hook.Send();
+	delete hook;
+}
+
+public void MAOnClientMuted(int admin, int target, char[] sIp, char[] sSteamID, char[] sName, int commtype, int time, char[] reason)
+{
+	if(StrEqual(g_sSourceComms_Webhook, ""))
+	{
+		return;
+	}
+	if(!g_bMaterialAdmin)
+	{
+		return;
+	}
+	if(commtype == 0)
+	{
+		return;
+	}
+	char clientName[MAX_NAME_LENGTH], clientAuth[32], clientAuth2[32];
+	char targetName[MAX_NAME_LENGTH], targetAuth[32], targetAuth2[32];
+	GetClientName(target, targetName, sizeof(targetName));
+	GetClientAuthId(target, AuthId_SteamID64, targetAuth, sizeof(targetAuth));
+	GetClientAuthId(target, AuthId_Steam2, targetAuth2, sizeof(targetAuth2));
+	Discord_EscapeString(targetName, sizeof(targetName));
+	
+	if(!admin)
+	{
+		Format(clientName, sizeof(clientName), "%T", "SERVER", LANG_SERVER);
+		Format(clientAuth, sizeof(clientAuth), "%T", "CONSOLE", LANG_SERVER);
+	}
+	else
+	{
+		GetClientAuthId(admin, AuthId_SteamID64, clientAuth, sizeof(clientAuth));
+		GetClientAuthId(admin, AuthId_Steam2, clientAuth2, sizeof(clientAuth2));
+		GetClientName(admin, clientName, sizeof(clientName));
+		Discord_EscapeString(clientName, sizeof(clientName));
+	}
+	
+	char sReason[64];
+	
+	strcopy(sReason, sizeof(sReason), reason);
+
+	if(strlen(sReason) < 2)
+	{
+		Format(sReason, sizeof(sReason), "%T", "NoReasonSpecified", LANG_SERVER);
+	}
+	Discord_EscapeString(sReason, sizeof(sReason));
+	
+	DiscordWebHook hook = new DiscordWebHook( g_sSourceComms_Webhook );
+	hook.SlackMode = true;
+	if(g_sSourceComms_BotName[0])
+	{
+		hook.SetUsername( g_sSourceComms_BotName );
+	}
+	
+	if(g_sSourceComms_BotAvatar[0])
+	{
+		hook.SetAvatar( g_sSourceComms_BotAvatar );
+	}
+	
+	MessageEmbed embed = new MessageEmbed();
+	
+	char buffer[512], trans[64];
+	Format( trans, sizeof( trans ), "%T", "SourceCommsTitle", LANG_SERVER);
+	embed.SetTitle( trans );
+	
+	if(!admin)
+	{
+		Format( buffer, sizeof( buffer ), "[%s](http://www.steamcommunity.com/profiles/%s) (%s)", clientName, clientAuth, clientAuth2 );
+	}
+	else
+	{
+		Format( buffer, sizeof( buffer ), "%s", clientName );
+		
+	}
+	Format( trans, sizeof( trans ), "%T", "AdminField", LANG_SERVER);
+	embed.AddField( trans, buffer, true );
+	
+	Format( trans, sizeof( trans ), "%T", "PlayerField", LANG_SERVER);
+	Format( buffer, sizeof( buffer ), "[%s](http://www.steamcommunity.com/profiles/%s) (%s)", targetName, targetAuth, targetAuth2 );
+	embed.AddField( trans, buffer, true	);
+	
+	if(time < 0)
+	{
+		Format(buffer, sizeof( buffer ), "%T", "TEMPORARY", LANG_SERVER);
+		if(StrContains(g_sSourceComms_Color[0], "#") != -1)
+		{
+			embed.SetColor(g_sSourceComms_Color);
+		}
+		else
+		{
+			LogError("[Discord-Utilities] Sourcecomms is using default color as you've set invalid Sourcecomms color.");
+			embed.SetColor(DEFAULT_COLOR);
+		}
+	}
+	else if(time > 0)
+	{
+		char sMinute[16], sMinutes[16];
+		Format(sMinute, sizeof(sMinute), "%T", "MINUTE", LANG_SERVER);
+		Format(sMinutes, sizeof(sMinutes), "%T", "MINUTES", LANG_SERVER);
+		Format( buffer, sizeof( buffer ), "%d %s", time, time == 1 ? sMinute:sMinutes);
+		if(StrContains(g_sSourceComms_Color[0], "#") != -1)
+		{
+			embed.SetColor(g_sSourceComms_Color);
+		}
+		else
+		{
+			LogError("[Discord-Utilities] Sourcecomms is using default color as you've set invalid Sourcecomms color.");
+			embed.SetColor(DEFAULT_COLOR);
+		}
+	}
+	else
+	{
+		Format(buffer, sizeof( buffer ), "%T", "PERMANENT", LANG_SERVER);
+		if(StrContains(g_sSourceComms_PermaColor[0], "#") != -1)
+		{
+			embed.SetColor(g_sSourceComms_PermaColor);
+		}
+		else
+		{
+			LogError("[Discord-Utilities] Sourcecomms permaban is using default color as you've set invalid Sourcecomms perma color.");
+			embed.SetColor(DEFAULT_COLOR);
+		}
+	}
+	
+	Format( trans, sizeof( trans ), "%T", "LengthField", LANG_SERVER);
+	embed.AddField( trans, buffer, true );
+	
+	switch(commtype)
+	{
+		case 1:
+		{
+			Format(buffer, sizeof( buffer ), "%T", "MUTE", LANG_SERVER);
+		}
+		case 2:
+		{
+			Format(buffer, sizeof( buffer ), "%T", "GAG", LANG_SERVER);
+		}
+		case 3:
+		{
+			Format(buffer, sizeof( buffer ), "%T", "SILENCE", LANG_SERVER);
+		}
+	}
+	Format( trans, sizeof( trans ), "%T", "TypeField", LANG_SERVER);
+	embed.AddField( trans, buffer, true );
+	
+	Format( trans, sizeof( trans ), "%T", "ReasonField", LANG_SERVER);
+	embed.AddField( trans, sReason, true );
+	
+	Format( trans, sizeof( trans ), "%T", "DirectConnectField", LANG_SERVER);
+	Format( buffer, sizeof( buffer ), "steam://connect/%s", g_sServerIP );
+	embed.AddField( trans, buffer, true );
+	
+	if(g_sSourceComms_FooterIcon[0])
+	{
+		embed.SetFooterIcon( g_sSourceComms_FooterIcon );
+	}
+	
+	Format( buffer, sizeof( buffer ), "%T", "ServerField", LANG_SERVER, g_sServerName );
+	embed.SetFooter( buffer );
+	
+	if(g_sSourceComms_Content[0])
+	{
+		hook.SetContent(g_sSourceComms_Content);
+	}
+	
+	hook.Embed( embed );
+	hook.Send();
+	delete hook;
+}
+
 public void AdminChatRelayReceived(DiscordBot bawt, DiscordChannel channel, DiscordMessage discordmessage)
 {
 	if((g_sAdminChatRelay_Mode[0] == '0' && g_sAdminChatRelay_Mode[1] == '\0') || (g_sAdminChatRelay_Mode[0] != '\0' && g_sAdminChatRelay_Mode[0] != '0' && g_sAdminChatRelay_Mode[1] != '\0'))
