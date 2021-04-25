@@ -10,6 +10,7 @@ public void OnLibraryAdded(const char[] szLibrary)
 	else if(StrEqual(szLibrary, "calladmin")) g_bCallAdmin = true;
 	else if(StrEqual(szLibrary, "shavit")) g_bShavit = true;
 	else if(StrEqual(szLibrary, "bugreport")) g_bBugReport = true;
+	else if(StrEqual(szLibrary, "basecomm")) g_bBaseComm = true;
 }
 
 public void OnLibraryRemoved(const char[] szLibrary)
@@ -19,6 +20,7 @@ public void OnLibraryRemoved(const char[] szLibrary)
 	else if(StrEqual(szLibrary, "calladmin")) g_bCallAdmin = false;
 	else if(StrEqual(szLibrary, "shavit")) g_bShavit = false;
 	else if(StrEqual(szLibrary, "bugreport")) g_bBugReport = false;
+	else if(StrEqual(szLibrary, "basecomm")) g_bBaseComm = false;
 }
 
 public void OnAllPluginsLoaded()
@@ -33,6 +35,7 @@ public void OnAllPluginsLoaded()
 	g_bCallAdmin = LibraryExists("calladmin");
 	g_bShavit = LibraryExists("shavit");
 	g_bBugReport = LibraryExists("bugreport");
+	g_bBaseComm = LibraryExists("basecomm");
 }
 
 public void OnConfigsExecuted()
@@ -112,6 +115,10 @@ public Action Command_AdminChat(int client, const char[] command, int argc)
 	{
 		return Plugin_Continue;
 	}
+	if(g_bBaseComm && BaseComm_IsClientGagged(client))
+	{
+		return Plugin_Continue;
+	}
 	if(1 <= client <= MaxClients)
 	{
 		char sMessage[256];
@@ -124,6 +131,10 @@ public Action Command_AdminChat(int client, const char[] command, int argc)
 public Action OnClientSayCommand(int client, const char[] command, const char[] sArgs)
 {
 	if(StrEqual(g_sChatRelay_Webhook, "") && StrEqual(g_sAdminChatRelay_Webhook, ""))
+	{
+		return Plugin_Continue;
+	}
+	if(g_bBaseComm && BaseComm_IsClientGagged(client))
 	{
 		return Plugin_Continue;
 	}
