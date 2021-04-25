@@ -1,4 +1,4 @@
-#define PLUGIN_VERSION "2.7-BETA"
+#define PLUGIN_VERSION "2.8-BETA"
 
 #define PLUGIN_NAME "Discord Utilities"
 #define PLUGIN_AUTHOR "Cruze"
@@ -44,7 +44,7 @@ char g_sServerName[128];
 
 ArrayList g_aCallAdmin_ReportedList;
 
-bool g_bCallAdmin, g_bSourceBans, g_bSourceComms, g_bShavit, g_bBugReport, g_bBaseComm;
+bool g_bCallAdmin, g_bSourceBans, g_bSourceComms, g_bShavit, g_bBugReport, g_bBaseComm, g_bMaterialAdmin;
 
 char g_sLastMapPath[PLATFORM_MAX_PATH];
 
