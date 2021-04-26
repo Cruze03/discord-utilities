@@ -36,51 +36,59 @@
 	"ChatRelayFormat"
 	{
 		"#format"	"{1:s},{2:s},{3:s}"		//1 = Username | 2 = Discriminator | 3 = Message
-		"en"		"{purple}{1}#{2}{default}: {3}"
+		"en"		"{orange}{1}#{2}{default}: {3}"
+	}
+	
+	"AdminChatRelayFormat"
+	{
+		"#format"	"{1:s},{2:s},{3:s}"		//1 = Username | 2 = Discriminator | 3 = Message
+		"en"		"Admin: {orange}{1}#{2}{default}: {3}"
+		"ru"		"Админ: {orange}{1}#{2}{default}: {3}"
 	}
 	
 	"TryAgainLater"
 	{
 		"en"		"Please wait. Your member status hasn't been fetched yet."
         "ru"		"Пожалуйста, подождите. Ваш статус участника ещё не получен."
+		"hu"		"Kérlek várj egy picit! A tagságod még lekérés alatt..."
 	}
 	
 	"DiscordRevoked"
 	{
 		"en"		"You are no longer in our discord server therefore your discord member status has been revoked!"
-		"ro"        "Nu mai faci parte din server-ul nostru de discord, rolul tău de membru a fost sters!"
 		"ru"		"Вы больше не находитесь на нашем сервере Discord, поэтому ваш статус участника Discord был отменён!"
+		"ro"        "Numai faci parte din server-ul nostru de discord, rolul tău de membru a fost sters!"
 	}
 	
 	"DiscordMissingParameters"
 	{
 		"#format"	"{1:s}"
 		"en"		"<@{1}> You need to provide an ID for this command!"
-		"hu"		"<@{1}> Meg kell adnia egy azonosítót ehhez a parancshoz!"
+		"hu"		"<@{1}> Kérlek adj meg egy azonosítót a parancs használatához!"
 		"fr"		"<@{1}> Vous devez fournir un identifiant pour cette commande!"
 		"nl"		"<@{1}> U moet een ID opgeven voor deze opdracht!"
 		"lv"		"<@{1}> Jums ir jānorāda šīs komandas ID!"
 		"ru"		"<@{1}> Вам необходимо указать идентификатор для этой команды!"
-		"ro"		"<@{1}> Trebuie să furnizezi un ID pentru această comandă!"
+		"ro"		"<@{1}> Trebuie să furnizați un ID pentru această comandă!"
 	}
 
 	"DiscordInvalidID"
 	{
 		"#format"	"{1:s},{2:s}"
 		"en"		"<@{1}> This ID is not valid, please type {2} in-game and try again!"
-		"hu"		"<@{1}> Ez az azonosító nem érvényes, kérjük, írja be a {2} játékon belüli játékot, és próbálja újra!"
+		"hu"		"<@{1}> Az általad megadott azonosító nem létezik. Használd a {2} parancsot a szerveren és próbáld újra!"
 		"fr"		"<@{1}> Cet identifiant n'est pas valide, veuillez saisir {2} dans le jeu et réessayer!"
 		"nl"		"<@{1}> Deze ID is niet geldig. Typ {2} in de game en probeer het opnieuw!"
 		"lv"		"<@{1}> Šis ID nav derīgs. Lūdzu, ierakstiet {2} spēlē un mēģiniet vēlreiz!"
 		"ru"		"<@{1}> Этот идентификатор недействителен, введите в игре {2} и повторите попытку!"
-		"ro"		"<@{1}> Acest ID este invalid, te rugăm să tastezi {2} în joc să incerci din nou!"
+		"ro"		"<@{1}> Acest ID nu este valid, te rog sa tastezi {2} în joc să incerci din nou!"
 	}
 
 	"DiscordInvalid"
 	{
 		"#format"	"{1:s}"
 		"en"		"<@{1}> There is no client with this ID, ensure you are connected to the game server and check your ID again!"
-		"hu"		"<@{1}> Nincs kliens ezzel az azonosítóval, ellenőrizze, hogy csatlakozik-e a játék szerveréhez, és ellenőrizze újra az azonosítóját!"
+		"hu"		"<@{1}> Nem található kliens ezzel az azonosítóval. Kérlek csatlakozz a szerverre és próbáld újra!"
 		"fr"		"<@{1}> Il n'y a pas de client avec cet identifiant, assurez-vous d'être connecté au serveur de jeu et vérifiez à nouveau votre identifiant!"
 		"nl"		"<@{1}> Er is geen client met deze ID, zorg ervoor dat je verbonden bent met de spelserver en controleer je ID opnieuw!"
 		"lv"		"<@{1}> Nav neviena klienta ar šo ID, pārliecinieties, vai esat izveidojis savienojumu ar spēles serveri, un pārbaudiet savu ID vēlreiz!"
@@ -92,36 +100,36 @@
 	{
 		"#format"	"{1:s},{2:s}"
 		"en"		"<@{1}> This channel is being used for account linking!\nUsage: {2} <verification code>"
-		"hu"		"<@{1}> Ezt a szobát a fiókok megerősítésére használjuk!\nHasználat: {2} <azonosító>"
+		"hu"		"<@{1}> Ezt a szobát a fiókok megerősítésére használjuk!\nHasználat: {2} <azonosítód>"
 		"fr"		"<@{1}> Ce canal est utilisé pour la liason de compte!\nUtilisation: {2} <code de vérification>"
 		"nl"		"<@{1}> Dit kanaal wordt gebruikt om je account te koppelen!\nGebruik: {2} <verificatie code>"
 		"lv"		"<@{1}> Šis kanāls tiek lietots profilu savienošanas!\nPielietojums: {2} <verifikācijas kods>"
 		"ru"		"<@{1}> Этот канал используется для привязки аккаунта!\nИспользование: {2} <код подтверждения>"
-		"ro"		"<@{1}> Acest canal este folosit pentru a-ți verifica, contul!\nFolosește: {2} <cod de verificare>"
+		"ro"		"<@{1}> Acest canal este folosit pentru a-ți verifica contul!\nFolosește: {2} <cod de verificare>"
 	}
 	
 	"DiscordVerified"
 	{
 		"#format"	"{1:s},{2:s}"
 		"en"		"You have verified your account. ({green}{1}#{2}{default})"
-		"hu"		"Megerősítetted a fiókodat! ({green}{1}#{2}{default})"
+		"hu"		"Sikeresen megerősítetted a fiókodat! ({green}{1}#{2}{default})"
 		"fr"		"Vous avez validé votre compte. ({green}{1}#{2}{default})"
 		"nl"		"Je hebt je account geverifieerd. ({green}{1}#{2}{default})"
 		"lv"		"Jūs verificējāt savu profilu. ({green}{1}#{2}{default})"
 		"ru"		"Вы подтвердили свой аккаунт. ({green}{1}#{2}{default})"
-		"ro"		"Ți-ai verificat contul tău. ({green}{1}#{2}{default})"
+		"ro"		"Ti-a verificat contul tău. ({green}{1}#{2}{default})"
 	}
 	
 	"DiscordLinked"
 	{
 		"#format"	"{1:s}"
 		"en"		"<@{1}> You've linked your account! ✅"
-		"hu"		"<@{1}> Sikeresen megerősítetted a fiókodat! ✅ \nmostmár visszamehetsz a szerverre^-^"
+		"hu"		"<@{1}> Sikeresen megerősítetted a fiókodat! ✅"
 		"fr"		"<@{1}> Vous avez lié votre compte! ✅"
 		"nl"		"<@{1}> Je hebt je account gekoppeld! ✅"
 		"lv"		"<@{1}> Tu savienoji savu profilu! ✅"
 		"ru"		"<@{1}> Вы связали свой аккаунт! ✅"
-		"ro"		"<@{1}> Ți-ai asociat contul cu succes! ✅"
+		"ro"		"<@{1}> Ti-a asociat contul cu succes! ✅"
 	}
 	
 	"DiscordAlreadyLinked"
@@ -139,6 +147,7 @@
 	"ChatRelayPrivateToAdmins"
 	{
 		"en"		"Private To Admins: "
+		"hu"		"Üzenet Adminoknak: "
 		"nl"		"Prive naar Admins: "
 		"lv"		"Privāti adminiem: "
 		"ru"		"Частно для администраторов: "
@@ -148,6 +157,7 @@
 	"ChatRelayAllChat"
 	{
 		"en"		"All Chat: "
+		"hu"		"Mindenkinek: "
 		"nl"		"Openbare Chat: "
 		"lv"		"Visu Čats: "
 		"ru"		"весь чат: "
@@ -158,6 +168,12 @@
 	{
 		"#format"	"{1:s},{2:s},{3:s},{4:s}"		//1 = TimeStamp | 2 = ServerName | 3 = MapName | 4 = Message
 		"en"		"{1}`{2}|{3}` => {4}"
+	}
+	
+	"AdminChatFormat"
+	{
+		"#format"	"{1:s},{2:s},{3:s},{4:s}"		//1 = TimeStamp | 2 = ServerName | 3 = PrivateToAdmins/Blank | 4 = Message
+		"en"		"{1}`{2}` => {3}{4}"
 	}
 	
 	"LinkYourID"
@@ -174,49 +190,30 @@
 	
 	"LinkConnect"
 	{
-		"en"		"Connect to our discord server at:"
-		"hu"		"Csatlakozz discord szerverünkre:"
-		"fr"		"Connectez-vous à notre serveur de discord avec:"
-		"nl"		"Join onze Discord server via:"
-		"lv"		"Pievienojies mūsu discord serverim šeit:"
-		"ru"		"Подключитесь к нашему серверу в discord на:"
-		"ro"		"Conectează-te la server-ul nostru de discord:"
+		"en"		"Join our discord server:"
+		"hu"		"Csatlakozz a Discord szerverünkhöz:"
+		"ru"		"Присоединяйтесь к нашему discord серверу:"
 	}
 
 	"LinkUsage"
 	{
-		"#format"	"{1:s},{2:s}"
-		"en"		"Use {yellow}{1} {2}"
-		"hu"		"Használd a {yellow}{1} {2}"
-		"fr"		"Utiliser {yellow}{1} {2}"
-		"nl"		"Gebruik {yellow}{1} {2}"
-		"lv"		"Izmanto {yellow}{1} {2}"
-		"ru"		"использование {yellow}{1} {2}"
-		"ro"		"Folosește {yellow}{1} {2}"
-	}
-
-	"LinkUsage2"
-	{
-		"#format"	"{1:s}"
-		"en"		"in channel {purple}#{1} {default}to get verified!"
-		"hu"		"parancsot a {purple}#{1} {default}szobában a megerősítéshez!"
-		"fr"		"dans le canal {purple}#{1} {default}pour se faire vérifier!"
-		"nl"		"in kanaal {purple}#{1} {default}om geverifieerd te worden!"
-		"lv"		"verifikācijas kodu kanālā {purple}#{1} {default}lai verificētu profilu!"
-		"ru"		"в канале {purple}#{1} {default}пройти проверку!"
-		"ro"		"Pe canalul {purple}#{1} {default}pentru a-ți verifica, contul!"
+		"#format"	"{1:s},{2:s},{3:s}"
+		"en"		"Type {lime}{1} {2} {default}in {orange}#{3}"
+		"hu"		"Használd a {lime}{1} {2} {default}parancsot a {orange}#{3} {default}szobában"
+		"ru"		"Введите {lime}{1} {2} {default}в {orange}#{3}"
 	}
 	
 	"CopyPasteFromConsole"
 	{
-		"en"		"You can also {yellow}copy-paste{default} from {green}console{default} :)"
-		"ru"		"Вы также можете {yellow}скопировать и вставить{default} из {green}консоли{default} :)"
+		"en"		"You can also {lime}copy-paste{default} from {orange}console{default} :)"
+		"hu"		"Ki is {lime}másolhatod {default}a {orange}konzolból{default} :)"
+		"ru"        "Вы также можете {lime}скопировать и вставить{default} из {orange}консоли{default} :)"
 	}
-	
-	
+
 	"CallAdminReportHandledTitle"
 	{
 		"en"		"CallAdmin Report is being handled!"
+		"hu"		"Egy jelentést éppen kezelnek!"
 		"nl"		"De CallAdmin Report wordt behandelt!"
 		"lv"		"CallAdmin Ziņojums tiek izskatīts!"
 		"ru"		"Жалоба CallAdmin обрабатывается!"
@@ -226,6 +223,7 @@
 	"CallAdminReportHandlerName"
 	{
 		"en"		"Handler Name:"
+		"hu"		"Admin:"
 		"nl"		"Naam van de Handelaar:"
 		"lv"		"Ziņu izskatījā:"
 		"ru"		"Имя обработчика:"
@@ -235,6 +233,7 @@
 	"CallAdminReportIDField"
 	{
 		"en"		"Report ID:"
+		"hu"		"Jelentés azonosító:"
 		"nl"		"Report ID:"
 		"lv"		"Ziņojuma ID:"
 		"ru"		"ID жалобы:"
@@ -245,6 +244,7 @@
 	{
 		"#format"	"{1:s}"
 		"en"		"Server: {1}"
+		"hu"		"Szerver: {1}"
 		"nl"		"Server: {1}"
 		"lv"		"Server: {1}"
 		"ru"		"Сервер: {1}"
@@ -254,6 +254,7 @@
 	"CallAdminReportTitle"
 	{
 		"en"		"New CallAdmin Report!"
+		"hu"		"Új jelentés érkezett!"
 		"lv"		"Jauns CallAdmin Ziņojums!"
 		"nl"		"Nieuwe CallAdmin Report!"
 		"ru"		"Новая жалоба CallAdmin!"
@@ -263,24 +264,27 @@
 	"CONSOLE"
 	{
 		"en"		"CONSOLE"
+		"hu"		"KONZOL"
 		"nl"		"CONSOLE"
 		"lv"		"CONSOLE"
-		"ru"		"CONSOLE"
+		"ru"		"КОНСОЛЬ"
 		"ro"		"CONSOLE"
 	}
 	
 	"SERVER"
 	{
 		"en"		"SERVER"
+		"hu"		"SZERVER"
 		"nl"		"SERVER"
 		"lv"		"SERVER"
-		"ru"		"SERVER"
+		"ru"		"СЕРВЕР"
 		"ro"		"SERVER"
 	}
 	
 	"ReporterField"
 	{
 		"en"		"Reporter:"
+		"hu"		"Jelentő:"
 		"nl"		"Raporteerder:"
 		"lv"		"Ziņotājs:"
 		"ru"		"Отправитель:"
@@ -290,6 +294,7 @@
 	"TargetField"
 	{
 		"en"		"Target:"
+		"hu"		"Jelentett:"
 		"lv"		"Ziņo par:"
 		"nl"		"Doel:"
 		"ru"		"Цель:"
@@ -299,6 +304,7 @@
 	"ReasonField"
 	{
 		"en"		"Reason:"
+		"hu"		"Indok:"
 		"nl"		"Reden:"
 		"lv"		"Iemesls:"
 		"ru"		"Причина:" 
@@ -308,6 +314,7 @@
 	"BugReportTitle"
 	{
 		"en"		"New Bug Report!"
+		"hu"		"Egy új hibajelentés érkezett!"
 		"nl"		"Nieuwe Fout Gerapporteerd!"
 		"lv"		"Jauns kļūdas ziņojums!"
 		"ru"		"Новое сообщение об ошибке!"
@@ -317,6 +324,7 @@
 	"MapField"
 	{
 		"en"		"Map:"
+		"hu"		"Pálya:"
 		"nl"		"Map:"
 		"lv"		"Mape:"
 		"ru"		"Карта:"
@@ -326,7 +334,7 @@
 	"NoReasonSpecified"
 	{
 		"en"		"No reason specified."
-		"hu"		"Nincs indok megadva"
+		"hu"		"Nincs indok megadva."
 		"nl"		"Geen reden gespecificeerd."
 		"lv"		"iemesls nav norādīts"
 		"ru"		"Причина не указана."
@@ -336,6 +344,7 @@
 	"SourceBansTitle"
 	{
 		"en"		"New Player Server Banned!"
+		"hu"		"Új Játékos Kitiltás!"
 		"lv"		"Jauns spēlētājs ir saņēmis banu!"
 		"nl"		"Nieuwe Speler Server Geband!"
 		"ru"		"Новый игрок сервера забанен!"
@@ -355,7 +364,7 @@
 	"PlayerField"
 	{
 		"en"		"PLAYER:"
-		"hu"		"PLAYER:"
+		"hu"		"JÁTÉKOS:"
 		"fr"		"PLAYER:"
 		"nl"		"SPELER:"
 		"lv"		"PLAYER:"
@@ -381,17 +390,18 @@
 		"fr"		"minute"
 		"nl"		"minuut"
 		"lv"		"minūte"
-		"ru"		"минут"
+		"ru"		"мин."
 		"ro"		"minut"
 	}
 	
 	"MINUTES"
 	{
 		"en"		"minutes"
+		"hu"		"perc"
 		"fr"		"minutes"
 		"nl"		"minuten"
 		"lv"		"minūtes"
-		"ru"		"минут"
+		"ru"		"мин."
 		"ro"		"minute"
 	}
 	
@@ -413,13 +423,14 @@
 		"fr"		"DURÉE"
 		"nl"		"LENGTE"
 		"lv"		"ILGUMS"
-		"ru"		"ДЛИНА"
+		"ru"		"СРОК"
 		"ro"		"DURATĂ"
 	}
 	
 	"SourceBansReportTitle"
 	{
 		"en"		"New Report!"
+		"hu"		"Új jelentés!"
 		"nl"		"Nieuwe Report!"
 		"lv"		"Jauns Ziņojums!"
 		"ru"		"Новая жалоба!"
@@ -429,6 +440,7 @@
 	"SourceCommsTitle"
 	{
 		"en"		"New Player Comm-Banned!"
+		"hu"		"Új Játékos Némítás!"
 		"nl"		"Nieuwe Speler Comm-Banned!"
 		"lv"		"New Player Comm-Banned!"
 		"ru"		"Новый игрок был забанен!"
@@ -438,6 +450,7 @@
 	"MUTE"
 	{
 		"en"		"MUTE"
+		"hu"		"HANG-TILTÁS"
 		"nl"		"MUTE"
 		"lv"		"MUTE"
 		"ru"		"ЗАГЛУШИТЬ"
@@ -447,6 +460,7 @@
 	"GAG"
 	{
 		"en"		"GAG"
+		"hu"		"ÍRÁS-TILTÁS"
 		"nl"		"GAG"
 		"lv"		"GAG"
 		"ru"		"КЛЯП"
@@ -456,6 +470,7 @@
 	"SILENCE"
 	{
 		"en"		"SILENCE"
+		"hu"		"TELJES NÉMÍTÁS"
 		"nl"		"SILENCE"
 		"lv"		"SILENCE"
 		"ru"		"МОЛЧАНИЕ"
@@ -469,19 +484,19 @@
 		"fr"		"TYPE"
 		"nl"		"TYPE"
 		"lv"		"VEIDS"
-		"ru"		"ТИП"
+		"ru"		"ВВОД"
 		"ro"		"TIP"
 	}
 	
 	"MustVerify"
 	{
 		"#format"	"{1:s}"
-		"en"		"You have to verify your {blue}Discord {default}account! Type {orange}{1}"
-		"hu"		"Meg kell erősítened a {blue}Discord {default}fiókodat! Írd be, hogy {orange}{1}"
-		"fr"		"Vous devez vérifier votre {blue}Discord {default}account! Ecrit {orange}{1}"
-		"nl"		"Je moet je {blue}Discord {default}account verifieren! Type {orange}{1}"
-		"lv"		"Verificē savu {blue}Discord {default}profilu! Raksti {orange}{1}"
-		"ru"		"Вы должны подтвердить свою учётную запись {blue}Discord {default}! Введите {orange}{1}"
-		"ro"		"Trebuie să îti asociezi contul de Discord! Tastează {orange}{1}"
+		"en"		"You have to verify your {lightblue}Discord {default}account! Type {orange}{1}"
+		"hu"		"Meg kell erősítened a {lightblue}Discord {default}fiókodat! Írd be, hogy {orange}{1}"
+		"fr"		"Vous devez vérifier votre {lightblue}Discord {default}account! Ecrit {orange}{1}"
+		"nl"		"Je moet je {lightblue}Discord {default}account verifieren! Type {orange}{1}"
+		"lv"		"Verificē savu {lightblue}Discord {default}profilu! Raksti {orange}{1}"
+		"ru"		"Вы должны подтвердить свою {default}учётную запись {lightblue}Discord! Введите {orange}{1}"
+		"ro"		"Trebuie să îti asociezi Discord-ul tău! Tastează {orange}{1}"
 	}
 }

@@ -1,6 +1,6 @@
-public int SQLQuery_Connect(Handle owner, Handle hndl, char[] error, any data)
+public int SQLQuery_Connect(Database db, const char[] error, any userid)
 {
-	if(hndl == INVALID_HANDLE)
+	if(db == null)
 	{
 		LogError("[DU-Connect] Database failure: %s", error);
 		SetFailState("[Discord Utilities] Failed to connect to database");
@@ -9,7 +9,7 @@ public int SQLQuery_Connect(Handle owner, Handle hndl, char[] error, any data)
 	{
 		delete g_hDB;
 
-		g_hDB = view_as<Database>(hndl);
+		g_hDB = db;
 		
 		char Ident[4096];
 		SQL_GetDriverIdent(SQL_ReadDriver(g_hDB), Ident, sizeof(Ident));
@@ -24,7 +24,7 @@ public int SQLQuery_Connect(Handle owner, Handle hndl, char[] error, any data)
 			g_hDB.Format(Ident, sizeof(Ident), "CREATE TABLE IF NOT EXISTS %s (userid varchar(20) NOT NULL, steamid varchar(20) PRIMARY KEY NOT NULL, member int(20) NOT NULL, last_accountuse INTEGER)", g_sTableName);
 			SQL_SetCharset(g_hDB, "utf8");
 		}
-		SQL_TQuery(g_hDB, SQLQuery_ConnectCallback, Ident);
+		g_hDB.Query(SQLQuery_ConnectCallback, Ident);
 		PruneDatabase();
 	}
 	
@@ -38,9 +38,9 @@ public int SQLQuery_Connect(Handle owner, Handle hndl, char[] error, any data)
 	}
 }
 
-public int SQLQuery_ConnectCallback(Handle owner, Handle hndl, char[] error, any data)
+public int SQLQuery_ConnectCallback(Database db, DBResultSet results, const char[] error, any userid)
 {
-	if(hndl == INVALID_HANDLE)
+	if(db == null)
 	{
 		LogError("[DU-ConnectCallback] Database failure: %s", error);
 	}
@@ -48,7 +48,7 @@ public int SQLQuery_ConnectCallback(Handle owner, Handle hndl, char[] error, any
 	
 public void PruneDatabase()
 {
-	if(g_hDB == INVALID_HANDLE)
+	if(g_hDB == null)
 	{
 		LogError("[DU-PruneDatabaseStart] Prune Database cannot connect to database.");
 		return;
@@ -67,34 +67,34 @@ public void PruneDatabase()
 	else
 		g_hDB.Format(buffer, sizeof(buffer), "DELETE FROM %s WHERE last_accountuse<'%d' AND last_accountuse>'0' AND member = 0;", g_sTableName, maxlastaccuse);
 
-	SQL_TQuery(g_hDB, SQLQuery_PruneDatabase, buffer);
+	g_hDB.Query(SQLQuery_PruneDatabase, buffer);
 }
 
-public int SQLQuery_PruneDatabase(Handle owner, Handle hndl, char[] error, any data)
+public int SQLQuery_PruneDatabase(Database db, DBResultSet results, const char[] error, any userid)
 {
-	if(hndl == INVALID_HANDLE)
+	if(db == null)
 	{
 		LogError("[DU-PruneDatabase] Query failure: %s", error);
 	}
 }
 
-public int SQLQuery_GetUserData(Handle owner, Handle hndl, char[] error, any data)
+public int SQLQuery_GetUserData(Database db, DBResultSet results, const char[] error, any userid)
 {
 	int client;
 	
 	/* Make sure the client didn't disconnect while the thread was running */
 	
-	if((client = GetClientOfUserId(data)) == 0)
+	if((client = GetClientOfUserId(userid)) == 0)
 	{
 		return;
 	}
 	
-	if(hndl == INVALID_HANDLE)
+	if(db == null)
 	{
 		LogError("[DU-GetUserData] Query failure: %s", error);
 		return;
 	}
-	if(!SQL_GetRowCount(hndl)) 
+	if(results.RowCount == 0) 
 	{
 		char szSteamId[32];
 		char Query[256];
@@ -107,14 +107,14 @@ public int SQLQuery_GetUserData(Handle owner, Handle hndl, char[] error, any dat
 		{
 			g_hDB.Format(Query, sizeof(Query), "INSERT INTO %s(userid, steamid, member, last_accountuse) VALUES('%s', '%s', '0', '0');", g_sTableName, NULL_STRING, szSteamId);
 		}
-		SQL_TQuery(g_hDB, SQLQuery_InsertNewPlayer, Query);
+		g_hDB.Query(SQLQuery_InsertNewPlayer, Query);
 		OnClientPreAdminCheck(client);
 		return;
 	}
-	while(SQL_FetchRow(hndl))
+	while(results.FetchRow())
 	{
-		SQL_FetchString(hndl, 0, g_sUserID[client], sizeof(g_sUserID));
-		g_bMember[client] = !!SQL_FetchInt(hndl, 1);
+		results.FetchString(0, g_sUserID[client], sizeof(g_sUserID));
+		g_bMember[client] = !!results.FetchInt(1);
 	}
 	/*
 	if(g_bMember[client])
@@ -130,27 +130,30 @@ public int SQLQuery_GetUserData(Handle owner, Handle hndl, char[] error, any dat
 	int uniqueNum = GetRandomInt(100000, 999999);
 	Format(g_sUniqueCode[client], sizeof(g_sUniqueCode), "%i-%i-%s", g_cServerID.IntValue, uniqueNum, steamid);
 	g_bChecked[client] = true;
+	Call_StartForward(g_hOnClientLoaded);
+	Call_PushCell(client);
+	Call_Finish();
 }
 
-public int SQLQuery_InsertNewPlayer(Handle owner, Handle hndl, char[] error, any data)
+public int SQLQuery_InsertNewPlayer(Database db, DBResultSet results, const char[] error, any userid)
 {
-	if(hndl == INVALID_HANDLE)
+	if(db == null)
 	{
 		LogError("[DU-InsertNewPlayer] Query failure: %s", error);
 	}
 }
 
-public int SQLQuery_CheckUserData(Handle owner, Handle hndl, char [] error, DataPack pack)
+public int SQLQuery_CheckUserData(Database db, DBResultSet results, const char[] error, DataPack pack)
 {
-	if(hndl == INVALID_HANDLE)
+	if(db == null)
 	{
 		LogError("[DU-CheckUserData] Query failure: %s", error);
 		return;
 	}
 	char szUserIdDB[20];
-	while (SQL_FetchRow(hndl))
+	while (results.FetchRow())
 	{
-		SQL_FetchString(hndl, 0, szUserIdDB, sizeof(szUserIdDB));
+		results.FetchString(0, szUserIdDB, sizeof(szUserIdDB));
 	}
 	char szUserId[20], szUserName[32], szDiscriminator[6];
 	pack.Reset();
@@ -187,7 +190,7 @@ public int SQLQuery_CheckUserData(Handle owner, Handle hndl, char [] error, Data
 		{
 			g_hDB.Format(Query, sizeof(Query), "UPDATE %s SET userid = '%s', member = 1 WHERE steamid = '%s'", g_sTableName, szUserId, szSteamId);
 		}
-		SQL_TQuery(g_hDB, SQLQuery_LinkedAccount, Query);
+		g_hDB.Query(SQLQuery_LinkedAccount, Query);
 
 		Call_StartForward(g_hOnLinkedAccount);
 		Call_PushCell(client);
@@ -203,26 +206,44 @@ public int SQLQuery_CheckUserData(Handle owner, Handle hndl, char [] error, Data
 	}
 }
 
-public int SQLQuery_LinkedAccount(Handle owner, Handle hndl, char [] error, any data)
+public int SQLQuery_LinkedAccount(Database db, DBResultSet results, const char[] error, any userid)
 {
-	if(hndl == INVALID_HANDLE)
+	if(db == null)
 	{
 		LogError("[DU-LinkedAccount] Query failure: %s", error);
 	}
 }
 
-public int SQLQuery_UpdatePlayer(Handle owner, Handle hndl, char [] error, any data)
+public int SQLQuery_UpdatePlayer(Database db, DBResultSet results, const char[] error, any userid)
 {
-	if(hndl == INVALID_HANDLE)
+	if(db == null)
 	{
 		LogError("[DU-UpdatePlayer] Query failure: %s", error);
 	}
 }
 
-public int SQLQuery_DeleteAccount(Handle owner, Handle hndl, char[] error, any data)
+public int SQLQuery_DeleteAccount(Database db, DBResultSet results, const char[] error, DataPack pack)
 {
-	if(hndl == INVALID_HANDLE)
+	if(db == null)
 	{
+		pack.Reset();
+		delete pack;
 		LogError("[DU-DeleteAccount] Query failure: %s", error);
+		return;
 	}
+	pack.Reset();
+	int userid = pack.ReadCell();
+	int userid2 = pack.ReadCell();
+	delete pack;
+	int client, target;
+	if((target = GetClientOfUserId(userid2)) > 0)
+	{
+		g_bMember[target] = false;
+		g_sUserID[target][0] = '\0';
+	}
+	if((client = GetClientOfUserId(userid)) == 0)
+	{
+		return;
+	}
+	CPrintToChat(client, "%s Successfully deleted account from database.", g_sServerPrefix);
 }

@@ -43,6 +43,27 @@ public int Native_GetIP(Handle plugin, int numparams)
 	return 0;
 }
 
+public int Native_CheckRole(Handle plugin, int numparams)
+{
+	if(!g_bChecked[GetNativeCell(1)])
+	{
+		return ThrowNativeError(25, "[Discord-Utilities] %N hasn't been checked. Call this in OnClientPostAdminCheck.", GetNativeCell(1));
+	}
+	if(!g_bMember[GetNativeCell(1)])
+	{
+		return ThrowNativeError(25, "[Discord-Utilities] %N isn't verified.", GetNativeCell(1));
+	}
+	if(g_sUserID[GetNativeCell(1)][0] == '\0')
+	{
+		return ThrowNativeError(25, "[Discord-Utilities] %N's userid doesn't exist in database.", GetNativeCell(1));
+	}
+	int client = GetNativeCell(1);
+	char roleid[128];
+	GetNativeString(2, roleid, sizeof(roleid));
+	CheckingRole(g_sUserID[client], roleid, k_EHTTPMethodGET);
+	return 0;
+}
+
 public int Native_AddRole(Handle plugin, int numparams)
 {
 	if(!g_bChecked[GetNativeCell(1)])
