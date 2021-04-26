@@ -150,7 +150,7 @@
 		"hu"		"Üzenet Adminoknak: "
 		"nl"		"Prive naar Admins: "
 		"lv"		"Privāti adminiem: "
-		"ru"		"Частно для администраторов: "
+		"ru"		"Лично для администраторов: "
 		"ro"		"Privat către Admini: "
 	}
 	
@@ -160,7 +160,7 @@
 		"hu"		"Mindenkinek: "
 		"nl"		"Openbare Chat: "
 		"lv"		"Visu Čats: "
-		"ru"		"весь чат: "
+		"ru"		"Весь чат: "
 		"ro"		"General Chat: "
 	}
 	
@@ -216,7 +216,7 @@
 		"hu"		"Egy jelentést éppen kezelnek!"
 		"nl"		"De CallAdmin Report wordt behandelt!"
 		"lv"		"CallAdmin Ziņojums tiek izskatīts!"
-		"ru"		"Жалоба CallAdmin обрабатывается!"
+		"ru"		"Вызов Администратора обрабатывается!"
 		"ro"		"CallAdmin Report se gestionează!"
 	}
 	
@@ -379,7 +379,7 @@
 		"fr"		"TEMPORAIRE"
 		"nl"		"TIJDELIJK"
 		"lv"		"PAGAIDU"
-		"ru"		"ВРЕМЕННОЕ"
+		"ru"		"ВРЕМЕННАЯ"
 		"ro"		"TEMPORAR"
 	}
 	
@@ -412,7 +412,7 @@
 		"fr"		"PERMANENT"
 		"nl"		"PERMANENT"
 		"lv"		"MŪŽĪGS"
-		"ru"		"НАВСЕГДА"
+		"ru"		"ВЕЧНАЯ"
 		"ro"		"PERMANENT"
 	}
 
@@ -443,7 +443,7 @@
 		"hu"		"Új Játékos Némítás!"
 		"nl"		"Nieuwe Speler Comm-Banned!"
 		"lv"		"New Player Comm-Banned!"
-		"ru"		"Новый игрок был забанен!"
+		"ru"		"Новый игрок был заглушен!"
 		"ro"		"Jucător nou Comm-banat"
 	}
 	
