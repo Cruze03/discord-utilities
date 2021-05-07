@@ -8,7 +8,8 @@
 		"nl"		"Huidige Map:"
 		"lv"		"Šobrīd Mape:"
 		"ru"		"Текущая карта:"
-		"ro"		"Mapa curentă:"
+		"ro"		"Harta actuala:"
+		"es"		"Mapa actual:"
 	}
 
 	"PlayersOnlineField"
@@ -19,7 +20,8 @@
 		"nl"		"Spelers Online:"
 		"lv"		"Spēlētāji Online:"
 		"ru"		"Игроки онлайн:"
-		"ro"		"Playeri Online:"
+		"ro"		"Jucători Online:"
+		"es"		"Jugadores en linea:"
 	}
 
 	"DirectConnectField"
@@ -31,6 +33,7 @@
 		"lv"		"Tiešā savienošana:"
 		"ru"		"Прямое соединение:"
 		"ro"		"Conectare Directă:"
+		"es"		"Conexión directa:"
 	}
 	
 	"ChatRelayFormat"
@@ -49,12 +52,13 @@
 	{
 		"en"		"Please wait. Your member status hasn't been fetched yet."
 		"hu"		"Kérlek várj egy picit! A tagságod még lekérés alatt..."
+		"es"		"Porfavor espera, tu estado no ha sido solicitado todavia."
 	}
 	
 	"DiscordRevoked"
 	{
 		"en"		"You are no longer in our discord server therefore your discord member status has been revoked!"
-		"ro"        "Numai faci parte din server-ul nostru de discord, rolul tău de membru a fost sters!"
+		"ro"       	"Nu mai faci parte din server-ul nostru de discord, rolul tău de membru a fost șters!"
 	}
 	
 	"DiscordMissingParameters"
@@ -67,6 +71,7 @@
 		"lv"		"<@{1}> Jums ir jānorāda šīs komandas ID!"
 		"ru"		"<@{1}> Вам необходимо указать идентификатор для этой команды!"
 		"ro"		"<@{1}> Trebuie să furnizați un ID pentru această comandă!"
+		"es"		"<@{1}> Tienes que proveer de una ID para este comando!"
 	}
 
 	"DiscordInvalidID"
@@ -79,6 +84,7 @@
 		"lv"		"<@{1}> Šis ID nav derīgs. Lūdzu, ierakstiet {2} spēlē un mēģiniet vēlreiz!"
 		"ru"		"<@{1}> Этот идентификатор недействителен, введите в игре {2} и повторите попытку!"
 		"ro"		"<@{1}> Acest ID nu este valid, te rog sa tastezi {2} în joc să incerci din nou!"
+		"es"		"<@{1}> Esta ID es invalida, porfavor escribe {2} en el juego y prueba de nuevo."
 	}
 
 	"DiscordInvalid"
@@ -91,6 +97,7 @@
 		"lv"		"<@{1}> Nav neviena klienta ar šo ID, pārliecinieties, vai esat izveidojis savienojumu ar spēles serveri, un pārbaudiet savu ID vēlreiz!"
 		"ru"		"<@{1}> Нет клиента с таким идентификатором, убедитесь, что вы подключены к игровому серверу, и еще раз проверьте свой идентификатор!"
 		"ro"		"<@{1}> Nu există niciun client cu acest ID, fii sigur că ești conectat la joc si verifică ID din nou!"
+		"es"		"<@{1}> No existe ningún cliente con este ID, asegurate de que estás conectado al servidor, y prueba con tu ID de nuevo!"
 	}
 	
 	"DiscordInfo"
@@ -103,6 +110,7 @@
 		"lv"		"<@{1}> Šis kanāls tiek lietots profilu savienošanas!\nPielietojums: {2} <verifikācijas kods>"
 		"ru"		"<@{1}> Этот канал используется для привязки аккаунта!\nИспользование: {2} <код подтверждения>"
 		"ro"		"<@{1}> Acest canal este folosit pentru a-ți verifica contul!\nFolosește: {2} <cod de verificare>"
+		"es"		"<@{1}> Este canal es usado para enlazar cuentas!\nUso: {2} <código de verificación>"
 	}
 	
 	"DiscordVerified"
@@ -115,6 +123,7 @@
 		"lv"		"Jūs verificējāt savu profilu. ({green}{1}#{2}{default})"
 		"ru"		"Вы подтвердили свой аккаунт. ({green}{1}#{2}{default})"
 		"ro"		"Ti-a verificat contul tău. ({green}{1}#{2}{default})"
+		"es"		"Has verificado tu cuenta. ({green}{1}#{2}{default})"
 	}
 	
 	"DiscordLinked"
@@ -127,6 +136,7 @@
 		"lv"		"<@{1}> Tu savienoji savu profilu! ✅"
 		"ru"		"<@{1}> Вы связали свой аккаунт! ✅"
 		"ro"		"<@{1}> Ti-a asociat contul cu succes! ✅"
+		"es"		"<@{1}> Has enlazado tu cuenta! ✅"
 	}
 	
 	"DiscordAlreadyLinked"
@@ -139,6 +149,7 @@
 		"lv"		"<@{1}> Jūsu discord profils jau ir savienots! ❌"
 		"ru"		"<@{1}> Эта учетная запись уже связана! ❌"
 		"ro"		"<@{1}> Acest cont de discord este deja asociat! ❌"
+		"es"		"<@{1}> Esta cuenta de discord ya está enlazada! ❌"
 	}
 	
 	"ChatRelayPrivateToAdmins"
@@ -148,7 +159,8 @@
 		"nl"		"Prive naar Admins: "
 		"lv"		"Privāti adminiem: "
 		"ru"		"Приват для администраторов: "
-		"ro"		"Privat către Admini: "
+		"ro"		"Trimiteţi un mesaj privat la administrator: "
+		"es" 		"Mandar mensaje privado a los administradores: "
 	}
 	
 	"ChatRelayAllChat"
@@ -158,7 +170,8 @@
 		"nl"		"Openbare Chat: "
 		"lv"		"Visu Čats: "
 		"ru"		"весь чат: "
-		"ro"		"General Chat: "
+		"ro"		"Chat General: "
+		"es"		"Chat General: "
 	}
 	
 	"AdminLogFormat"
@@ -183,12 +196,15 @@
 		"lv"		"Tavs ID: {grey}{1}"
 		"ru"		"Ваш ID: {grey}{1}"
 		"ro"		"ID-ul tău: {grey}{1}"
+		"es"		"Yu ID: {grey}{1}"
 	}
 	
 	"LinkConnect"
 	{
 		"en"		"Join our discord server:"
 		"hu"		"Csatlakozz a Discord szerverünkhöz:"
+		"ro"		"Accesați serverul nostru de discord:"
+		"es"		"Únete a nuestro servidor de discord:"
 	}
 
 	"LinkUsage"
@@ -196,12 +212,16 @@
 		"#format"	"{1:s},{2:s},{3:s}"
 		"en"		"Type {lime}{1} {2} {default}in {orange}#{3}"
 		"hu"		"Használd a {lime}{1} {2} {default}parancsot a {orange}#{3} {default}szobában"
+		"ro"		"Scrie {lime}{1} {2} {default}in {orange}#{3}"
+		"es"		"Escribe {lime}{1} {2} {default}en {orange}#{3}"
 	}
 	
 	"CopyPasteFromConsole"
 	{
 		"en"		"You can also {lime}copy-paste{default} from {orange}console{default} :)"
 		"hu"		"Ki is {lime}másolhatod {default}a {orange}konzolból{default} :)"
+		"ro"		"Poti si sa {lime}copia-lipi{default} din {orange}console{default} :)"
+		"es"		"Tambien puedes {lime}copiar-pegar{default} del {orange}console{default} :)"
 	}
 
 	"CallAdminReportHandledTitle"
@@ -212,6 +232,7 @@
 		"lv"		"CallAdmin Ziņojums tiek izskatīts!"
 		"ru"		"CallAdmin Репорт обрабатывается!"
 		"ro"		"CallAdmin Report se gestionează!"
+		"es"		"CallAdmin Report se está gestionando!"
 	}
 	
 	"CallAdminReportHandlerName"
@@ -222,6 +243,7 @@
 		"lv"		"Ziņu izskatījā:"
 		"ru"		"Имя обработчика:"
 		"ro"		"Nume de legătură:"
+		"es"		"Nombre del handler:"
 	}
 	
 	"CallAdminReportIDField"
@@ -231,7 +253,8 @@
 		"nl"		"Report ID:"
 		"lv"		"Ziņojuma ID:"
 		"ru"		"Репорт ID:"
-		"ro"		"Report ID:"
+		"ro"		"Raport ID:"
+		"es"		"ID del Reporte:"
 	}
 	
 	"ServerField"
@@ -243,6 +266,7 @@
 		"lv"		"Server: {1}"
 		"ru"		"Сервер: {1}"
 		"ro"		"Server: {1}"
+		"es"		"Servidor: {1}"
 	}
 	
 	"CallAdminReportTitle"
@@ -252,7 +276,8 @@
 		"lv"		"Jauns CallAdmin Ziņojums!"
 		"nl"		"Nieuwe CallAdmin Report!"
 		"ru"		"Новый CallAdmin Репорт!"
-		"ro"		"Nou Report CallAdmin"
+		"ro"		"Nou Raport CallAdmin!"
+		"es"		"Nuevo Reporte del CallAdmin!"
 	}
 	
 	"CONSOLE"
@@ -262,7 +287,8 @@
 		"nl"		"CONSOLE"
 		"lv"		"CONSOLE"
 		"ru"		"CONSOLE"
-		"ro"		"CONSOLE"
+		"ro"		"CONSOLĂ"
+		"es"		"CONSOLA"
 	}
 	
 	"SERVER"
@@ -273,6 +299,7 @@
 		"lv"		"SERVER"
 		"ru"		"SERVER"
 		"ro"		"SERVER"
+		"es"		"SERVIDOR"
 	}
 	
 	"ReporterField"
@@ -283,6 +310,7 @@
 		"lv"		"Ziņotājs:"
 		"ru"		"Репортер:"
 		"ro"		"Reporter:"
+		"es"		"Reportador:"
 	}
 	
 	"TargetField"
@@ -292,7 +320,8 @@
 		"lv"		"Ziņo par:"
 		"nl"		"Doel:"
 		"ru"		"Цель:"
-		"ro"		"Target:"
+		"ro"		"Obiectiv:"
+		"es"		"Objetivo:"
 	}
 	
 	"ReasonField"
@@ -303,6 +332,7 @@
 		"lv"		"Iemesls:"
 		"ru"		"Причина:" 
 		"ro"		"Motiv:"
+		"es"		"Motivo:"
 	}
 	
 	"BugReportTitle"
@@ -313,6 +343,7 @@
 		"lv"		"Jauns kļūdas ziņojums!"
 		"ru"		"Новая  Буг Репорт!"
 		"ro"		"Nou Bug Report!"
+		"es"		"Nuevo reporte de bug!"
 	}
 	
 	"MapField"
@@ -322,7 +353,8 @@
 		"nl"		"Map:"
 		"lv"		"Mape:"
 		"ru"		"Карта:"
-		"ro"		"Mapă:"
+		"ro"		"Hartă:"
+		"es"		"Mapa:"
 	}
 	
 	"NoReasonSpecified"
@@ -333,6 +365,7 @@
 		"lv"		"iemesls nav norādīts"
 		"ru"		"Причина не указана."
 		"ro"		"Niciun motiv specificat."
+		"es"		"No se ha especificado nunguna razón."
 	}
 	
 	"SourceBansTitle"
@@ -342,7 +375,8 @@
 		"lv"		"Jauns spēlētājs ir saņēmis banu!"
 		"nl"		"Nieuwe Speler Server Geband!"
 		"ru"		"Новый игрок Сервер Banned!"
-		"ro"		"Jucător nou banat!"
+		"ro"		"Jucător nou banat din server!"
+		"es"		"Nuevo usuario baneado del servidor!"
 	}
 	"AdminField"
 	{
@@ -353,6 +387,7 @@
 		"lv"		"ADMIN:"
 		"ru"		"ADMIN:"
 		"ro"		"ADMIN:"
+		"es"		"ADMIN:"
 	}
 
 	"PlayerField"
@@ -363,7 +398,8 @@
 		"nl"		"SPELER:"
 		"lv"		"PLAYER:"
 		"ru"		"ИГРОК:"
-		"ro"		"PLAYER:"
+		"ro"		"JUCĂTOR:"
+		"es"		"JUGADOR:"
 	}
 	
 	"TEMPORARY"
@@ -375,6 +411,7 @@
 		"lv"		"PAGAIDU"
 		"ru"		"ВРЕМЕННОЕ"
 		"ro"		"TEMPORAR"
+		"es"		"TEMPORAL"
 	}
 	
 	"MINUTE"
@@ -386,6 +423,7 @@
 		"lv"		"minūte"
 		"ru"		"минут"
 		"ro"		"minut"
+		"es"		"minuto"
 	}
 	
 	"MINUTES"
@@ -397,6 +435,7 @@
 		"lv"		"minūtes"
 		"ru"		"минут"
 		"ro"		"minute"
+		"es"		"minutos"
 	}
 	
 	"PERMANENT"
@@ -408,6 +447,7 @@
 		"lv"		"MŪŽĪGS"
 		"ru"		"ПОСТОЯННАЯ"
 		"ro"		"PERMANENT"
+		"es"		"PERMANENTEMENTE"
 	}
 
 	"LengthField"
@@ -419,6 +459,7 @@
 		"lv"		"ILGUMS"
 		"ru"		"ДЛИНА"
 		"ro"		"DURATĂ"
+		"es"		"DURACIÓN"
 	}
 	
 	"SourceBansReportTitle"
@@ -429,6 +470,7 @@
 		"lv"		"Jauns Ziņojums!"
 		"ru"		"Новый Репорт!"
 		"ro"		"Report nou!"
+		"es"		"Nuevo reporte!"
 	}
 	
 	"SourceCommsTitle"
@@ -438,7 +480,8 @@
 		"nl"		"Nieuwe Speler Comm-Banned!"
 		"lv"		"New Player Comm-Banned!"
 		"ru"		"Новый игрок Comm-Banned!"
-		"ro"		"Jucător nou Comm-banat"
+		"ro"		"Jucător nou Comm-banat!"
+		"es"		"Un nuevo jugador ha sido bloqueado en las comunicaciones!"
 	}
 	
 	"MUTE"
@@ -449,6 +492,7 @@
 		"lv"		"MUTE"
 		"ru"		"МУТЕ"
 		"ro"		"MUTE"
+		"es"		"MUTEAR"
 	}
 	
 	"GAG"
@@ -459,6 +503,7 @@
 		"lv"		"GAG"
 		"ru"		"ГАГ"
 		"ro"		"GAG"
+		"es"		"AMORDAZADO"
 	}
 	
 	"SILENCE"
@@ -480,6 +525,7 @@
 		"lv"		"VEIDS"
 		"ru"		"ТИП"
 		"ro"		"TIP"
+		"es"		"TIPO"
 	}
 	
 	"MustVerify"
@@ -491,6 +537,7 @@
 		"nl"		"Je moet je {lightblue}Discord {default}account verifieren! Type {orange}{1}"
 		"lv"		"Verificē savu {lightblue}Discord {default}profilu! Raksti {orange}{1}"
 		"ru"		"Вы должны подтвердить свой {lightblue}Discord {default}учетная запись! Тип {orange}{1}"
-		"ro"		"Trebuie să îti asociezi Discord-ul tău! Tastează {orange}{1}"
+		"ro"		"Trebuie să îti asociezi {lightblue}Discord-ul {default}tău! Tastează {orange}{1}"
+		"es"		"Necesitas verificar tu cuenta de {lightblue}Discord {default}! Escribe {orange}{1}"
 	}
 }
