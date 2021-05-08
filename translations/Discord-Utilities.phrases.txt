@@ -196,7 +196,7 @@
 		"lv"		"Tavs ID: {grey}{1}"
 		"ru"		"Ваш ID: {grey}{1}"
 		"ro"		"ID-ul tău: {grey}{1}"
-		"es"		"Yu ID: {grey}{1}"
+		"es"		"Tu ID: {grey}{1}"
 	}
 	
 	"LinkConnect"
