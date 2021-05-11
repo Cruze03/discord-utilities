@@ -51,7 +51,6 @@
 	"TryAgainLater"
 	{
 		"en"		"Please wait. Your member status hasn't been fetched yet."
-		"ua"		"Будь ласка, почекайте. Ваш статус учасника ще не отримано."
 		"hu"		"Kérlek várj egy picit! A tagságod még lekérés alatt..."
 	}
 	
@@ -203,7 +202,6 @@
 	"LinkConnect"
 	{
 		"en"		"Join our discord server:"
-		"ua"		"Приєднуйтесь до нашого сервера discord:"
 		"hu"		"Csatlakozz a Discord szerverünkhöz:"
 	}
 
@@ -211,14 +209,12 @@
 	{
 		"#format"	"{1:s},{2:s},{3:s}"
 		"en"		"Type {lime}{1} {2} {default}in {orange}#{3}"
-		"ua"		"Тип {lime}{1} {2} {default}в {orange}#{3}"
 		"hu"		"Használd a {lime}{1} {2} {default}parancsot a {orange}#{3} {default}szobában"
 	}
 	
 	"CopyPasteFromConsole"
 	{
 		"en"		"You can also {lime}copy-paste{default} from {orange}console{default} :)"
-		"ua"		"Ви також можете {lime}Копіювати-Вставити {default} з {orange}консоллю{default} :)"
 		"hu"		"Ki is {lime}másolhatod {default}a {orange}konzolból{default} :)"
 	}
 
@@ -536,7 +532,6 @@
 		"nl"		"Je moet je {lightblue}Discord {default}account verifieren! Type {orange}{1}"
 		"lv"		"Verificē savu {lightblue}Discord {default}profilu! Raksti {orange}{1}"
 		"ru"		"Вы должны подтвердить свой {lightblue}Discord {default}учетная запись! Тип {orange}{1}"
-		"ua"		"Ви повинні підтвердити свій {lightblue}Discord {default}аккаунт! Тип {orange}{1}"
 		"ro"		"Trebuie să îti asociezi Discord-ul tău! Tastează {orange}{1}"
 	}
 }
