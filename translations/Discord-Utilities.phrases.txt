@@ -6,7 +6,7 @@
 		"hu"		"Jelenlegi pálya:"
 		"fr"		"Carte actuelle:"
 		"nl"		"Huidige Map:"
-		"lv"		"Šobrīd Mape:"
+		"lv"		"Šobrīd Karte:"
 		"ru"		"Текущая карта:"
 		"ro"		"Mapa curentă:"
 	}
@@ -17,7 +17,7 @@
 		"hu"		"Elérhető Játékosok:"
 		"fr"		"Joueurs en ligne:"
 		"nl"		"Spelers Online:"
-		"lv"		"Spēlētāji Online:"
+		"lv"		"Spēlētāji Onlainā:"
 		"ru"		"Игроки онлайн:"
 		"ro"		"Playeri Online:"
 	}
@@ -28,7 +28,7 @@
 		"hu"		"Csatlakozás:"
 		"fr"		"Connexion directe:"
 		"nl"		"Direct Verbinden:"
-		"lv"		"Tiešā savienošana:"
+		"lv"		"Savienojies ar serveri:"
 		"ru"		"Прямое соединение:"
 		"ro"		"Conectare Directă:"
 	}
@@ -49,12 +49,14 @@
 	{
 		"en"		"Please wait. Your member status hasn't been fetched yet."
 		"hu"		"Kérlek várj egy picit! A tagságod még lekérés alatt..."
+		"lv"		"Lūdzu, uzgaidi! Tavs lietotāja status nav vēl apstiprināts."
 	}
 	
 	"DiscordRevoked"
 	{
 		"en"		"You are no longer in our discord server therefore your discord member status has been revoked!"
 		"ro"        "Numai faci parte din server-ul nostru de discord, rolul tău de membru a fost sters!"
+		"lv"		"Tu vairāk neatrodies mūsu discord serverī, tāpēc tev tiks noņemta discord biedra grupa!"
 	}
 	
 	"DiscordMissingParameters"
@@ -88,7 +90,7 @@
 		"hu"		"<@{1}> Nem található kliens ezzel az azonosítóval. Kérlek csatlakozz a szerverre és próbáld újra!"
 		"fr"		"<@{1}> Il n'y a pas de client avec cet identifiant, assurez-vous d'être connecté au serveur de jeu et vérifiez à nouveau votre identifiant!"
 		"nl"		"<@{1}> Er is geen client met deze ID, zorg ervoor dat je verbonden bent met de spelserver en controleer je ID opnieuw!"
-		"lv"		"<@{1}> Nav neviena klienta ar šo ID, pārliecinieties, vai esat izveidojis savienojumu ar spēles serveri, un pārbaudiet savu ID vēlreiz!"
+		"lv"		"<@{1}> Nav neviena spēlētāja serverī ar šo ID! Pārliecinies vai atrodies serverī, un pārbaudi savu ID vēlreiz!"
 		"ru"		"<@{1}> Нет клиента с таким идентификатором, убедитесь, что вы подключены к игровому серверу, и еще раз проверьте свой идентификатор!"
 		"ro"		"<@{1}> Nu există niciun client cu acest ID, fii sigur că ești conectat la joc si verifică ID din nou!"
 	}
@@ -146,7 +148,7 @@
 		"en"		"Private To Admins: "
 		"hu"		"Üzenet Adminoknak: "
 		"nl"		"Prive naar Admins: "
-		"lv"		"Privāti adminiem: "
+		"lv"		"Privāti Adminiem: "
 		"ru"		"Приват для администраторов: "
 		"ro"		"Privat către Admini: "
 	}
@@ -156,7 +158,7 @@
 		"en"		"All Chat: "
 		"hu"		"Mindenkinek: "
 		"nl"		"Openbare Chat: "
-		"lv"		"Visu Čats: "
+		"lv"		"Publiskais Čats: "
 		"ru"		"весь чат: "
 		"ro"		"General Chat: "
 	}
@@ -189,6 +191,7 @@
 	{
 		"en"		"Join our discord server:"
 		"hu"		"Csatlakozz a Discord szerverünkhöz:"
+		"lv"		"Pievienojies mūsu discord serverim:"
 	}
 
 	"LinkUsage"
@@ -196,12 +199,14 @@
 		"#format"	"{1:s},{2:s},{3:s}"
 		"en"		"Type {lime}{1} {2} {default}in {orange}#{3}"
 		"hu"		"Használd a {lime}{1} {2} {default}parancsot a {orange}#{3} {default}szobában"
+		"lv"		"Ieraksti {lime}{1} {2} {default}šajā discord kanālā {orange}#{3}"
 	}
 	
 	"CopyPasteFromConsole"
 	{
 		"en"		"You can also {lime}copy-paste{default} from {orange}console{default} :)"
 		"hu"		"Ki is {lime}másolhatod {default}a {orange}konzolból{default} :)"
+		"lv"		"Tu arī vari izmanot {lime}copy-paste{default} opciju no {orange}konsoles{default} :)"
 	}
 
 	"CallAdminReportHandledTitle"
@@ -240,7 +245,7 @@
 		"en"		"Server: {1}"
 		"hu"		"Szerver: {1}"
 		"nl"		"Server: {1}"
-		"lv"		"Server: {1}"
+		"lv"		"Serveris: {1}"
 		"ru"		"Сервер: {1}"
 		"ro"		"Server: {1}"
 	}
@@ -320,7 +325,7 @@
 		"en"		"Map:"
 		"hu"		"Pálya:"
 		"nl"		"Map:"
-		"lv"		"Mape:"
+		"lv"		"Karte:"
 		"ru"		"Карта:"
 		"ro"		"Mapă:"
 	}
@@ -361,7 +366,7 @@
 		"hu"		"JÁTÉKOS:"
 		"fr"		"PLAYER:"
 		"nl"		"SPELER:"
-		"lv"		"PLAYER:"
+		"lv"		"SPĒLĒTĀJS:"
 		"ru"		"ИГРОК:"
 		"ro"		"PLAYER:"
 	}
@@ -489,7 +494,7 @@
 		"hu"		"Meg kell erősítened a {lightblue}Discord {default}fiókodat! Írd be, hogy {orange}{1}"
 		"fr"		"Vous devez vérifier votre {lightblue}Discord {default}account! Ecrit {orange}{1}"
 		"nl"		"Je moet je {lightblue}Discord {default}account verifieren! Type {orange}{1}"
-		"lv"		"Verificē savu {lightblue}Discord {default}profilu! Raksti {orange}{1}"
+		"lv"		"Tev vajag verificē savu {lightblue}Discord {default}profilu! Raksti {orange}{1}"
 		"ru"		"Вы должны подтвердить свой {lightblue}Discord {default}учетная запись! Тип {orange}{1}"
 		"ro"		"Trebuie să îti asociezi Discord-ul tău! Tastează {orange}{1}"
 	}
