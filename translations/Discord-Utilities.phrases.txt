@@ -8,6 +8,7 @@
 		"nl"		"Huidige Map:"
 		"lv"		"Šobrīd Mape:"
 		"ru"		"Текущая карта:"
+		"ua"		"Поточна карта:"
 		"ro"		"Mapa curentă:"
 	}
 
@@ -19,6 +20,7 @@
 		"nl"		"Spelers Online:"
 		"lv"		"Spēlētāji Online:"
 		"ru"		"Игроки онлайн:"
+		"ua"		"Гравці онлайн:"
 		"ro"		"Playeri Online:"
 	}
 
@@ -30,6 +32,7 @@
 		"nl"		"Direct Verbinden:"
 		"lv"		"Tiešā savienošana:"
 		"ru"		"Прямое соединение:"
+		"ua"		"Пряме з'єднання:"
 		"ro"		"Conectare Directă:"
 	}
 	
@@ -54,6 +57,7 @@
 	"DiscordRevoked"
 	{
 		"en"		"You are no longer in our discord server therefore your discord member status has been revoked!"
+		"ua"		"Вас більше немає на нашому сервері discord, тому ваш статус учасника discord скасовано!"
 		"ro"        "Numai faci parte din server-ul nostru de discord, rolul tău de membru a fost sters!"
 	}
 	
@@ -66,6 +70,7 @@
 		"nl"		"<@{1}> U moet een ID opgeven voor deze opdracht!"
 		"lv"		"<@{1}> Jums ir jānorāda šīs komandas ID!"
 		"ru"		"<@{1}> Вам необходимо указать идентификатор для этой команды!"
+		"ua"		"<@{1}> Вам необхідно вказати ідентифікатор для цієї команди!"
 		"ro"		"<@{1}> Trebuie să furnizați un ID pentru această comandă!"
 	}
 
@@ -78,6 +83,7 @@
 		"nl"		"<@{1}> Deze ID is niet geldig. Typ {2} in de game en probeer het opnieuw!"
 		"lv"		"<@{1}> Šis ID nav derīgs. Lūdzu, ierakstiet {2} spēlē un mēģiniet vēlreiz!"
 		"ru"		"<@{1}> Этот идентификатор недействителен, введите в игре {2} и повторите попытку!"
+		"ua"		"<@{1}> Цей ідентифікатор недійсний, введіть в грі {2} і спробуйте ще раз!"
 		"ro"		"<@{1}> Acest ID nu este valid, te rog sa tastezi {2} în joc să incerci din nou!"
 	}
 
@@ -90,6 +96,7 @@
 		"nl"		"<@{1}> Er is geen client met deze ID, zorg ervoor dat je verbonden bent met de spelserver en controleer je ID opnieuw!"
 		"lv"		"<@{1}> Nav neviena klienta ar šo ID, pārliecinieties, vai esat izveidojis savienojumu ar spēles serveri, un pārbaudiet savu ID vēlreiz!"
 		"ru"		"<@{1}> Нет клиента с таким идентификатором, убедитесь, что вы подключены к игровому серверу, и еще раз проверьте свой идентификатор!"
+		"ua"		"<@{1}> Не існує клієнта з таким ідентифікатором, переконайтеся, що ви підключені до ігрового сервера, і ще раз перевірте свій ідентифікатор!"
 		"ro"		"<@{1}> Nu există niciun client cu acest ID, fii sigur că ești conectat la joc si verifică ID din nou!"
 	}
 	
@@ -102,6 +109,7 @@
 		"nl"		"<@{1}> Dit kanaal wordt gebruikt om je account te koppelen!\nGebruik: {2} <verificatie code>"
 		"lv"		"<@{1}> Šis kanāls tiek lietots profilu savienošanas!\nPielietojums: {2} <verifikācijas kods>"
 		"ru"		"<@{1}> Этот канал используется для привязки аккаунта!\nИспользование: {2} <код подтверждения>"
+		"ua"		"<@{1}> Цей канал використовується для прив'язки аккаунта! \nВикористання : {2} <код підтвердження>"
 		"ro"		"<@{1}> Acest canal este folosit pentru a-ți verifica contul!\nFolosește: {2} <cod de verificare>"
 	}
 	
@@ -114,6 +122,7 @@
 		"nl"		"Je hebt je account geverifieerd. ({green}{1}#{2}{default})"
 		"lv"		"Jūs verificējāt savu profilu. ({green}{1}#{2}{default})"
 		"ru"		"Вы подтвердили свой аккаунт. ({green}{1}#{2}{default})"
+		"ua"		"Ви підтвердили свій аккаунт. ({green}{1}#{2}{default})"
 		"ro"		"Ti-a verificat contul tău. ({green}{1}#{2}{default})"
 	}
 	
@@ -126,6 +135,7 @@
 		"nl"		"<@{1}> Je hebt je account gekoppeld! ✅"
 		"lv"		"<@{1}> Tu savienoji savu profilu! ✅"
 		"ru"		"<@{1}> Вы связали свой аккаунт! ✅"
+		"ua"		"<@{1}> Ви пов'язали свій аккаунт! ✅"
 		"ro"		"<@{1}> Ti-a asociat contul cu succes! ✅"
 	}
 	
@@ -138,6 +148,7 @@
 		"nl"		"<@{1}> Dit Discord account is al gekoppeld! ❌"
 		"lv"		"<@{1}> Jūsu discord profils jau ir savienots! ❌"
 		"ru"		"<@{1}> Эта учетная запись уже связана! ❌"
+		"ua"		"<@{1}> Цей аккаунт discord вже пов'язаний ❌"
 		"ro"		"<@{1}> Acest cont de discord este deja asociat! ❌"
 	}
 	
@@ -148,6 +159,7 @@
 		"nl"		"Prive naar Admins: "
 		"lv"		"Privāti adminiem: "
 		"ru"		"Приват для администраторов: "
+		"ua"		"Приват для адміністраторів: "
 		"ro"		"Privat către Admini: "
 	}
 	
@@ -158,6 +170,7 @@
 		"nl"		"Openbare Chat: "
 		"lv"		"Visu Čats: "
 		"ru"		"весь чат: "
+		"ua"		"весь чат: "
 		"ro"		"General Chat: "
 	}
 	
@@ -182,6 +195,7 @@
 		"nl" 		"Jouw ID: {grey}{1}"
 		"lv"		"Tavs ID: {grey}{1}"
 		"ru"		"Ваш ID: {grey}{1}"
+		"ua"		"Ваш ID: {grey}{1}"
 		"ro"		"ID-ul tău: {grey}{1}"
 	}
 	
@@ -211,6 +225,7 @@
 		"nl"		"De CallAdmin Report wordt behandelt!"
 		"lv"		"CallAdmin Ziņojums tiek izskatīts!"
 		"ru"		"CallAdmin Репорт обрабатывается!"
+		"ua"		"CallAdmin Репорт обробляється!"
 		"ro"		"CallAdmin Report se gestionează!"
 	}
 	
@@ -221,6 +236,7 @@
 		"nl"		"Naam van de Handelaar:"
 		"lv"		"Ziņu izskatījā:"
 		"ru"		"Имя обработчика:"
+		"ua"		"Ім'я обробника:"
 		"ro"		"Nume de legătură:"
 	}
 	
@@ -231,6 +247,7 @@
 		"nl"		"Report ID:"
 		"lv"		"Ziņojuma ID:"
 		"ru"		"Репорт ID:"
+		"ua"		"Репорт ID:"
 		"ro"		"Report ID:"
 	}
 	
@@ -242,6 +259,7 @@
 		"nl"		"Server: {1}"
 		"lv"		"Server: {1}"
 		"ru"		"Сервер: {1}"
+		"ua"		"Сервер: {1}"
 		"ro"		"Server: {1}"
 	}
 	
@@ -252,6 +270,7 @@
 		"lv"		"Jauns CallAdmin Ziņojums!"
 		"nl"		"Nieuwe CallAdmin Report!"
 		"ru"		"Новый CallAdmin Репорт!"
+		"ua"		"Новий CallAdmin Репорт!"
 		"ro"		"Nou Report CallAdmin"
 	}
 	
@@ -262,6 +281,7 @@
 		"nl"		"CONSOLE"
 		"lv"		"CONSOLE"
 		"ru"		"CONSOLE"
+		"ua"		"КОНСОЛЬ"
 		"ro"		"CONSOLE"
 	}
 	
@@ -272,6 +292,7 @@
 		"nl"		"SERVER"
 		"lv"		"SERVER"
 		"ru"		"SERVER"
+		"ua"		"СЕРВЕР"
 		"ro"		"SERVER"
 	}
 	
@@ -282,6 +303,7 @@
 		"nl"		"Raporteerder:"
 		"lv"		"Ziņotājs:"
 		"ru"		"Репортер:"
+		"ua"		"Репортер:"
 		"ro"		"Reporter:"
 	}
 	
@@ -292,6 +314,7 @@
 		"lv"		"Ziņo par:"
 		"nl"		"Doel:"
 		"ru"		"Цель:"
+		"ua"		"Ціль:"
 		"ro"		"Target:"
 	}
 	
@@ -302,6 +325,7 @@
 		"nl"		"Reden:"
 		"lv"		"Iemesls:"
 		"ru"		"Причина:" 
+		"ua"		"Причина:" 
 		"ro"		"Motiv:"
 	}
 	
@@ -312,6 +336,7 @@
 		"nl"		"Nieuwe Fout Gerapporteerd!"
 		"lv"		"Jauns kļūdas ziņojums!"
 		"ru"		"Новая  Буг Репорт!"
+		"ua"		"Новий Баг Репорт"
 		"ro"		"Nou Bug Report!"
 	}
 	
@@ -322,6 +347,7 @@
 		"nl"		"Map:"
 		"lv"		"Mape:"
 		"ru"		"Карта:"
+		"ua"		"Мапа:"
 		"ro"		"Mapă:"
 	}
 	
@@ -332,6 +358,7 @@
 		"nl"		"Geen reden gespecificeerd."
 		"lv"		"iemesls nav norādīts"
 		"ru"		"Причина не указана."
+		"ua"		"Причина не вказана."
 		"ro"		"Niciun motiv specificat."
 	}
 	
@@ -342,6 +369,7 @@
 		"lv"		"Jauns spēlētājs ir saņēmis banu!"
 		"nl"		"Nieuwe Speler Server Geband!"
 		"ru"		"Новый игрок Сервер Banned!"
+		"ua"		"Новий гравець Сервер Banned!"
 		"ro"		"Jucător nou banat!"
 	}
 	"AdminField"
@@ -352,6 +380,7 @@
 		"nl"		"ADMIN:"
 		"lv"		"ADMIN:"
 		"ru"		"ADMIN:"
+		"ua"		"АДМІН:"
 		"ro"		"ADMIN:"
 	}
 
@@ -363,6 +392,7 @@
 		"nl"		"SPELER:"
 		"lv"		"PLAYER:"
 		"ru"		"ИГРОК:"
+		"ua"		"ГРАВЕЦЬ:"
 		"ro"		"PLAYER:"
 	}
 	
@@ -374,6 +404,7 @@
 		"nl"		"TIJDELIJK"
 		"lv"		"PAGAIDU"
 		"ru"		"ВРЕМЕННОЕ"
+		"ua"		"ТИМЧАСОВЕ"
 		"ro"		"TEMPORAR"
 	}
 	
@@ -385,6 +416,7 @@
 		"nl"		"minuut"
 		"lv"		"minūte"
 		"ru"		"минут"
+		"ua"		"хвилин"
 		"ro"		"minut"
 	}
 	
@@ -396,6 +428,7 @@
 		"nl"		"minuten"
 		"lv"		"minūtes"
 		"ru"		"минут"
+		"ua"		"хвилин"
 		"ro"		"minute"
 	}
 	
@@ -407,6 +440,7 @@
 		"nl"		"PERMANENT"
 		"lv"		"MŪŽĪGS"
 		"ru"		"ПОСТОЯННАЯ"
+		"ua"		"НАЗАВЖДИ"
 		"ro"		"PERMANENT"
 	}
 
@@ -418,6 +452,7 @@
 		"nl"		"LENGTE"
 		"lv"		"ILGUMS"
 		"ru"		"ДЛИНА"
+		"ua"		"ДОВЖИНА"
 		"ro"		"DURATĂ"
 	}
 	
@@ -428,6 +463,7 @@
 		"nl"		"Nieuwe Report!"
 		"lv"		"Jauns Ziņojums!"
 		"ru"		"Новый Репорт!"
+		"ua"		"Новий Репорт!"
 		"ro"		"Report nou!"
 	}
 	
@@ -438,6 +474,7 @@
 		"nl"		"Nieuwe Speler Comm-Banned!"
 		"lv"		"New Player Comm-Banned!"
 		"ru"		"Новый игрок Comm-Banned!"
+		"ua"		"Новий гравець Comm-Banned!"
 		"ro"		"Jucător nou Comm-banat"
 	}
 	
@@ -448,6 +485,7 @@
 		"nl"		"MUTE"
 		"lv"		"MUTE"
 		"ru"		"МУТЕ"
+		"ua"		"МУТЕ"
 		"ro"		"MUTE"
 	}
 	
@@ -458,6 +496,7 @@
 		"nl"		"GAG"
 		"lv"		"GAG"
 		"ru"		"ГАГ"
+		"ua"		"ГАГ"
 		"ro"		"GAG"
 	}
 	
@@ -468,6 +507,7 @@
 		"nl"		"SILENCE"
 		"lv"		"SILENCE"
 		"ru"		"МОЛЧАНИЕ"
+		"ua"		"МОВЧАННЯ"
 		"ro"		"SILENCE"
 	}
 	
@@ -479,6 +519,7 @@
 		"nl"		"TYPE"
 		"lv"		"VEIDS"
 		"ru"		"ТИП"
+		"ua"		"ТИП"
 		"ro"		"TIP"
 	}
 	
