@@ -3,6 +3,7 @@
 	"CurrentMapField"
 	{
 		"en"		"Current Map:"
+		"pt"		"Mapa Ataul:"
 		"hu"		"Jelenlegi pálya:"
 		"fr"		"Carte actuelle:"
 		"nl"		"Huidige Map:"
@@ -10,10 +11,11 @@
 		"ru"		"Текущая карта:"
 		"ro"		"Mapa curentă:"
 	}
-
+	
 	"PlayersOnlineField"
 	{
 		"en"		"Players Online:"
+		"pt"		"Players Online:"
 		"hu"		"Elérhető Játékosok:"
 		"fr"		"Joueurs en ligne:"
 		"nl"		"Spelers Online:"
@@ -21,10 +23,11 @@
 		"ru"		"Игроки онлайн:"
 		"ro"		"Playeri Online:"
 	}
-
+	
 	"DirectConnectField"
 	{
 		"en"		"Direct Connect:"
+		"pt"		"Conexão Direta:"
 		"hu"		"Csatlakozás:"
 		"fr"		"Connexion directe:"
 		"nl"		"Direct Verbinden:"
@@ -48,12 +51,14 @@
 	"TryAgainLater"
 	{
 		"en"		"Please wait. Your member status hasn't been fetched yet."
-		"hu"		"Kérlek várj egy picit! A tagságod még lekérés alatt..."
+		"pt"		"Por favor, aguarde. Seu status de membro ainda não foi obtido."
+		"hu"		"Kérlek várj egy picit! A tagságod még lekérés alatt."
 	}
 	
 	"DiscordRevoked"
 	{
 		"en"		"You are no longer in our discord server therefore your discord member status has been revoked!"
+		"pt"		"Você não está mais em nosso servidor discord, portanto, seu status de membro discord foi revogado!"
 		"ro"        "Numai faci parte din server-ul nostru de discord, rolul tău de membru a fost sters!"
 	}
 	
@@ -61,6 +66,7 @@
 	{
 		"#format"	"{1:s}"
 		"en"		"<@{1}> You need to provide an ID for this command!"
+		"pt"		"<@{1}> Você precisa fornecer um ID para este comando!"
 		"hu"		"<@{1}> Kérlek adj meg egy azonosítót a parancs használatához!"
 		"fr"		"<@{1}> Vous devez fournir un identifiant pour cette commande!"
 		"nl"		"<@{1}> U moet een ID opgeven voor deze opdracht!"
@@ -68,11 +74,12 @@
 		"ru"		"<@{1}> Вам необходимо указать идентификатор для этой команды!"
 		"ro"		"<@{1}> Trebuie să furnizați un ID pentru această comandă!"
 	}
-
+	
 	"DiscordInvalidID"
 	{
 		"#format"	"{1:s},{2:s}"
 		"en"		"<@{1}> This ID is not valid, please type {2} in-game and try again!"
+		"pt"		"<@{1}> Este ID não é válido, digite {2} no jogo e tente novamente!"
 		"hu"		"<@{1}> Az általad megadott azonosító nem létezik. Használd a {2} parancsot a szerveren és próbáld újra!"
 		"fr"		"<@{1}> Cet identifiant n'est pas valide, veuillez saisir {2} dans le jeu et réessayer!"
 		"nl"		"<@{1}> Deze ID is niet geldig. Typ {2} in de game en probeer het opnieuw!"
@@ -80,11 +87,12 @@
 		"ru"		"<@{1}> Этот идентификатор недействителен, введите в игре {2} и повторите попытку!"
 		"ro"		"<@{1}> Acest ID nu este valid, te rog sa tastezi {2} în joc să incerci din nou!"
 	}
-
+	
 	"DiscordInvalid"
 	{
 		"#format"	"{1:s}"
 		"en"		"<@{1}> There is no client with this ID, ensure you are connected to the game server and check your ID again!"
+		"pt"		"<@{1}> Não há nenhum cliente com este ID, certifique-se de estar conectado ao servidor do jogo e verifique seu ID novamente!"
 		"hu"		"<@{1}> Nem található kliens ezzel az azonosítóval. Kérlek csatlakozz a szerverre és próbáld újra!"
 		"fr"		"<@{1}> Il n'y a pas de client avec cet identifiant, assurez-vous d'être connecté au serveur de jeu et vérifiez à nouveau votre identifiant!"
 		"nl"		"<@{1}> Er is geen client met deze ID, zorg ervoor dat je verbonden bent met de spelserver en controleer je ID opnieuw!"
@@ -97,6 +105,7 @@
 	{
 		"#format"	"{1:s},{2:s}"
 		"en"		"<@{1}> This channel is being used for account linking!\nUsage: {2} <verification code>"
+		"pt"		"<@{1}> Este canal está sendo usado para vinculação de contas!\nUse: {2} <verification code>"
 		"hu"		"<@{1}> Ezt a szobát a fiókok megerősítésére használjuk!\nHasználat: {2} <azonosítód>"
 		"fr"		"<@{1}> Ce canal est utilisé pour la liason de compte!\nUtilisation: {2} <code de vérification>"
 		"nl"		"<@{1}> Dit kanaal wordt gebruikt om je account te koppelen!\nGebruik: {2} <verificatie code>"
@@ -109,6 +118,7 @@
 	{
 		"#format"	"{1:s},{2:s}"
 		"en"		"You have verified your account. ({green}{1}#{2}{default})"
+		"pt"		"Você verificou sua conta. ({green}{1}#{2}{default})"
 		"hu"		"Sikeresen megerősítetted a fiókodat! ({green}{1}#{2}{default})"
 		"fr"		"Vous avez validé votre compte. ({green}{1}#{2}{default})"
 		"nl"		"Je hebt je account geverifieerd. ({green}{1}#{2}{default})"
@@ -121,6 +131,7 @@
 	{
 		"#format"	"{1:s}"
 		"en"		"<@{1}> You've linked your account! ✅"
+		"pt"		"<@{1}> Você vinculou sua conta! ✅"
 		"hu"		"<@{1}> Sikeresen megerősítetted a fiókodat! ✅"
 		"fr"		"<@{1}> Vous avez lié votre compte! ✅"
 		"nl"		"<@{1}> Je hebt je account gekoppeld! ✅"
@@ -133,6 +144,7 @@
 	{
 		"#format"	"{1:s}"
 		"en"		"<@{1}> This discord account is already linked! ❌"
+		"pt"		"<@{1}> Esta conta discord já está vinculada! ❌"
 		"hu"		"<@{1}> Ez a discord fiók már társítva van! ❌"
 		"fr"		"<@{1}> Ce compte Discord est déjà lié! ❌"
 		"nl"		"<@{1}> Dit Discord account is al gekoppeld! ❌"
@@ -177,6 +189,7 @@
 	{
 		"#format"	"{1:s}"
 		"en" 		"Your ID: {grey}{1}"
+		"pt" 		"Seu ID: {grey}{1}"
 		"hu" 		"Azonosítód: {grey}{1}"
 		"fr"		"Identifiant: {grey}{1}"
 		"nl" 		"Jouw ID: {grey}{1}"
@@ -188,22 +201,25 @@
 	"LinkConnect"
 	{
 		"en"		"Join our discord server:"
+		"pt"		"Junte-se ao nosso servidor Discord:"
 		"hu"		"Csatlakozz a Discord szerverünkhöz:"
 	}
-
+	
 	"LinkUsage"
 	{
 		"#format"	"{1:s},{2:s},{3:s}"
 		"en"		"Type {lime}{1} {2} {default}in {orange}#{3}"
+		"pt"		"Digite {lime}{1} {2} {default}no {orange}#{3}"
 		"hu"		"Használd a {lime}{1} {2} {default}parancsot a {orange}#{3} {default}szobában"
 	}
 	
 	"CopyPasteFromConsole"
 	{
 		"en"		"You can also {lime}copy-paste{default} from {orange}console{default} :)"
+		"pt"		"Você também pode {lime}copiar e colar {default}do console {orange}{default} :)"
 		"hu"		"Ki is {lime}másolhatod {default}a {orange}konzolból{default} :)"
 	}
-
+	
 	"CallAdminReportHandledTitle"
 	{
 		"en"		"CallAdmin Report is being handled!"
@@ -252,12 +268,13 @@
 		"lv"		"Jauns CallAdmin Ziņojums!"
 		"nl"		"Nieuwe CallAdmin Report!"
 		"ru"		"Новый CallAdmin Репорт!"
-		"ro"		"Nou Report CallAdmin"
+		"ro"		"Nou Report CallAdmin!"
 	}
 	
 	"CONSOLE"
 	{
 		"en"		"CONSOLE"
+		"pt"		"CONSOLE"
 		"hu"		"KONZOL"
 		"nl"		"CONSOLE"
 		"lv"		"CONSOLE"
@@ -298,6 +315,7 @@
 	"ReasonField"
 	{
 		"en"		"Reason:"
+		"pt"		"Motivo:"
 		"hu"		"Indok:"
 		"nl"		"Reden:"
 		"lv"		"Iemesls:"
@@ -318,6 +336,7 @@
 	"MapField"
 	{
 		"en"		"Map:"
+		"pt"		"Mapa:"
 		"hu"		"Pálya:"
 		"nl"		"Map:"
 		"lv"		"Mape:"
@@ -330,7 +349,7 @@
 		"en"		"No reason specified."
 		"hu"		"Nincs indok megadva."
 		"nl"		"Geen reden gespecificeerd."
-		"lv"		"iemesls nav norādīts"
+		"lv"		"iemesls nav norādīts."
 		"ru"		"Причина не указана."
 		"ro"		"Niciun motiv specificat."
 	}
@@ -354,7 +373,7 @@
 		"ru"		"ADMIN:"
 		"ro"		"ADMIN:"
 	}
-
+	
 	"PlayerField"
 	{
 		"en"		"PLAYER:"
@@ -409,7 +428,7 @@
 		"ru"		"ПОСТОЯННАЯ"
 		"ro"		"PERMANENT"
 	}
-
+	
 	"LengthField"
 	{
 		"en"		"LENGTH"
@@ -474,6 +493,7 @@
 	"TypeField"
 	{
 		"en"		"TYPE"
+		"en"		"TYPE"
 		"hu"		"TIPUS"
 		"fr"		"TYPE"
 		"nl"		"TYPE"
@@ -486,6 +506,7 @@
 	{
 		"#format"	"{1:s}"
 		"en"		"You have to verify your {lightblue}Discord {default}account! Type {orange}{1}"
+		"pt"		"Você tem que verificar sua conta {lightblue}Discord{default}! Digite {orange}{1}"
 		"hu"		"Meg kell erősítened a {lightblue}Discord {default}fiókodat! Írd be, hogy {orange}{1}"
 		"fr"		"Vous devez vérifier votre {lightblue}Discord {default}account! Ecrit {orange}{1}"
 		"nl"		"Je moet je {lightblue}Discord {default}account verifieren! Type {orange}{1}"
