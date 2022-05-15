@@ -31,7 +31,7 @@ char g_sSourceComms_Webhook[128], g_sSourceComms_BotName[32], g_sSourceComms_Bot
 char g_sMap_Webhook[128], g_sMap_BotName[32], g_sMap_BotAvatar[128], g_sMap_Color[8], g_sMap_Content[256];
 char g_sChatRelay_Webhook[128], g_sChatRelay_BlockList[MAX_BLOCKLIST_LIMIT][64], g_sAdminChatRelay_Mode[16], g_sAdminChatRelay_Webhook[128], g_sAdminChatRelay_BlockList[MAX_BLOCKLIST_LIMIT][64], g_sAdminLog_Webhook[128], g_sAdminLog_BlockList[MAX_BLOCKLIST_LIMIT][64];
 char g_sVerificationChannelID[20], g_sChatRelayChannelID[20], g_sAdminChatRelayChannelID[20], g_sGuildID[20], g_sRoleID[20];
-char g_sAPIKey[64], g_sBotToken[60], g_sServerIP[128];
+char g_sAPIKey[64], g_sBotToken[70], g_sServerIP[128];
 char g_sLinkCommand[20], g_sViewIDCommand[20], g_sInviteLink[30];
 char g_sDiscordPrefix[128], g_sServerPrefix[128];
 char g_sTableName[32];
