@@ -475,6 +475,7 @@ void CreateCvars()
 	g_cVerificationChannelID = AutoExecConfig_CreateConVar("sm_du_verfication_channelid", "", "Channel ID for verfication. Blank to disable.");
 	g_cChatRelayChannelID = AutoExecConfig_CreateConVar("sm_du_chat_channelid", "", "Channel ID for discord server => game server messages. Blank to disable.");
 	g_cAdminChatRelayChannelID = AutoExecConfig_CreateConVar("sm_du_adminchat_channelid", "", "Channel ID for discord server => game server messages only of admins. Blank to disable.");
+	g_cAdminCommandChannelID = AutoExecConfig_CreateConVar("sm_du_admincommand_channelid", "", "Channel ID for executing admin commands. Blank to disable.");
 	g_cGuildID = AutoExecConfig_CreateConVar("sm_du_verification_guildid", "", "Guild ID of your discord server. Blank to disable. Needed for verification module.");
 	g_cRoleID = AutoExecConfig_CreateConVar("sm_du_verification_roleid", "", "Role ID to give to user when user is verified. Blank to give no role. Verification module needs to be running.");
 
@@ -551,6 +552,7 @@ void CreateCvars()
 	g_cVerificationChannelID = CreateConVar("sm_du_verfication_channelid", "", "Channel ID for verfication. Blank to disable.");
 	g_cChatRelayChannelID = CreateConVar("sm_du_chat_channelid", "", "Channel ID for discord server => game server messages. Blank to disable.");
 	g_cAdminChatRelayChannelID = CreateConVar("sm_du_adminchat_channelid", "", "Channel ID for discord server => game server messages only of admins. Blank to disable.");
+	g_cAdminCommandChannelID = CreateConVar("sm_du_admincommand_channelid", "", "Channel ID for executing admin commands. Blank to disable.");
 	g_cGuildID = CreateConVar("sm_du_verification_guildid", "", "Guild ID of your discord server. Blank to disable. Needed for verification module.");
 	g_cRoleID = CreateConVar("sm_du_verification_roleid", "", "Role ID to give to user when user is verified. Blank to give no role. Verification module needs to be running.");
 
@@ -624,6 +626,7 @@ void CreateCvars()
 	HookConVarChange(g_cVerificationChannelID, OnSettingsChanged);
 	HookConVarChange(g_cChatRelayChannelID, OnSettingsChanged);
 	HookConVarChange(g_cAdminChatRelayChannelID, OnSettingsChanged);
+	HookConVarChange(g_cAdminCommandChannelID, OnSettingsChanged);
 	HookConVarChange(g_cGuildID, OnSettingsChanged);
 	HookConVarChange(g_cRoleID, OnSettingsChanged);
 
@@ -694,6 +697,7 @@ void LoadCvars()
 	g_cVerificationChannelID.GetString(g_sVerificationChannelID, sizeof(g_sVerificationChannelID));
 	g_cChatRelayChannelID.GetString(g_sChatRelayChannelID, sizeof(g_sChatRelayChannelID));
 	g_cAdminChatRelayChannelID.GetString(g_sAdminChatRelayChannelID, sizeof(g_sAdminChatRelayChannelID));
+	g_cAdminCommandChannelID.GetString(g_sAdminCommandChannelID, sizeof(g_sAdminCommandChannelID));
 	g_cGuildID.GetString(g_sGuildID, sizeof(g_sGuildID));
 	g_cRoleID.GetString(g_sRoleID, sizeof(g_sRoleID));
 	
@@ -1007,41 +1011,50 @@ void LoadCommands()
 	
 	if(!FileExists(sBuffer))
 	{
-		fFile.Close();
-		fFile = OpenFile(sBuffer, "w+");
-		fFile.WriteLine("// Separate each commands with separate lines. DON'T USE SPACE INFRONT OF COMMANDS. Example:");
-		fFile.WriteLine("//sm_shop");
-		fFile.WriteLine("//sm_store");
-		fFile.WriteLine("//Use it without \"//\"");
-		fFile.Close();
-		LogError("[Discord-Utilities] %s file is empty. Add commands to restrict them!", sBuffer);
+		if(fFile != null)
+		{
+			fFile.Close();
+			fFile = OpenFile(sBuffer, "w+");
+			if(fFile != null)
+			{
+				fFile.WriteLine("// Separate each commands with separate lines. DON'T USE SPACE INFRONT OF COMMANDS. Example:");
+				fFile.WriteLine("//sm_shop");
+				fFile.WriteLine("//sm_store");
+				fFile.WriteLine("//Use it without \"//\"");
+				fFile.Close();
+				LogError("[Discord-Utilities] %s file is empty. Add commands to restrict them!", sBuffer);
+			}
+		}
 		return;
 	}
 	char sReadBuffer[PLATFORM_MAX_PATH];
 
 	int len;
-	while(!fFile.EndOfFile() && fFile.ReadLine(sReadBuffer, sizeof(sReadBuffer)))
+	if(fFile != null)
 	{
-		if (sReadBuffer[0] == '/' && sReadBuffer[1] == '/' || IsCharSpace(sReadBuffer[0]))
+		while(!fFile.EndOfFile() && fFile.ReadLine(sReadBuffer, sizeof(sReadBuffer)))
 		{
-			continue;
+			if (sReadBuffer[0] == '/' && sReadBuffer[1] == '/' || IsCharSpace(sReadBuffer[0]))
+			{
+				continue;
+			}
+
+			ReplaceString(sReadBuffer, sizeof(sReadBuffer), "\n", "");
+			ReplaceString(sReadBuffer, sizeof(sReadBuffer), "\r", "");
+			ReplaceString(sReadBuffer, sizeof(sReadBuffer), "\t", "");
+
+			len = strlen(sReadBuffer);
+
+			if (len < 3)
+			{
+				continue;
+			}
+
+			AddCommandListener(Check, sReadBuffer);
 		}
 
-		ReplaceString(sReadBuffer, sizeof(sReadBuffer), "\n", "");
-		ReplaceString(sReadBuffer, sizeof(sReadBuffer), "\r", "");
-		ReplaceString(sReadBuffer, sizeof(sReadBuffer), "\t", "");
-
-		len = strlen(sReadBuffer);
-
-		if (len < 3)
-		{
-			continue;
-		}
-
-		AddCommandListener(Check, sReadBuffer);
+		fFile.Close();
 	}
-
-	fFile.Close();
 }
 
 stock void RefreshClients()
