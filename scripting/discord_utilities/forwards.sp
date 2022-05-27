@@ -118,12 +118,13 @@ public Action Command_AdminChat(int client, const char[] command, int argc)
 	{
 		return Plugin_Continue;
 	}
-	if(g_bBaseComm && BaseComm_IsClientGagged(client))
+	if(1 <= client <= MaxClients && IsClientInGame(client))
 	{
-		return Plugin_Continue;
-	}
-	if(1 <= client <= MaxClients)
-	{
+		if(g_bBaseComm && BaseComm_IsClientGagged(client))
+		{
+			return Plugin_Continue;
+		}
+	
 		char sMessage[256];
 		GetCmdArgString(sMessage, sizeof(sMessage));
 		SendChatRelay(client, sMessage, g_sAdminChatRelay_Webhook);
@@ -137,12 +138,12 @@ public Action OnClientSayCommand(int client, const char[] command, const char[] 
 	{
 		return Plugin_Continue;
 	}
-	if(g_bBaseComm && BaseComm_IsClientGagged(client))
+	if(1 <= client <= MaxClients && IsClientInGame(client))
 	{
-		return Plugin_Continue;
-	}
-	if(1 <= client <= MaxClients)
-	{
+		if(g_bBaseComm && BaseComm_IsClientGagged(client))
+		{
+			return Plugin_Continue;
+		}
 		if(strcmp(command, "say") != 0 && strcmp(command, "say_team") != 0)
 		{
 			return Plugin_Continue;
@@ -421,6 +422,14 @@ public int OnSettingsChanged(ConVar convar, const char[] oldVal, const char[] ne
 	{
 		strcopy(g_sChatRelayChannelID, sizeof(g_sChatRelayChannelID), newVal);
 	}
+	else if(convar == g_cAdminChatRelayChannelID)
+	{
+		strcopy(g_sAdminChatRelayChannelID, sizeof(g_sAdminChatRelayChannelID), newVal);
+	}
+	else if(convar == g_cAdminCommandChannelID)
+	{
+		strcopy(g_sAdminCommandChannelID, sizeof(g_sAdminCommandChannelID), newVal);
+	}
 	else if(convar == g_cGuildID)
 	{
 		strcopy(g_sGuildID, sizeof(g_sGuildID), newVal);
@@ -482,7 +491,7 @@ public void GuildList(DiscordBot bawt, char[] id, char[] name, char[] icon, bool
 
 public void ChannelList(DiscordBot bawt, const char[] guild, DiscordChannel Channel, const bool listen)
 {
-	if(StrEqual(g_sBotToken, "") || (StrEqual(g_sChatRelayChannelID, "") && StrEqual(g_sVerificationChannelID, "") && StrEqual(g_sAdminChatRelayChannelID, "")))
+	if(StrEqual(g_sBotToken, "") || (StrEqual(g_sChatRelayChannelID, "") && StrEqual(g_sVerificationChannelID, "") && StrEqual(g_sAdminChatRelayChannelID, "") && StrEqual(g_sAdminCommandChannelID, "")))
 	{
 		return;
 	}
@@ -510,6 +519,13 @@ public void ChannelList(DiscordBot bawt, const char[] guild, DiscordChannel Chan
 		if(StrEqual(id, g_sAdminChatRelayChannelID) && !StrEqual(g_sAdminChatRelay_Mode, "", false) && (g_sAdminChatRelay_Mode[0] == '0' && g_sAdminChatRelay_Mode[1] != '\0') || (g_sAdminChatRelay_Mode[0] != '0' && g_sAdminChatRelay_Mode[0] != '\0'))
 		{
 			Bot.StartListeningToChannel(Channel, AdminChatRelayReceived);
+		}
+	}
+	if(strlen(g_sAdminCommandChannelID) > 10)
+	{
+		if(StrEqual(id, g_sAdminCommandChannelID))
+		{
+			Bot.StartListeningToChannel(Channel, ExecuteAdminCommands);
 		}
 	}
 	if(strlen(g_sVerificationChannelID) > 10)
