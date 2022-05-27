@@ -947,15 +947,27 @@ public void MAOnClientMuted(int admin, int target, char[] sIp, char[] sSteamID, 
 	{
 		return;
 	}
-	if(commtype == 0)
+	if(commtype != 5 && commtype != 6 && commtype != 7)
 	{
 		return;
 	}
 	char clientName[MAX_NAME_LENGTH], clientAuth[32], clientAuth2[32];
 	char targetName[MAX_NAME_LENGTH], targetAuth[32], targetAuth2[32];
-	GetClientName(target, targetName, sizeof(targetName));
-	GetClientAuthId(target, AuthId_SteamID64, targetAuth, sizeof(targetAuth));
-	GetClientAuthId(target, AuthId_Steam2, targetAuth2, sizeof(targetAuth2));
+	if(target)
+	{
+		GetClientName(target, targetName, sizeof(targetName));
+		GetClientAuthId(target, AuthId_SteamID64, targetAuth, sizeof(targetAuth));
+		GetClientAuthId(target, AuthId_Steam2, targetAuth2, sizeof(targetAuth2));
+	}
+	else
+	{
+		strcopy(targetName, sizeof(targetName), sName);
+		strcopy(targetAuth2, sizeof(targetAuth2), sSteamID);
+		if(targetName[0] == '\0')
+		{
+			Format(targetName, sizeof(targetName), "%T", "UnknownPlayer", LANG_SERVER);
+		}
+	}
 	Discord_EscapeString(targetName, sizeof(targetName));
 	
 	if(!admin)
@@ -1012,7 +1024,15 @@ public void MAOnClientMuted(int admin, int target, char[] sIp, char[] sSteamID, 
 	embed.AddField( trans, buffer, true );
 	
 	Format( trans, sizeof( trans ), "%T", "PlayerField", LANG_SERVER);
-	Format( buffer, sizeof( buffer ), "[%s](http://www.steamcommunity.com/profiles/%s) (%s)", targetName, targetAuth, targetAuth2 );
+	
+	if(targetAuth[0] == '\0')
+	{
+		Format( buffer, sizeof( buffer ), "%s(%s)", targetName, targetAuth2 );
+	}
+	else
+	{
+		Format( buffer, sizeof( buffer ), "[%s](http://www.steamcommunity.com/profiles/%s) (%s)", targetName, targetAuth, targetAuth2 );
+	}
 	embed.AddField( trans, buffer, true	);
 	
 	if(time < 0)
@@ -1061,7 +1081,7 @@ public void MAOnClientMuted(int admin, int target, char[] sIp, char[] sSteamID, 
 	Format( trans, sizeof( trans ), "%T", "LengthField", LANG_SERVER);
 	embed.AddField( trans, buffer, true );
 	
-	switch(commtype)
+	switch(commtype) //case 1 , 2 , 3 is according to include file and case 5 , 6 , 7 is according to plugin code. Either way this should do
 	{
 		case 1:
 		{
@@ -1072,6 +1092,18 @@ public void MAOnClientMuted(int admin, int target, char[] sIp, char[] sSteamID, 
 			Format(buffer, sizeof( buffer ), "%T", "GAG", LANG_SERVER);
 		}
 		case 3:
+		{
+			Format(buffer, sizeof( buffer ), "%T", "SILENCE", LANG_SERVER);
+		}
+		case 5:
+		{
+			Format(buffer, sizeof( buffer ), "%T", "GAG", LANG_SERVER);
+		}
+		case 6:
+		{
+			Format(buffer, sizeof( buffer ), "%T", "MUTE", LANG_SERVER);
+		}
+		case 7:
 		{
 			Format(buffer, sizeof( buffer ), "%T", "SILENCE", LANG_SERVER);
 		}
@@ -1102,6 +1134,39 @@ public void MAOnClientMuted(int admin, int target, char[] sIp, char[] sSteamID, 
 	hook.Embed( embed );
 	hook.Send();
 	delete hook;
+}
+
+public void ExecuteAdminCommands(DiscordBot bawt, DiscordChannel channel, DiscordMessage discordmessage)
+{
+	DiscordUser author = discordmessage.GetAuthor();
+	if(author.IsBot()) 
+	{
+		delete author;
+		return;
+	}
+
+	char szReply[256];
+	char message[512];
+	char userID[20], userName[32], discriminator[6];
+	discordmessage.GetContent(message, sizeof(message));
+	author.GetUsername(userName, sizeof(userName));
+	author.GetDiscriminator(discriminator, sizeof(discriminator));
+	author.GetID(userID, sizeof(userID));
+	delete author;
+	
+	char sCommandBits[MAX_ARGUMENTS][256];
+	ExplodeString(message, " ", sCommandBits, sizeof(sCommandBits), sizeof(sCommandBits[]));
+	
+	if(!CommandExists(sCommandBits[0]))
+	{
+		Format(szReply, sizeof(szReply), "%T", "CommandDoesntExist", LANG_SERVER, userID);
+		Bot.SendMessage(channel, szReply);
+		return;
+	}
+	
+	ServerCommand(message);
+	Format(szReply, sizeof(szReply), "%T", "CommandExecuted", LANG_SERVER, userID);
+	Bot.SendMessage(channel, szReply);
 }
 
 public void AdminChatRelayReceived(DiscordBot bawt, DiscordChannel channel, DiscordMessage discordmessage)
