@@ -634,6 +634,10 @@ public Action Check(int client, const char[] command, int args)
 	{
 		return Plugin_Continue;
 	}
+	if(!IsClientInGame(client))
+	{
+		return Plugin_Continue;
+	}
 	Action action = Plugin_Handled;
 	Call_StartForward(g_hOnBlockedCommandUse);
 	Call_PushCell(client);
