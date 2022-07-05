@@ -814,12 +814,28 @@ public void APIWebResponse(const char[] sData, int client)
 	delete kvResponse;
 }
 
-void CheckingRole(char[] userid, char[] roleid, EHTTPMethod method)
+void CheckingRole(char[] userid, char[] roleid, EHTTPMethod method, any data = 0)
 {
 	Handle hData = json_object();
 	json_object_set_new(hData, "userid", json_string(userid));
 	json_object_set_new(hData, "roleid", json_string(roleid));
 	json_object_set_new(hData, "method", json_integer(view_as<int>(method)));
+	if(data != 0)
+	{
+		DataPack dPack = view_as<DataPack>(data);
+		dPack.Reset();
+		Handle plugin = dPack.ReadCell();
+		Function fCallback = dPack.ReadFunction();
+		int client = dPack.ReadCell();
+		any dataR = dPack.ReadCell();
+		delete dPack;
+
+		json_object_set_new(hData, "client_role", json_integer(view_as<int>(client)));
+		json_object_set_new(hData, "data1", json_integer(view_as<int>(dataR)));
+		Handle fwd = CreateForward(ET_Ignore, Param_Cell, Param_Cell, Param_Cell);
+		AddToForward(fwd, plugin, fCallback);
+		json_object_set_new(hData, "callback", json_integer(view_as<int>(fwd)));
+	}
 	CheckRole(hData);
 }
 
@@ -847,9 +863,9 @@ void CheckRole(Handle hData)
 	}
 	EHTTPMethod method = view_as<EHTTPMethod>(JsonObjectGetInt(hData, "method"));
 	char url[1024];
-	FormatEx(url, sizeof(url), "https://discord.com/api/guilds/%s/roles", g_sGuildID);
+	FormatEx(url, sizeof(url), "https://discord.com/api/guilds/%s/members/%s", g_sGuildID, userid);
 	char route[512];
-	FormatEx(route, sizeof(route), "guild/%s/roles", g_sGuildID);
+	FormatEx(route, sizeof(route), "guild/%s/members/%s", g_sGuildID, userid);
 	DiscordRequest request = new DiscordRequest(url, method);
 	if (request == null)
 	{
@@ -879,35 +895,53 @@ public void OnCheckRoleSent(Handle request, bool failure, int offset, int status
 		delete view_as<Handle>(dp);
 		return;
 	}
-	LogError("[OnCheckRoleSent-3] Status Code: %i | Failure: %i", statuscode, failure);
-	SteamWorks_GetHTTPResponseBodyCallback(request, GetRolesData, dp);
+	LogMessage("[OnCheckRoleSent-3] Status Code: %i | Failure: %i", statuscode, failure);
+	SteamWorks_GetHTTPResponseBodyCallback(request, GetRoleData, dp);
 	delete request;
 }
 
-public int GetRolesData(const char[] data, any dp)
+public int GetRoleData(const char[] data, any dp)
 {
 	Handle hJson = json_load(data);
+
 	Handle hData = view_as<Handle>(dp);
-	DiscordBot bot = view_as<DiscordBot>(json_object_get(hData, "bot"));
 	
 	Handle fwd = view_as<Handle>(JsonObjectGetInt(hData, "callback"));
+
+	char szRoleId[128];
+	JsonObjectGetString(hData, "roleid", szRoleId, sizeof(szRoleId));
+
+	bool found = false;
 	
-	char guild[32];
-	JsonObjectGetString(hData, "guild", guild, sizeof(guild));
+	Handle hRoles = json_object_get(hJson, "roles");
+	if(hRoles != null) {
+		if(json_is_array(hRoles)) {
+			for(int i = 0; i < json_array_size(hRoles); i++) {
+				char szTmpRoleId[32];
+				json_array_get_string(hRoles, i, szTmpRoleId, sizeof(szTmpRoleId));
+				if(StrEqual(szRoleId, szTmpRoleId))
+				{
+					found = true;
+					break;
+				}
+			}
+		}
+		delete hRoles;
+	}
 	
 	any data1 = JsonObjectGetInt(hData, "data1");
+
+	int client = GetClientOfUserId(JsonObjectGetInt(hData, "client_role"));
 	
 	if(fwd != null)
 	{
 		Call_StartForward(fwd);
-		Call_PushCell(bot);
-		Call_PushString(guild);
-		Call_PushCell(view_as<RoleList>(hJson));
+		Call_PushCell(client);
+		Call_PushCell(found);
 		Call_PushCell(data1);
 		Call_Finish();
 	}
 	
-	delete bot;
 	delete hJson;
 	delete hData;
 	delete fwd;
