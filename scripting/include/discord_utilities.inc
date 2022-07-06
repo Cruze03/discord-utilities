@@ -3,6 +3,8 @@
 #endif
 #define _discord_utilities_included
 
+typedef FetchedUserIdHandler = function void(const char[] szSteamId, const char[] discordId, any data);
+
 typedef FetchedRoleIdHandler = function void(int client, bool found, any data);
 
 /**
@@ -82,6 +84,14 @@ native bool DU_IsMember(int client);
  * @Throws native error if Is_Member == false or client userid is not retrieved.
  */
 native char DU_GetUserId(int client, char[] output, int maxsize);
+
+/**
+ * Retrieve client's discord userid from database.
+ * @param szSteamId		Client index to get userid from.
+ * @param handler		Function on loaded user id.
+ * @Throws native error if szSteamId invalid.
+ */
+native void DU_GetUserIdBySteamId(const char[] szSteamId, FetchedUserIdHandler handler, any data = 0);
 
 /**
  * Retrieve DNS ip / real ip of server according to sm_du_dns_ip. (If cvar is blank then real ip else DNS ip)
