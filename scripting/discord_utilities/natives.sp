@@ -60,7 +60,16 @@ public int Native_CheckRole(Handle plugin, int numparams)
 	int client = GetNativeCell(1);
 	char roleid[128];
 	GetNativeString(2, roleid, sizeof(roleid));
-	CheckingRole(g_sUserID[client], roleid, k_EHTTPMethodGET);
+
+	any data = GetNativeCell(4);
+
+	DataPack dPack = new DataPack();
+	dPack.WriteCell(plugin);
+	dPack.WriteFunction(GetNativeFunction(3));
+	dPack.WriteCell(GetClientUserId(client));
+	dPack.WriteCell(data);
+
+	CheckingRole(g_sUserID[client], roleid, k_EHTTPMethodGET, dPack);
 	return 0;
 }
 
