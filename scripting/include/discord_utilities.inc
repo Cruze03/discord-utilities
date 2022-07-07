@@ -3,7 +3,7 @@
 #endif
 #define _discord_utilities_included
 
-typedef FetchedUserIdHandler = function void(const char[] szSteamId, const char[] discordId, any data);
+typedef FetchedUserIdHandler = function void(const char[] szSteamId, const char[] discordId, bool member, any data);
 
 typedef FetchedRoleIdHandler = function void(int client, bool found, any data);
 

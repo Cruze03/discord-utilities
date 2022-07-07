@@ -46,7 +46,7 @@ public int Native_GetUserIdBySteamId(Handle plugin, int numparams)
 	dPack.WriteCell(data);
 
 	char Query[512];
-	g_hDB.Format(Query, sizeof(Query), "SELECT userid FROM %s WHERE steamid = '%s' and member = 1", g_sTableName, szSteamId);
+	g_hDB.Format(Query, sizeof(Query), "SELECT userid, member FROM %s WHERE steamid = '%s'", g_sTableName, szSteamId);
 	g_hDB.Query(SQLQuery_CheckUserDataNative, Query, dPack);
 	return 0;
 }
@@ -60,9 +60,14 @@ public void SQLQuery_CheckUserDataNative(Database db, DBResultSet results, const
 	}
 
 	char szUserIdDB[20], szSteamId[32];
-	while (results.FetchRow())
+	bool member = false;
+
+	if(results.RowCount == 1) 
 	{
+		results.FetchRow();
+		
 		results.FetchString(0, szUserIdDB, sizeof(szUserIdDB));
+		member = !!results.FetchInt(1);
 	}
 
 	dPack.Reset();
@@ -75,6 +80,7 @@ public void SQLQuery_CheckUserDataNative(Database db, DBResultSet results, const
 	Call_StartFunction(plugin, callback);
 	Call_PushString(szSteamId);
 	Call_PushString(szUserIdDB);
+	Call_PushCell(member);
 	Call_PushCell(data);
 	Call_Finish();
 }
