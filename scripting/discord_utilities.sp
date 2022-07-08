@@ -46,6 +46,7 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 	CreateNative("DU_IsChecked", Native_IsChecked);
 	CreateNative("DU_IsMember", Native_IsDiscordMember);
 	CreateNative("DU_GetUserId", Native_GetUserId);
+	CreateNative("DU_GetUserIdBySteamId", Native_GetUserIdBySteamId);
 	CreateNative("DU_RefreshClients", Native_RefreshClients);
 	CreateNative("DU_GetIP", Native_GetIP);
 	CreateNative("DU_CheckRole", Native_CheckRole);

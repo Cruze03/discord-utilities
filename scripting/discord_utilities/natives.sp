@@ -27,6 +27,64 @@ public int Native_GetUserId(Handle plugin, int numparams)
 	return 0;
 }
 
+public int Native_GetUserIdBySteamId(Handle plugin, int numparams)
+{
+	char szSteamId[32];
+	GetNativeString(1, szSteamId, sizeof(szSteamId));
+
+	if(StrEqual(szSteamId, "") || StrContains(szSteamId, "STEAM_1") == -1)
+	{
+		return ThrowNativeError(25, "[Discord-Utilities] Native_GetUserIdBySteamId Invalid steam id: %s.", szSteamId);
+	}
+
+	any data = GetNativeCell(3);
+
+	DataPack dPack = new DataPack();
+	dPack.WriteCell(plugin);
+	dPack.WriteFunction(GetNativeFunction(2));
+	dPack.WriteString(szSteamId);
+	dPack.WriteCell(data);
+
+	char Query[512];
+	g_hDB.Format(Query, sizeof(Query), "SELECT userid, member FROM %s WHERE steamid = '%s'", g_sTableName, szSteamId);
+	g_hDB.Query(SQLQuery_CheckUserDataNative, Query, dPack);
+	return 0;
+}
+
+public void SQLQuery_CheckUserDataNative(Database db, DBResultSet results, const char[] error, DataPack dPack)
+{
+	if(db == null)
+	{
+		LogError("[DU-SQLQuery_CheckUserDataNative] Query failure: %s", error);
+		return;
+	}
+
+	char szUserIdDB[20], szSteamId[32];
+	bool member = false;
+
+	if(results.RowCount == 1) 
+	{
+		results.FetchRow();
+		
+		results.FetchString(0, szUserIdDB, sizeof(szUserIdDB));
+		member = !!results.FetchInt(1);
+	}
+
+	dPack.Reset();
+	Handle plugin = dPack.ReadCell();
+	Function callback = dPack.ReadFunction();
+	dPack.ReadString(szSteamId, sizeof(szSteamId));
+	any data = dPack.ReadCell();
+	delete dPack;
+
+	Call_StartFunction(plugin, callback);
+	Call_PushString(szSteamId);
+	Call_PushString(szUserIdDB);
+	Call_PushCell(member);
+	Call_PushCell(data);
+	Call_Finish();
+}
+
 public int Native_RefreshClients(Handle plugin, int numparams)
 {
 	if(!g_bChecked[GetNativeCell(1)])
